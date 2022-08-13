@@ -1,3 +1,4 @@
+// iain - 0x90 @ https://stackoverflow.com/a/868894
 #include "InputParser.hpp"
 #include <algorithm>
 
