@@ -1,3 +1,4 @@
+# Authors: Lorenzo Colombo - Lorenzo De Filippo - Giovanni Nerviani
 cmake_minimum_required(VERSION 3.23)
 
 project(avventura
@@ -13,4 +14,4 @@ add_subdirectory(src)
 
 
 add_executable(avventura main.cpp)
-target_link_libraries(avventura PUBLIC InputParser GameState)
+target_link_libraries(avventura PUBLIC GameState)

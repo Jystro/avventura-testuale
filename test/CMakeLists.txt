@@ -1,4 +1,4 @@
-
+# Authors: Lorenzo Colombo - Lorenzo De Filippo - Giovanni Nerviani
 include(FetchContent)
 FetchContent_Declare(
 	googletest

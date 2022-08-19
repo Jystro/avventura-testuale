@@ -1,27 +1,35 @@
 // Authors: Lorenzo Colombo - Lorenzo De Filippo - Giovanni Nerviani
-//#include "InputParser.hpp"
-#include "InputParser.hpp"
 #include "GameState.hpp"
 #include <iostream>
 
-int main(int argc, char** argv) {
+// void funtion that changes static pointer to void function
+// (no return)
 
-	// Parse width and height arguments
-	InputParser input(argc, argv);
-	if(!input.cmdOptionExists("-w") || !input.cmdOptionExists("-h")) {
-		std::cerr << "Please provide width and height in pixels" << std::endl;
-		return 1;
-	};
-	const int width = std::stoi(input.getCmdOption("-w"));
-	const int height = std::stoi(input.getCmdOption("-h"));
-	std::cout << width << 'x' << height << std::endl;
+void f2();
+void f1() {
+	std::cout << "Hello ";
+	GameState::fun = f2;
+	return;
+};
+
+void f2() {
+	std::cout << "World!" << std::endl;
+	return;
+};
+
+int main(int argc, char** argv) {
 
 	// reset game state
 	GameState::reset();
 
+	// init void(*fun)() to the menu
+	GameState::fun = f1;
+
+	GameState::fun();
+	GameState::fun();
 	// Game loop
 	while(true) {	
-		printf("%s", GameState::gameOver ? "true" : "false");
+		//printf("%s", GameState::gameOver ? "true" : "false");
 	};
 
 	return 0;
