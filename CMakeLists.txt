@@ -14,4 +14,4 @@ add_subdirectory(src)
 
 
 add_executable(avventura main.cpp)
-target_link_libraries(avventura PUBLIC GameState)
+target_link_libraries(avventura PUBLIC GameState Functions)

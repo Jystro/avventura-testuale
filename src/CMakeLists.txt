@@ -7,6 +7,11 @@ add_library(GameState GameState.cpp ${HEADER_LIST})
 
 target_include_directories(GameState PUBLIC ../include)
 
+
+add_library(Functions Functions.cpp ${HEADER_LIST})
+
+target_include_directories(Functions PUBLIC ../include)
+
 source_group(
 	TREE "${PROJECT_SOURCE_DIR}/include"
 	PREFIX "Header Files"

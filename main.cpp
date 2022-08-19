@@ -1,5 +1,6 @@
 // Authors: Lorenzo Colombo - Lorenzo De Filippo - Giovanni Nerviani
 #include "GameState.hpp"
+#include "Functions.hpp"
 #include <iostream>
 
 // void funtion that changes static pointer to void function
@@ -23,9 +24,8 @@ int main(int argc, char** argv) {
 	GameState::reset();
 
 	// init void(*fun)() to the menu
-	GameState::fun = f1;
+	GameState::fun = Functions::startMenu;
 
-	GameState::fun();
 	GameState::fun();
 	// Game loop
 	while(true) {	
