@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+#include "GameState.hpp"
 #include "Functions.hpp"
 #include "Languages.hpp"
 

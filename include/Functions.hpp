@@ -9,10 +9,17 @@ namespace Functions {
 		unsigned int y;
 	};
 
-	struct menuItem {
+	struct item {
 		std::string text;
 		void(*next_ptr)();
 	};
+
+	const char border_horizontal[4] = "═";
+	const char border_vertical[4] = "║";
+	const char border_top_left[4] = "╔";
+	const char border_top_right[4] = "╗";
+	const char border_bottom_left[4] = "╚";
+	const char border_bottom_right[4] = "╝";
 
 	Functions::terminalSize getTerminalSize();
 
