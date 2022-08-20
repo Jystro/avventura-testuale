@@ -31,12 +31,36 @@ Functions::terminalSize Functions::getTerminalSize() {
 #endif
 
 
-
-std::string Functions::fullScreenBox(const Functions::item** items, const unsigned int columns, const unsigned int rows) {
+template<const unsigned int rows, const unsigned int columns>
+std::string Functions::fullScreenBox(const struct Functions::item (&entries)[rows][columns]) {
 	std::string box;
+	std::string topBorder = Functions::border_top_left;
+	std::string bottomBorder = Functions::border_bottom_left;
+	std::string emptyRow = Functions::border_vertical;
 
 	Functions::terminalSize terminal = Functions::getTerminalSize();
 
+	// first row of border
+	for(int i = 0; i < terminal.x - 2; i++) {
+		topBorder += Functions::border_horizontal;
+		bottomBorder += Functions::border_horizontal;
+		emptyRow += ' ';
+	};
+	topBorder += Functions::border_top_right;
+	topBorder += '\n';
+
+	bottomBorder += Functions::border_bottom_right;
+	bottomBorder += '\n';
+
+	emptyRow += Functions::border_vertical;
+	emptyRow += '\n';
+
+	box = topBorder;
+	// -2 for top and bottom, -1 for console to write command ¯\_(ツ)_/¯
+	for(int i = 0; i < terminal.y - 3; i++) {
+		box += emptyRow;
+	};
+	box += bottomBorder;
 
 	return box;
 };
@@ -45,10 +69,12 @@ std::string Functions::fullScreenBox(const Functions::item** items, const unsign
 
 void Functions::startMenu() {
 	// options to display
-	struct Functions::item options[] = {
-		{ Languages::languages[GameState::language][Languages::STRING_START], NULL }
+	const struct Functions::item options[2][1] = {
+		{ Languages::languages[GameState::language][Languages::STRING_START], NULL },
+		{ Languages::languages[GameState::language][Languages::STRING_QUIT], NULL }
 	};
 
-	std::cout << options[0].text << std::endl;
+	// std::cout << __func__ << std::endl; Might be useful
+	std::cout << Functions::fullScreenBox<2, 1>(options);
 	return;
 };

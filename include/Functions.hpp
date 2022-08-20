@@ -22,7 +22,8 @@ namespace Functions {
 	const char border_bottom_right[4] = "╝";
 
 	Functions::terminalSize getTerminalSize();
-	std::string fullScreenBox(const Functions::item** items, const unsigned int columns, const unsigned int rows);
+	template<const unsigned int rows, const unsigned int columns>
+	std::string fullScreenBox(const struct Functions::item (&entries)[rows][columns]);
 
 	void startMenu();
 }; // FUNCTIONS
