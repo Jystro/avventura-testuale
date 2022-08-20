@@ -4,14 +4,16 @@
 #include <string>
 
 namespace Languages {
-	namespace Eng {
-		 std::string Menu = "Menu";
-		 std::string Start = "Start";
-		 std::string Settings = "Settings";
-	}; // ENG
-	namespace Ita {
-		 std::string Menu = "Men\151";
-	}
+	enum Language {
+		EN, IT
+	};
+	enum {
+		STRING_MENU,
+		STRING_START,
+		STRING_QUIT,
+		STRING_SETTINGS
+	};
+	extern std::string* languages[];
 }; // LANGUAGES
 
 #endif // LANGUAGES_HPP

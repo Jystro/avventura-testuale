@@ -1,11 +1,13 @@
 // Authors: Lorenzo Colombo - Lorenzo De Filippo - Giovanni Nerviani
 #include "GameState.hpp"
+#include "Languages.hpp"
 #include <stdio.h>
 #include <stdlib.h>
 
 bool GameState::gameOver = false;
 unsigned int GameState::round = 0;
 void(*GameState::fun)() = NULL; 
+Languages::Language GameState::language = Languages::Language::EN;
 
 void GameState::reset() {
 	GameState::gameOver = false;
