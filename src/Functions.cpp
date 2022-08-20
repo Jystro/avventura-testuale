@@ -30,6 +30,25 @@ Functions::terminalSize Functions::getTerminalSize() {
 };
 #endif
 
+
+
+std::string Functions::fullScreenBox(const Functions::item** items, const unsigned int columns, const unsigned int rows) {
+	std::string box;
+
+	Functions::terminalSize terminal = Functions::getTerminalSize();
+
+
+	return box;
+};
+
+
+
 void Functions::startMenu() {
+	// options to display
+	struct Functions::item options[] = {
+		{ Languages::languages[GameState::language][Languages::STRING_START], NULL }
+	};
+
+	std::cout << options[0].text << std::endl;
 	return;
 };
