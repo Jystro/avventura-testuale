@@ -32,6 +32,8 @@ namespace Functions {
 
 	Functions::terminalSize getTerminalSize();
 	template<const unsigned int rows, const unsigned int columns>
+	std::string box(const struct Functions::entry (&entries)[rows][columns], const unsigned int width, const unsigned int height);
+	template<const unsigned int rows, const unsigned int columns>
 	std::string fullScreenBox(const struct Functions::entry (&entries)[rows][columns]);
 
 	void startMenu();
