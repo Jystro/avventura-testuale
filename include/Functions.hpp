@@ -5,12 +5,12 @@
 
 namespace Functions {
 
-	struct terminalSize {
+	struct TerminalSize {
 		unsigned int x;
 		unsigned int y;
 	};
 
-	struct entry {
+	struct Entry {
 		std::string text;
 		void(*next_ptr)();
 	};
@@ -30,11 +30,11 @@ namespace Functions {
 
 	const char border_connector[4] = "╬";
 
-	Functions::terminalSize getTerminalSize();
+	Functions::TerminalSize getTerminalSize();
 	template<const unsigned int rows, const unsigned int columns>
-	std::string box(const struct Functions::entry (&entries)[rows][columns], const unsigned int width, const unsigned int height);
+	std::string box(const std::string (&entries)[rows][columns], const unsigned int width, const unsigned int height);
 	template<const unsigned int rows, const unsigned int columns>
-	std::string fullScreenBox(const struct Functions::entry (&entries)[rows][columns]);
+	std::string fullScreenBox(const std::string (&entries)[rows][columns]);
 
 	void startMenu();
 }; // FUNCTIONS
