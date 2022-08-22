@@ -42,6 +42,7 @@ namespace Functions {
 	Functions::Entry entryFromString(const Functions::Entry (&entries)[length], std::string search);
 
 	// Game functions
+	void settings();
 	void startMenu();
 }; // FUNCTIONS
 
