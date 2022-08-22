@@ -7,6 +7,7 @@
 bool GameState::gameOver = false;
 unsigned int GameState::round = 0;
 void(*GameState::gameFunction)() = NULL;
+void(*GameState::prevGameFunction)() = NULL;
 Languages::Language GameState::language = Languages::Language::EN;
 
 void GameState::reset() {

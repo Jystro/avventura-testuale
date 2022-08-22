@@ -11,7 +11,11 @@ namespace Languages {
 		STRING_Menu,
 		STRING_Start,
 		STRING_Quit,
-		STRING_Settings
+		STRING_Settings,
+		STRING_English,
+		STRING_Italian,
+		STRING_Language,
+		STRING_Back
 	};
 	extern std::string* languages[];
 }; // LANGUAGES

@@ -2,6 +2,7 @@
 #include <ctype.h>
 #include <iostream>
 #include <string>
+
 #include "GameState.hpp"
 #include "Functions.hpp"
 #include "Languages.hpp"
@@ -180,22 +181,9 @@ Functions::Entry Functions::entryFromString(const Functions::Entry (&entries)[le
 
 
 
-void Functions::settings() {
-	std::cout << "Hello from settings!" << std::endl;
-	return;
-};
+template<const unsigned int rows, unsigned int columns>
+void nextFunctionOnUserInput(const struct Functions::Entry (&entries)[rows][columns], std::string statusMessage, void(*caller)()) {
 
-
-void Functions::startMenu() {
-	// Entries available to select
-	const unsigned int rows = 3;
-	const unsigned int columns = 1;
-	const struct Functions::Entry entries[rows][columns] = {
-		{{ Languages::languages[GameState::language][Languages::STRING_Start], NULL }},
-		{{ Languages::languages[GameState::language][Languages::STRING_Settings], Functions::settings }},
-		{{ Languages::languages[GameState::language][Languages::STRING_Quit], NULL }}
-	};
-	
 	// Strings to display
 	std::string strings[rows][columns];
 	// 1D array to search for input
@@ -208,9 +196,7 @@ void Functions::startMenu() {
 		};
 	};
 
-	std::string statusMessage = "Enter a command";
-
-	while(GameState::gameFunction == startMenu) {
+	while(GameState::gameFunction == caller) {
 		std::cout << Functions::fullScreenBox<rows, columns>(strings) << statusMessage << std::endl;
 
 		std::string command;
@@ -226,5 +212,96 @@ void Functions::startMenu() {
 			statusMessage = "That's not an option";
 		};
 	};
+	return;
+};
+
+
+
+void setLanguage() {
+	// Entries available to select
+	const unsigned int rows = 3;
+	const unsigned int columns = 1;
+	const struct Functions::Entry entries[rows][columns] = {
+		{ Languages::languages[GameState::language][Languages::STRING_English], NULL },
+		{ Languages::languages[GameState::language][Languages::STRING_Italian], NULL },
+		{ Languages::languages[GameState::language][Languages::STRING_Back], Functions::settings }
+	};
+
+	// Strings to display
+	std::string strings[rows][columns];
+	// 1D array to search for input
+	struct Functions::Entry entriesArray[rows * columns];
+
+	for(int i = 0; i < rows; i++) {
+		for(int j = 0; j < columns; j++) {
+			strings[i][j] = entries[i][j].text;
+			entriesArray[i * columns + j] = entries[i][j];
+		};
+	};
+
+	std::string statusMessage = "Select an a language";
+
+	while(GameState::gameFunction == setLanguage) {
+		std::cout << Functions::fullScreenBox<rows, columns>(strings) << statusMessage << std::endl;
+
+		std::string command;
+		std::cin >> command;
+
+		try {
+			const struct Functions::Entry selectedLanguage = Functions::entryFromString<rows * columns>(entriesArray, command);
+
+			if(selectedLanguage.next_ptr != NULL) {
+				GameState::gameFunction = selectedLanguage.next_ptr;
+			}
+			else {
+				statusMessage = selectedLanguage.text;
+
+				for(int i = 0; i < rows * columns; i++) {
+					if(entriesArray[i].text == selectedLanguage.text) {
+						GameState::language = static_cast<Languages::Language>(i);
+						GameState::gameFunction = Functions::settings;
+					};
+				};
+			};
+		} catch(const char* error) {
+			statusMessage = "That's not an option";
+		};
+	};
+	return;
+};
+
+
+
+void Functions::settings() {
+	// Entries available to select
+	const unsigned int rows = 2;
+	const unsigned int columns = 1;
+	const struct Functions::Entry entries[rows][columns] = {
+		{Languages::languages[GameState::language][Languages::STRING_Language], setLanguage},
+		{Languages::languages[GameState::language][Languages::STRING_Back], GameState::prevGameFunction}
+	};
+
+	std::string statusMessage = "Select an option";
+
+	nextFunctionOnUserInput<rows, columns>(entries, statusMessage, Functions::settings);
+
+	return;
+};
+
+
+void Functions::startMenu() {
+	// Entries available to select
+	const unsigned int rows = 3;
+	const unsigned int columns = 1;
+	const struct Functions::Entry entries[rows][columns] = {
+		{{ Languages::languages[GameState::language][Languages::STRING_Start], NULL }},
+		{{ Languages::languages[GameState::language][Languages::STRING_Settings], Functions::settings }},
+		{{ Languages::languages[GameState::language][Languages::STRING_Quit], NULL }}
+	};
+
+	std::string statusMessage = "Enter a command";
+
+	nextFunctionOnUserInput<rows, columns>(entries, statusMessage, Functions::startMenu);
+	GameState::prevGameFunction = Functions::startMenu;
 	return;
 };
