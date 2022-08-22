@@ -188,6 +188,7 @@ void Functions::settings() {
 
 
 void Functions::quit() {
+	std::cout << "Bye Bye!" << std::endl;
 	exit(0);
 	return;
 };
