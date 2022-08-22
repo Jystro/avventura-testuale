@@ -15,7 +15,8 @@ namespace Languages {
 		STRING_English,
 		STRING_Italian,
 		STRING_Language,
-		STRING_Back
+		STRING_Back,
+		STRING_Reset_settings
 	};
 	extern std::string* languages[];
 }; // LANGUAGES

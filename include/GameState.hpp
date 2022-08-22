@@ -6,14 +6,17 @@
 
 namespace GameState {
 	// extern tells compiler variable exists somewhere, doesn't care where
+	extern struct Settings {
+		Languages::Language language;
+	} settings;
 	extern bool gameOver;
 	extern void(*gameFunction)();
 	extern void(*prevGameFunction)();
 	extern unsigned int round;
-	extern Languages::Language language;
 
 	unsigned int increaseRound();
 	void reset();
+	void resetSettings();
 }; // GAMESTATE
 
 #endif // GAMESTATE_HPP

@@ -8,7 +8,18 @@ bool GameState::gameOver = false;
 unsigned int GameState::round = 0;
 void(*GameState::gameFunction)() = NULL;
 void(*GameState::prevGameFunction)() = NULL;
-Languages::Language GameState::language = Languages::Language::EN;
+
+GameState::Settings GameState::settings = {
+	.language = Languages::Language::EN
+};
+
+
+void GameState::resetSettings() {
+	GameState::settings = {
+		.language = Languages::Language::EN
+	};
+	return;
+};
 
 void GameState::reset() {
 	GameState::gameOver = false;
