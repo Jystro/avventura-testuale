@@ -43,6 +43,7 @@ namespace Functions {
 
 	// Game functions
 	void settings();
+	void quit();
 	void startMenu();
 }; // FUNCTIONS
 

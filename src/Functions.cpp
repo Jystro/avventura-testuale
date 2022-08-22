@@ -180,11 +180,17 @@ Functions::Entry Functions::entryFromString(const Functions::Entry (&entries)[le
 
 
 
+
 void Functions::settings() {
 	std::cout << "Hello from settings!" << std::endl;
 	return;
 };
 
+
+void Functions::quit() {
+	exit(0);
+	return;
+};
 
 void Functions::startMenu() {
 	// Entries available to select
@@ -193,7 +199,7 @@ void Functions::startMenu() {
 	const struct Functions::Entry entries[rows][columns] = {
 		{{ Languages::languages[GameState::language][Languages::STRING_Start], NULL }},
 		{{ Languages::languages[GameState::language][Languages::STRING_Settings], Functions::settings }},
-		{{ Languages::languages[GameState::language][Languages::STRING_Quit], NULL }}
+		{{ Languages::languages[GameState::language][Languages::STRING_Quit], Functions::quit }}
 	};
 	
 	// Strings to display
