@@ -191,9 +191,9 @@ void Functions::startMenu() {
 	const unsigned int rows = 3;
 	const unsigned int columns = 1;
 	const struct Functions::Entry entries[rows][columns] = {
-		{{ Languages::languages[GameState::language][Languages::STRING_START], NULL }},
-		{{ Languages::languages[GameState::language][Languages::STRING_SETTINGS], Functions::settings }},
-		{{ Languages::languages[GameState::language][Languages::STRING_QUIT], NULL }}
+		{{ Languages::languages[GameState::language][Languages::STRING_Start], NULL }},
+		{{ Languages::languages[GameState::language][Languages::STRING_Settings], Functions::settings }},
+		{{ Languages::languages[GameState::language][Languages::STRING_Quit], NULL }}
 	};
 	
 	// Strings to display

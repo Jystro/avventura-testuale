@@ -8,10 +8,10 @@ namespace Languages {
 		EN, IT
 	};
 	enum {
-		STRING_MENU,
-		STRING_START,
-		STRING_QUIT,
-		STRING_SETTINGS
+		STRING_Menu,
+		STRING_Start,
+		STRING_Quit,
+		STRING_Settings
 	};
 	extern std::string* languages[];
 }; // LANGUAGES
