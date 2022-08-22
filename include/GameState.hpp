@@ -7,7 +7,7 @@
 namespace GameState {
 	// extern tells compiler variable exists somewhere, doesn't care where
 	extern bool gameOver;
-	extern void(*fun)();
+	extern void(*gameFunction)();
 	extern unsigned int round;
 	extern Languages::Language language;
 

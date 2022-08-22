@@ -3,32 +3,17 @@
 #include "Functions.hpp"
 #include <iostream>
 
-// void funtion that changes static pointer to void function
-// (no return)
-
-void f2();
-void f1() {
-	std::cout << "Hello ";
-	GameState::fun = f2;
-	return;
-};
-
-void f2() {
-	std::cout << "World!" << std::endl;
-	return;
-};
-
 int main(int argc, char** argv) {
 
 	// reset game state
 	GameState::reset();
 
 	// init void(*fun)() to the menu
-	GameState::fun = Functions::startMenu;
+	GameState::gameFunction = Functions::startMenu;
 
-	GameState::fun();
 	// Game loop
 	while(true) {	
+		GameState::gameFunction();
 		//printf("%s", GameState::gameOver ? "true" : "false");
 	};
 

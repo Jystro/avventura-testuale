@@ -1,3 +1,5 @@
+#include <algorithm>
+#include <ctype.h>
 #include <iostream>
 #include <string>
 #include "GameState.hpp"
@@ -115,7 +117,7 @@ std::string Functions::box(const std::string (&entries)[rows][columns], const un
 	};
 
 	// Where to put vertical connectors
-	unsigned int rowStep = (heigth - 1) / rows;
+	unsigned int rowStep = (heigth - 2) / rows;
 
 	// Entry vertical padding and offset
 	for(int i = 0; i < rows; i++) {
@@ -128,8 +130,8 @@ std::string Functions::box(const std::string (&entries)[rows][columns], const un
 	box = topBorder;
 
 	// Add all rows to fill height
-	// -2 for top and bottom, -1 for console to write command ¯\_(ツ)_/¯
-	for(int i = 0; i < heigth - 3; i++) {
+	// -2 for top and bottom, -1 for console to write command, -1 for status message ¯\_(ツ)_/¯
+	for(int i = 0; i < heigth - 4; i++) {
 		// Not adding a border/connector?
 		if(((i + 1) % rowStep) || i + rowStep > heigth - 2) {
 			bool blank = true;
@@ -154,7 +156,6 @@ std::string Functions::box(const std::string (&entries)[rows][columns], const un
 };
 
 
-
 template<const unsigned int rows, const unsigned int columns>
 std::string Functions::fullScreenBox(const std::string (&entries)[rows][columns]) {
 
@@ -163,22 +164,63 @@ std::string Functions::fullScreenBox(const std::string (&entries)[rows][columns]
 };
 
 
+
+template<const unsigned int length>
+Functions::Entry Functions::entryFromString(const Functions::Entry (&entries)[length], std::string search) {
+	std::transform(search.begin(), search.end(), search.begin(), ::tolower);
+	for(int i = 0; i < length; i++) {
+		std::string lowercaseEntry = entries[i].text;
+		std::transform(lowercaseEntry.begin(), lowercaseEntry.end(), lowercaseEntry.begin(), ::tolower);
+		if(lowercaseEntry == search) {
+			return entries[i];
+		};
+	};
+	throw "search does not appear in the entries";
+};
+
+
+
+
+
 void Functions::startMenu() {
-	// Entries to display
-	const struct Functions::Entry entries[2][2] = {
-		{{ Languages::languages[GameState::language][Languages::STRING_START], NULL }, { Languages::languages[GameState::language][Languages::STRING_MENU], NULL }},
-		{{ Languages::languages[GameState::language][Languages::STRING_QUIT], NULL }, { Languages::languages[GameState::language][Languages::STRING_SETTINGS], NULL }}
+	// Entries available to select
+	const unsigned int rows = 3;
+	const unsigned int columns = 1;
+	const struct Functions::Entry entries[rows][columns] = {
+		{{ Languages::languages[GameState::language][Languages::STRING_START], NULL }},
+		{{ Languages::languages[GameState::language][Languages::STRING_QUIT], NULL }},
+		{{ Languages::languages[GameState::language][Languages::STRING_SETTINGS], NULL}}
 	};
 	
-	std::string strings[2][2];
-	for(int i = 0; i < 2; i++) {
-		for(int j = 0; j < 2; j++) {
-			strings[i][j] = entries[i][j].text;
-		}
-	}
+	// Strings to display
+	std::string strings[rows][columns];
+	// 1D array to search for input
+	struct Functions::Entry entriesArray[rows * columns];
 
-	// std::cout << __func__ << std::endl; Might be useful
-	std::cout << Functions::box<2, 2>(strings, 50, 8) << std::endl;
-	std::cout << Functions::fullScreenBox<2, 2>(strings);
+	for(int i = 0; i < rows; i++) {
+		for(int j = 0; j < columns; j++) {
+			strings[i][j] = entries[i][j].text;
+			entriesArray[i * columns + j] = entries[i][j];
+		};
+	};
+
+	std::string statusMessage = "Enter a command";
+
+	while(GameState::gameFunction == startMenu) {
+		std::cout << Functions::fullScreenBox<rows, columns>(strings) << statusMessage << std::endl;
+
+		std::string command;
+		std::cin >> command;
+
+		try {
+			const struct Functions::Entry action = Functions::entryFromString<rows * columns>(entriesArray, command);
+			statusMessage = action.text;
+			if(action.next_ptr != NULL) {
+				GameState::gameFunction = action.next_ptr;
+			};
+		} catch(const char* error) {
+			statusMessage = "That's not an option";
+		};
+	};
 	return;
 };

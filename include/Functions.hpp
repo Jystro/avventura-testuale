@@ -30,12 +30,18 @@ namespace Functions {
 
 	const char border_connector[4] = "╬";
 
+
 	Functions::TerminalSize getTerminalSize();
+
 	template<const unsigned int rows, const unsigned int columns>
 	std::string box(const std::string (&entries)[rows][columns], const unsigned int width, const unsigned int height);
 	template<const unsigned int rows, const unsigned int columns>
 	std::string fullScreenBox(const std::string (&entries)[rows][columns]);
 
+	template<const unsigned int length>
+	Functions::Entry entryFromString(const Functions::Entry (&entries)[length], std::string search);
+
+	// Game functions
 	void startMenu();
 }; // FUNCTIONS
 
