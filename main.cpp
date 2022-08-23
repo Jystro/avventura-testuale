@@ -5,16 +5,21 @@
 
 int main(int argc, char** argv) {
 
-	// reset game state
-	GameState::reset();
+	// init game state
+	GameState::init(argc, argv);
 
 	// init void(*fun)() to the menu
 	GameState::gameFunction = Functions::startMenu;
 
 	// Game loop
 	while(true) {	
-		GameState::gameFunction();
+		try {
+			GameState::gameFunction();
 		//printf("%s", GameState::gameOver ? "true" : "false");
+		} catch(const std::exception& e) {
+			std::cout << "Error: " << e.what() << std::endl;
+			GameState::prevGameFunction();
+		};
 	};
 
 	return 0;
