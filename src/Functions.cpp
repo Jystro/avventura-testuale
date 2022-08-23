@@ -8,6 +8,36 @@
 #include "Functions.hpp"
 #include "Languages.hpp"
 
+
+
+struct TerminalSize {
+	unsigned int x;
+	unsigned int y;
+};
+
+struct Entry {
+	std::string text;
+	void(*next_ptr)();
+};
+
+
+struct Border {
+	const char horizontal[4] = "═";
+	const char vertical[4] = "║";
+	const char top_left[4] = "╔";
+	const char top_right[4] = "╗";
+	const char bottom_left[4] = "╚";
+	const char bottom_right[4] = "╝";
+
+	const char horizontal_connector_down[4] = "╦";
+	const char horizontal_connector_up[4] = "╩";
+
+	const char vertical_connector_right[4] = "╠";
+	const char vertical_connector_left[4] = "╣";
+
+	const char connector[4] = "╬";
+} border;
+
 #ifdef WIN32
 #include <windows.h>
 Functions::TerminalSize Functions::getTerminalSize() {
@@ -23,11 +53,11 @@ Functions::TerminalSize Functions::getTerminalSize() {
 #include <sys/ioctl.h>
 #include <stdio.h>
 #include <unistd.h>
-Functions::TerminalSize Functions::getTerminalSize() {
+TerminalSize getTerminalSize() {
 	struct winsize w;
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 
-	struct Functions::TerminalSize terminal;
+	struct TerminalSize terminal;
 	terminal.y = w.ws_row;
 	terminal.x = w.ws_col;
 	return terminal;
@@ -41,12 +71,12 @@ std::string Functions::box(const std::string (&entries)[rows][columns], const un
 	std::string box;
 
 	// String representing different row types
-	std::string topBorder = Functions::border_top_left;
-	std::string bottomBorder = Functions::border_bottom_left;
-	std::string emptyRow = Functions::border_vertical;
-	std::string borderRow = Functions::border_vertical_connector_right;
+	std::string topBorder = border.top_left;
+	std::string bottomBorder = border.bottom_left;
+	std::string emptyRow = border.vertical;
+	std::string borderRow = border.vertical_connector_right;
 	struct TextRow {
-		std::string row = Functions::border_vertical;
+		std::string row = border.vertical;
 		unsigned int verticalOffset;
 		unsigned int horizontalOffset[columns];
 		unsigned int verticalPadding;
@@ -69,10 +99,10 @@ std::string Functions::box(const std::string (&entries)[rows][columns], const un
 	for(int i = 0; i < width - 2; i++) {
 		// Check if we're not adding a connector
 		if(((i + 1) % columnStep) || i + columnStep > width) {
-			topBorder += Functions::border_horizontal;
-			bottomBorder += Functions::border_horizontal;
+			topBorder += border.horizontal;
+			bottomBorder += border.horizontal;
 			emptyRow += ' ';
-			borderRow += Functions::border_horizontal;
+			borderRow += border.horizontal;
 
 			for(int j = 0; j < rows; j++) {
 				// Check if we're inserting a letter or blank space
@@ -90,31 +120,31 @@ std::string Functions::box(const std::string (&entries)[rows][columns], const un
 		}
 		// Otherwise add a connector
 		else {
-			topBorder += Functions::border_horizontal_connector_down;
-			bottomBorder += Functions::border_horizontal_connector_up;
-			emptyRow += Functions::border_vertical;
-			borderRow += Functions::border_connector;
+			topBorder += border.horizontal_connector_down;
+			bottomBorder += border.horizontal_connector_up;
+			emptyRow += border.vertical;
+			borderRow += border.connector;
 			for(int j = 0; j < rows; j++) {
-				textRow[j].row += Functions::border_vertical;
+				textRow[j].row += border.vertical;
 			};
 		};
 	};
 
 	// Finish each row and add \n
-	topBorder += Functions::border_top_right;
+	topBorder += border.top_right;
 	topBorder += '\n';
 
-	bottomBorder += Functions::border_bottom_right;
+	bottomBorder += border.bottom_right;
 	bottomBorder += '\n';
 
-	emptyRow += Functions::border_vertical;
+	emptyRow += border.vertical;
 	emptyRow += '\n';
 
-	borderRow += Functions::border_vertical_connector_left;
+	borderRow += border.vertical_connector_left;
 	borderRow += '\n';
 
 	for(int i = 0; i < rows; i++) {
-		textRow[i].row += Functions::border_vertical;
+		textRow[i].row += border.vertical;
 		textRow[i].row += '\n';
 	};
 
@@ -161,14 +191,14 @@ std::string Functions::box(const std::string (&entries)[rows][columns], const un
 template<const unsigned int rows, const unsigned int columns>
 std::string Functions::fullScreenBox(const std::string (&entries)[rows][columns]) {
 
-	Functions::TerminalSize terminal = Functions::getTerminalSize();
+	TerminalSize terminal = getTerminalSize();
 	return Functions::box<rows, columns>(entries, terminal.x, terminal.y);
 };
 
 
 
 template<const unsigned int length>
-Functions::Entry Functions::entryFromString(const Functions::Entry (&entries)[length], std::string search) {
+Entry entryFromString(const Entry (&entries)[length], std::string search) {
 	// Transform search string to lower case
 	std::transform(search.begin(), search.end(), search.begin(), ::tolower);
 	for(int i = 0; i < length; i++) {
@@ -191,11 +221,11 @@ void Functions::quit() {
 };
 
 template<const unsigned int rows, unsigned int columns>
-void nextFunctionOnUserInput(const struct Functions::Entry (&entries)[rows][columns], std::string statusMessage, void(*caller)()) {
+void nextFunctionOnUserInput(const struct Entry (&entries)[rows][columns], std::string statusMessage, void(*caller)()) {
 	// Strings to display
 	std::string strings[rows][columns];
 	// 1D array to search for input
-	struct Functions::Entry entriesArray[rows * columns];
+	struct Entry entriesArray[rows * columns];
 
 	for(int i = 0; i < rows; i++) {
 		for(int j = 0; j < columns; j++) {
@@ -211,7 +241,7 @@ void nextFunctionOnUserInput(const struct Functions::Entry (&entries)[rows][colu
 		std::getline(std::cin, command);
 
 		try {
-			const struct Functions::Entry action = Functions::entryFromString<rows * columns>(entriesArray, command);
+			const struct Entry action = entryFromString<rows * columns>(entriesArray, command);
 			statusMessage = action.text;
 			if(action.next_ptr != NULL) {
 				GameState::gameFunction = action.next_ptr;
@@ -229,7 +259,7 @@ void setLanguage() {
 	// Entries available to select
 	const unsigned int rows = 3;
 	const unsigned int columns = 1;
-	const struct Functions::Entry entries[rows][columns] = {
+	const struct Entry entries[rows][columns] = {
 		{ Languages::languages[GameState::settings.language][Languages::STRING_English], NULL },
 		{ Languages::languages[GameState::settings.language][Languages::STRING_Italian], NULL },
 		{ Languages::languages[GameState::settings.language][Languages::STRING_Back], Functions::settings }
@@ -238,7 +268,7 @@ void setLanguage() {
 	// Strings to display
 	std::string strings[rows][columns];
 	// 1D array to search for input
-	struct Functions::Entry entriesArray[rows * columns];
+	struct Entry entriesArray[rows * columns];
 
 	for(int i = 0; i < rows; i++) {
 		for(int j = 0; j < columns; j++) {
@@ -256,7 +286,7 @@ void setLanguage() {
 		std::cin >> command;
 
 		try {
-			const struct Functions::Entry selectedLanguage = Functions::entryFromString<rows * columns>(entriesArray, command);
+			const struct Entry selectedLanguage = entryFromString<rows * columns>(entriesArray, command);
 
 			if(selectedLanguage.next_ptr != NULL) {
 				GameState::gameFunction = selectedLanguage.next_ptr;
@@ -292,7 +322,7 @@ void Functions::settings() {
 	// Entries available to select
 	const unsigned int rows = 3;
 	const unsigned int columns = 1;
-	const struct Functions::Entry entries[rows][columns] = {
+	const struct Entry entries[rows][columns] = {
 		{ Languages::languages[GameState::settings.language][Languages::STRING_Language], setLanguage },
 		{ Languages::languages[GameState::settings.language][Languages::STRING_Reset_settings], resetSettings },
 		{ Languages::languages[GameState::settings.language][Languages::STRING_Back], GameState::prevGameFunction }
@@ -312,7 +342,7 @@ void Functions::startMenu() {
 	// Entries available to select
 	const unsigned int rows = 3;
 	const unsigned int columns = 1;
-	const struct Functions::Entry entries[rows][columns] = {
+	const struct Entry entries[rows][columns] = {
 		{{ Languages::languages[GameState::settings.language][Languages::STRING_Start], NULL }},
 		{{ Languages::languages[GameState::settings.language][Languages::STRING_Settings], Functions::settings }},
 		{{ Languages::languages[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
