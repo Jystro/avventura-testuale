@@ -266,7 +266,7 @@ void setLanguage() {
 					};
 				};
 			};
-		} catch(const char* error) {
+		} catch(const std::exception& e) {
 			statusMessage = "That's not an option";
 		};
 	};
@@ -297,18 +297,7 @@ void Functions::settings() {
 
 	nextFunctionOnUserInput<rows, columns>(entries, statusMessage, Functions::settings);
 
-	std::ofstream settingsFile;
-	std::string executableFolder(GameState::argv[0]);
-	executableFolder = executableFolder.substr(0, executableFolder.find_last_of("\\/") + 1);
-	settingsFile.open(executableFolder + "settings.bin", std::ios::out | std::ios::binary | std::ios::trunc);
-
-	if(settingsFile.is_open()) {
-		settingsFile << GameState::settings;
-		settingsFile.close();
-	}
-	else {
-		throw std::exception();
-	}
+	GameState::writeSettings();
 
 	return;
 };
