@@ -15,10 +15,15 @@ namespace Functions {
 
 	std::string fullScreenTextBox(const std::string title, const std::string text);
 
+
 	// Game functions
 	void settings();
 	void quit();
 	void startMenu();
+
+	namespace Phase1 {
+		void start();
+	};
 }; // FUNCTIONS
 
 #endif // FUNCTIONS_HPP

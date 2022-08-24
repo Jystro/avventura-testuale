@@ -529,7 +529,7 @@ void Functions::startMenu() {
 	const unsigned int rows = 3;
 	const unsigned int columns = 1;
 	const struct Entry entries[rows][columns] = {
-		{{ Languages::languages[GameState::settings.language][Languages::STRING_Start], NULL }},
+		{{ Languages::languages[GameState::settings.language][Languages::STRING_Start], Functions::Phase1::start}},
 		{{ Languages::languages[GameState::settings.language][Languages::STRING_Settings], Functions::settings }},
 		{{ Languages::languages[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
 	};
@@ -538,5 +538,21 @@ void Functions::startMenu() {
 
 	drawBoxAndSetNextFunctionOnUserInput<rows, columns>("Main Menu", entries, statusMessage, Functions::startMenu);
 	GameState::prevGameFunction = Functions::startMenu;
+	return;
+};
+
+
+
+
+void Functions::Phase1::start() {
+	const unsigned int rows = 2;
+	const unsigned int columns = 4;
+	const struct Entry entries[rows][columns] {
+		{{ "Ovest", NULL}, { "Nord", NULL}, { "Est", NULL}, { "Sud", NULL}},
+		{{ "Guardati attorno", }, { Languages::languages[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Avventura", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mattis nibh placerat ultricies pharetra. Etiam et auctor diam. Nullam pellentesque sem vitae ipsum volutpat, accumsan molestie nibh porttitor. Proin ultrices convallis mi, vel lacinia augue hendrerit sit amet. Praesent pellentesque augue eros, id vulputate dui ullamcorper eu. Donec quis velit.", entries, "Write a command", Functions::Phase1::start);
+	GameState::prevGameFunction = Functions::Phase1::start;
 	return;
 };
