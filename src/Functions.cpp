@@ -52,7 +52,6 @@ TerminalSize getTerminalSize() {
 };
 
 #else
-
 struct Border {
 	const char* horizontal = "═";
 	const char* vertical = "║";
@@ -85,8 +84,10 @@ TerminalSize getTerminalSize() {
 #endif
 
 
+
+
 template<const unsigned int rows, const unsigned int columns>
-std::string Functions::box(const std::string title, const std::string (&entries)[rows][columns], const unsigned int width, unsigned int heigth) {
+std::string Functions::box(const std::string title, const std::string (&entries)[rows][columns], const unsigned int width, unsigned int height) {
 	// String to be returned
 	std::string box;
 
@@ -109,7 +110,7 @@ std::string Functions::box(const std::string title, const std::string (&entries)
 
 
 	if(title != std::string()) {
-		heigth -= 2;
+		height -= 2;
 
 		titleRow.horizontalOffset = (width - title.length()) / 2;
 
@@ -191,7 +192,7 @@ std::string Functions::box(const std::string title, const std::string (&entries)
 	};
 
 	// Where to put vertical connectors
-	unsigned int rowStep = (heigth - 2) / rows;
+	unsigned int rowStep = (height - 2) / rows;
 
 	// Entry vertical padding and offset
 	for(int i = 0; i < rows; i++) {
@@ -210,9 +211,9 @@ std::string Functions::box(const std::string title, const std::string (&entries)
 
 	// Add all rows to fill height
 	// -2 for top and bottom, -1 for console to write command, -1 for status message ¯\_(ツ)_/¯
-	for(int i = 0; i < heigth - 4; i++) {
+	for(int i = 0; i < height - 4; i++) {
 		// Not adding a border/connector?
-		if(((i + 1) % rowStep) || i + rowStep > heigth - 2) {
+		if(((i + 1) % rowStep) || i + rowStep > height - 2) {
 			bool blank = true;
 			for(int j = 0; j < rows; j++) {
 				// Check if adding a text row
@@ -235,11 +236,117 @@ std::string Functions::box(const std::string title, const std::string (&entries)
 };
 
 
+std::string Functions::textBox(const std::string title, std::string text, const unsigned int width, unsigned int height) {
+	// String to be returned
+	std::string box;
+
+	// String representing different row types
+	std::string topBorder = border.top_left;
+	std::string bottomBorder = border.bottom_left;
+	std::string emptyRow = border.vertical;
+	std::string borderRow = border.vertical_connector_right;
+	struct TitleRow {
+		std::string row = border.vertical;
+		unsigned int horizontalOffset;
+	} titleRow;
+
+	// Setup title if we have a title
+	if(title != std::string()) {
+		height -= 2;
+
+		titleRow.horizontalOffset = (width - title.length()) / 2;
+
+		for(int i = 0; i < width - 2; i++) {
+			if(i >= titleRow.horizontalOffset && i < titleRow.horizontalOffset + title.length()) {
+				titleRow.row += title[i - titleRow.horizontalOffset];
+			}
+			else {
+				titleRow.row += ' ';
+			};
+		};
+
+		titleRow.row += border.vertical;
+		titleRow.row += '\n';
+	};
+
+
+	for(int i = 0; i < width - 2; i++) {
+		topBorder += border.horizontal;
+		emptyRow += ' ';
+		bottomBorder += border.horizontal;
+		borderRow += border.horizontal;
+	};
+
+	topBorder += border.top_right;
+	topBorder += '\n';
+
+	bottomBorder += border.bottom_right;
+	bottomBorder += '\n';
+
+	emptyRow += border.vertical;
+	emptyRow += '\n';
+
+	borderRow += border.vertical_connector_left;
+	borderRow += '\n';
+
+
+	box += topBorder;
+
+	if(title != std::string()) {
+		box += titleRow.row;
+		box += borderRow;
+	};
+
+	for(int i = 0; i < height - 2; i++) {
+		if(i < height * .1 || i > height * .9) {
+			box += emptyRow;
+		}
+		else {
+			// If we have a NL in the text, let's remove it
+			if(text[0] == '\n') {
+				text.erase(0, 1);
+			};
+			// Needed to see if we encountered a NL in the current line, so that we can print spaces until it ends
+			bool nl = false;
+			box += border.vertical;
+			for(int j = 0; j < width - 2; j++) {
+				if(j < width * .1 || j > width * .9 || !text.length() || nl) {
+					box += ' ';
+				}
+				else {
+					if(text[0] == '\n') {
+						nl = true;
+						box += ' ';
+					}
+					else {
+						box += text[0];
+						text.erase(0, 1);
+					};
+				};
+			};
+			box += border.vertical;
+			box += '\n';
+		};
+	};
+
+	box += bottomBorder;
+
+	return box;
+};
+
+
 template<const unsigned int rows, const unsigned int columns>
 std::string Functions::fullScreenBox(const std::string title, const std::string (&entries)[rows][columns]) {
 
 	TerminalSize terminal = getTerminalSize();
 	return Functions::box<rows, columns>(title, entries, terminal.x, terminal.y);
+};
+
+
+std::string Functions::fullScreenTextBox(const std::string title, std::string text) {
+
+	TerminalSize terminal = getTerminalSize();
+	return Functions::textBox(title, text, terminal.x, terminal.y);
 };
 
 
@@ -261,14 +368,8 @@ Entry entryFromString(const Entry (&entries)[length], std::string search) {
 
 
 
-void Functions::quit() {
-	std::cout << "Bye Bye!" << std::endl;
-	exit(0);
-	return;
-};
-
 template<const unsigned int rows, unsigned int columns>
-void nextFunctionOnUserInput(std::string title, const struct Entry (&entries)[rows][columns], std::string statusMessage, void(*caller)()) {
+void drawBoxAndSetNextFunctionOnUserInput(std::string title, const struct Entry (&entries)[rows][columns], std::string statusMessage, void(*caller)()) {
 	// Strings to display
 	std::string strings[rows][columns];
 	// 1D array to search for input
@@ -283,6 +384,37 @@ void nextFunctionOnUserInput(std::string title, const struct Entry (&entries)[ro
 
 	while(GameState::gameFunction == caller) {
 		std::cout << Functions::fullScreenBox<rows, columns>(title, strings) << statusMessage << std::endl;
+
+		std::string command;
+		std::getline(std::cin, command);
+
+		try {
+			const struct Entry action = entryFromString<rows * columns>(entriesArray, command);
+			statusMessage = action.text;
+			if(action.next_ptr != NULL) {
+				GameState::gameFunction = action.next_ptr;
+			};
+		} catch(const std::exception& e) {
+			statusMessage = "That's not an option";
+		};
+	};
+	return;
+};
+
+
+template<const unsigned int rows, unsigned int columns>
+void drawTextBoxAndSetNextFunctionOnUserInput(std::string title, const std::string text, const struct Entry (&entries)[rows][columns], std::string statusMessage, void(*caller)()) {
+	// 1D array to search for input
+	struct Entry entriesArray[rows * columns];
+
+	for(int i = 0; i < rows; i++) {
+		for(int j = 0; j < columns; j++) {
+			entriesArray[i * columns + j] = entries[i][j];
+		};
+	};
+
+	while(GameState::gameFunction == caller) {
+		std::cout << Functions::fullScreenTextBox(title, text) << statusMessage << std::endl;
 
 		std::string command;
 		std::getline(std::cin, command);
@@ -377,10 +509,17 @@ void Functions::settings() {
 
 	std::string statusMessage = "Select an option";
 
-	nextFunctionOnUserInput<rows, columns>("Settings", entries, statusMessage, Functions::settings);
+	drawBoxAndSetNextFunctionOnUserInput<rows, columns>("Settings", entries, statusMessage, Functions::settings);
 
 	GameState::writeSettings();
 
+	return;
+};
+
+
+void Functions::quit() {
+	std::cout << "Bye Bye!" << std::endl;
+	exit(0);
 	return;
 };
 
@@ -397,7 +536,7 @@ void Functions::startMenu() {
 
 	std::string statusMessage = "Enter a command";
 
-	nextFunctionOnUserInput<rows, columns>("Main Menu", entries, statusMessage, Functions::startMenu);
+	drawBoxAndSetNextFunctionOnUserInput<rows, columns>("Main Menu", entries, statusMessage, Functions::startMenu);
 	GameState::prevGameFunction = Functions::startMenu;
 	return;
 };
