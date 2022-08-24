@@ -26,8 +26,15 @@ namespace Languages {
 		STATUS_Select_An_Option,
 		STATUS_Enter_A_Command
 	};
+
 	enum {
-		STORY_Phase1_Start
+		STORY_Intro,
+		STORY_Phase1_Start,
+		STORY_Phase1_West,
+		STORY_Phase1_North,
+		STORY_Phase1_East,
+		STORY_Phase1_South,
+		STORY_Phase1_LookAround
 	};
 	extern std::string* strings[];
 	extern std::string* status[];
