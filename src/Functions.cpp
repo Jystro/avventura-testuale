@@ -21,27 +21,28 @@ struct Entry {
 };
 
 
-struct Border {
-	const char horizontal[4] = "═";
-	const char vertical[4] = "║";
-	const char top_left[4] = "╔";
-	const char top_right[4] = "╗";
-	const char bottom_left[4] = "╚";
-	const char bottom_right[4] = "╝";
-
-	const char horizontal_connector_down[4] = "╦";
-	const char horizontal_connector_up[4] = "╩";
-
-	const char vertical_connector_right[4] = "╠";
-	const char vertical_connector_left[4] = "╣";
-
-	const char connector[4] = "╬";
-} border;
 
 #ifdef WIN32
+struct Border {
+	const char* horizontal = "*";
+	const char* vertical = "*";
+	const char* top_left = "*";
+	const char* top_right = "*";
+	const char* bottom_left = "*";
+	const char* bottom_right = "*";
+
+	const char* horizontal_connector_down = "*";
+	const char* horizontal_connector_up = "*";
+
+	const char* vertical_connector_right = "*";
+	const char* vertical_connector_left = "*";
+
+	const char* connector = "*";
+} border;
+
 #include <windows.h>
-Functions::TerminalSize Functions::getTerminalSize() {
-	struct Functions::TerminalSize terminal;
+TerminalSize getTerminalSize() {
+	struct TerminalSize terminal;
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
 
 	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
@@ -49,7 +50,26 @@ Functions::TerminalSize Functions::getTerminalSize() {
 	terminal.y = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
 	return terminal;
 };
+
 #else
+
+struct Border {
+	const char* horizontal = "═";
+	const char* vertical = "║";
+	const char* top_left = "╔";
+	const char* top_right = "╗";
+	const char* bottom_left = "╚";
+	const char* bottom_right = "╝";
+
+	const char* horizontal_connector_down = "╦";
+	const char* horizontal_connector_up = "╩";
+
+	const char* vertical_connector_right = "╠";
+	const char* vertical_connector_left = "╣";
+
+	const char* connector = "╬";
+} border;
+
 #include <sys/ioctl.h>
 #include <stdio.h>
 #include <unistd.h>
