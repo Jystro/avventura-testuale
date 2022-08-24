@@ -66,7 +66,7 @@ TerminalSize getTerminalSize() {
 
 
 template<const unsigned int rows, const unsigned int columns>
-std::string Functions::box(const std::string (&entries)[rows][columns], const unsigned int width, const unsigned int heigth) {
+std::string Functions::box(const std::string title, const std::string (&entries)[rows][columns], const unsigned int width, unsigned int heigth) {
 	// String to be returned
 	std::string box;
 
@@ -75,6 +75,10 @@ std::string Functions::box(const std::string (&entries)[rows][columns], const un
 	std::string bottomBorder = border.bottom_left;
 	std::string emptyRow = border.vertical;
 	std::string borderRow = border.vertical_connector_right;
+	struct TitleRow {
+		std::string row = border.vertical;
+		unsigned int horizontalOffset;
+	} titleRow;
 	struct TextRow {
 		std::string row = border.vertical;
 		unsigned int verticalOffset;
@@ -83,6 +87,24 @@ std::string Functions::box(const std::string (&entries)[rows][columns], const un
 		unsigned int horizontalPadding[columns];
 	} textRow[rows];
 
+
+	if(title != std::string()) {
+		heigth -= 2;
+
+		titleRow.horizontalOffset = (width - title.length()) / 2;
+
+		for(int i = 0; i < width - 2; i++) {
+			if(i >= titleRow.horizontalOffset && i < titleRow.horizontalOffset + title.length()) {
+				titleRow.row += title[i - titleRow.horizontalOffset];
+			}
+			else {
+				titleRow.row += ' ';
+			};
+		};
+
+		titleRow.row += border.vertical;
+		titleRow.row += '\n';
+	};
 
 	// Where to put horizontal connectors
 	unsigned int columnStep = width / columns;
@@ -161,6 +183,11 @@ std::string Functions::box(const std::string (&entries)[rows][columns], const un
 	// Start concatenating to get final string
 	box = topBorder;
 
+	if(title != std::string()) {
+		box += titleRow.row;
+		box += borderRow;
+	};
+
 	// Add all rows to fill height
 	// -2 for top and bottom, -1 for console to write command, -1 for status message ¯\_(ツ)_/¯
 	for(int i = 0; i < heigth - 4; i++) {
@@ -189,10 +216,10 @@ std::string Functions::box(const std::string (&entries)[rows][columns], const un
 
 
 template<const unsigned int rows, const unsigned int columns>
-std::string Functions::fullScreenBox(const std::string (&entries)[rows][columns]) {
+std::string Functions::fullScreenBox(const std::string title, const std::string (&entries)[rows][columns]) {
 
 	TerminalSize terminal = getTerminalSize();
-	return Functions::box<rows, columns>(entries, terminal.x, terminal.y);
+	return Functions::box<rows, columns>(title, entries, terminal.x, terminal.y);
 };
 
 
@@ -221,7 +248,7 @@ void Functions::quit() {
 };
 
 template<const unsigned int rows, unsigned int columns>
-void nextFunctionOnUserInput(const struct Entry (&entries)[rows][columns], std::string statusMessage, void(*caller)()) {
+void nextFunctionOnUserInput(std::string title, const struct Entry (&entries)[rows][columns], std::string statusMessage, void(*caller)()) {
 	// Strings to display
 	std::string strings[rows][columns];
 	// 1D array to search for input
@@ -235,7 +262,7 @@ void nextFunctionOnUserInput(const struct Entry (&entries)[rows][columns], std::
 	};
 
 	while(GameState::gameFunction == caller) {
-		std::cout << Functions::fullScreenBox<rows, columns>(strings) << statusMessage << std::endl;
+		std::cout << Functions::fullScreenBox<rows, columns>(title, strings) << statusMessage << std::endl;
 
 		std::string command;
 		std::getline(std::cin, command);
@@ -280,7 +307,7 @@ void setLanguage() {
 	std::string statusMessage = "Select an a language";
 
 	while(GameState::gameFunction == setLanguage) {
-		std::cout << Functions::fullScreenBox<rows, columns>(strings) << statusMessage << std::endl;
+		std::cout << Functions::fullScreenBox<rows, columns>("Language", strings) << statusMessage << std::endl;
 
 		std::string command;
 		std::cin >> command;
@@ -330,7 +357,7 @@ void Functions::settings() {
 
 	std::string statusMessage = "Select an option";
 
-	nextFunctionOnUserInput<rows, columns>(entries, statusMessage, Functions::settings);
+	nextFunctionOnUserInput<rows, columns>("Settings", entries, statusMessage, Functions::settings);
 
 	GameState::writeSettings();
 
@@ -350,7 +377,7 @@ void Functions::startMenu() {
 
 	std::string statusMessage = "Enter a command";
 
-	nextFunctionOnUserInput<rows, columns>(entries, statusMessage, Functions::startMenu);
+	nextFunctionOnUserInput<rows, columns>("Main Menu", entries, statusMessage, Functions::startMenu);
 	GameState::prevGameFunction = Functions::startMenu;
 	return;
 };
