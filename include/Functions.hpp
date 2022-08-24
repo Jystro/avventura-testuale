@@ -1,3 +1,4 @@
+// Authors: Lorenzo Colombo - Lorenzo De Filippo - Giovanni Nerviani
 #ifndef FUNCTIONS_HPP
 #define FUNCTIONS_HPP
 

@@ -1,3 +1,4 @@
+// Authors: Lorenzo Colombo - Lorenzo De Filippo - Giovanni Nerviani
 #include <algorithm>
 #include <ctype.h>
 #include <fstream>
