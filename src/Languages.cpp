@@ -9,5 +9,8 @@ std::string it_strings[] = { "Men\158", "Inizia", "Esci", "Impostazioni", "Ingle
 std::string en_status[] = { "Bye Bye!", "That's not an option", "Select a language", "Select an option", "Enter a command" };
 std::string it_status[] = { "Ciao ciao!", "Quella opzione non è disponibile", "Seleziona una lingua", "Seleziona un'opzione", "Inserire un comando" };
 
+std::string en_story[] = {};
+std::string it_story[] = {};
 std::string* Languages::strings[] = { en_string, it_strings };
 std::string* Languages::status[] = { en_status, it_status};
+std::string* Languages::story[] = { en_story, it_story};

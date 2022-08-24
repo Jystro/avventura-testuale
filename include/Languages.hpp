@@ -26,8 +26,12 @@ namespace Languages {
 		STATUS_Select_An_Option,
 		STATUS_Enter_A_Command
 	};
+	enum {
+		STORY_Phase1_Start
+	};
 	extern std::string* strings[];
 	extern std::string* status[];
+	extern std::string* story[];
 }; // LANGUAGES
 
 #endif // LANGUAGES_HPP
