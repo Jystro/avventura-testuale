@@ -1,3 +1,4 @@
+// Authors: Lorenzo Colombo - Lorenzo De Filippo - Giovanni Nerviani
 #include <algorithm>
 #include <ctype.h>
 #include <fstream>
@@ -426,7 +427,7 @@ void drawTextBoxAndSetNextFunctionOnUserInput(std::string title, const std::stri
 				GameState::gameFunction = action.next_ptr;
 			};
 		} catch(const std::exception& e) {
-			statusMessage = "That's not an option";
+			std::string statusMessage = Languages::status[GameState::settings.language][Languages::STATUS_Unavailable_Option];
 		};
 	};
 	return;
@@ -439,9 +440,9 @@ void setLanguage() {
 	const unsigned int rows = 3;
 	const unsigned int columns = 1;
 	const struct Entry entries[rows][columns] = {
-		{ Languages::languages[GameState::settings.language][Languages::STRING_English], NULL },
-		{ Languages::languages[GameState::settings.language][Languages::STRING_Italian], NULL },
-		{ Languages::languages[GameState::settings.language][Languages::STRING_Back], Functions::settings }
+		{ Languages::strings[GameState::settings.language][Languages::STRING_English], NULL },
+		{ Languages::strings[GameState::settings.language][Languages::STRING_Italian], NULL },
+		{ Languages::strings[GameState::settings.language][Languages::STRING_Back], Functions::settings }
 	};
 
 	// Strings to display
@@ -456,7 +457,7 @@ void setLanguage() {
 		};
 	};
 
-	std::string statusMessage = "Select an a language";
+	std::string statusMessage = Languages::status[GameState::settings.language][Languages::STATUS_Select_A_Language];
 
 	while(GameState::gameFunction == setLanguage) {
 		std::cout << Functions::fullScreenBox<rows, columns>("Language", strings) << statusMessage << std::endl;
@@ -481,7 +482,7 @@ void setLanguage() {
 				};
 			};
 		} catch(const std::exception& e) {
-			statusMessage = "That's not an option";
+			std::string statusMessage = Languages::status[GameState::settings.language][Languages::STATUS_Unavailable_Option];
 		};
 	};
 	return;
@@ -502,12 +503,12 @@ void Functions::settings() {
 	const unsigned int rows = 3;
 	const unsigned int columns = 1;
 	const struct Entry entries[rows][columns] = {
-		{ Languages::languages[GameState::settings.language][Languages::STRING_Language], setLanguage },
-		{ Languages::languages[GameState::settings.language][Languages::STRING_Reset_settings], resetSettings },
-		{ Languages::languages[GameState::settings.language][Languages::STRING_Back], GameState::prevGameFunction }
+		{ Languages::strings[GameState::settings.language][Languages::STRING_Language], setLanguage },
+		{ Languages::strings[GameState::settings.language][Languages::STRING_Reset_settings], resetSettings },
+		{ Languages::strings[GameState::settings.language][Languages::STRING_Back], GameState::prevGameFunction }
 	};
 
-	std::string statusMessage = "Select an option";
+	std::string statusMessage = Languages::status[GameState::settings.language][Languages::STATUS_Select_An_Option];
 
 	drawBoxAndSetNextFunctionOnUserInput<rows, columns>("Settings", entries, statusMessage, Functions::settings);
 
@@ -529,12 +530,12 @@ void Functions::startMenu() {
 	const unsigned int rows = 3;
 	const unsigned int columns = 1;
 	const struct Entry entries[rows][columns] = {
-		{{ Languages::languages[GameState::settings.language][Languages::STRING_Start], Functions::Phase1::start}},
-		{{ Languages::languages[GameState::settings.language][Languages::STRING_Settings], Functions::settings }},
-		{{ Languages::languages[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+		{{ Languages::strings[GameState::settings.language][Languages::STRING_Start], NULL }},
+		{{ Languages::strings[GameState::settings.language][Languages::STRING_Settings], Functions::settings }},
+		{{ Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
 	};
 
-	std::string statusMessage = "Enter a command";
+	std::string statusMessage = Languages::status[GameState::settings.language][Languages::STATUS_Enter_A_Command];
 
 	drawBoxAndSetNextFunctionOnUserInput<rows, columns>("Main Menu", entries, statusMessage, Functions::startMenu);
 	GameState::prevGameFunction = Functions::startMenu;
@@ -549,7 +550,7 @@ void Functions::Phase1::start() {
 	const unsigned int columns = 4;
 	const struct Entry entries[rows][columns] {
 		{{ "Ovest", NULL}, { "Nord", NULL}, { "Est", NULL}, { "Sud", NULL}},
-		{{ "Guardati attorno", }, { Languages::languages[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+		{{ "Guardati attorno", }, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
 	};
 
 	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Avventura", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mattis nibh placerat ultricies pharetra. Etiam et auctor diam. Nullam pellentesque sem vitae ipsum volutpat, accumsan molestie nibh porttitor. Proin ultrices convallis mi, vel lacinia augue hendrerit sit amet. Praesent pellentesque augue eros, id vulputate dui ullamcorper eu. Donec quis velit.", entries, "Write a command", Functions::Phase1::start);

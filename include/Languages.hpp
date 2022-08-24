@@ -1,3 +1,4 @@
+// Authors: Lorenzo Colombo - Lorenzo De Filippo - Giovanni Nerviani
 #ifndef LANGUAGES_HPP
 #define LANGUAGES_HPP
 
@@ -18,7 +19,15 @@ namespace Languages {
 		STRING_Back,
 		STRING_Reset_settings
 	};
-	extern std::string* languages[];
+	enum {
+		STATUS_Bye,
+		STATUS_Unavailable_Option,
+		STATUS_Select_A_Language,
+		STATUS_Select_An_Option,
+		STATUS_Enter_A_Command
+	};
+	extern std::string* strings[];
+	extern std::string* status[];
 }; // LANGUAGES
 
 #endif // LANGUAGES_HPP
