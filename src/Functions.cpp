@@ -396,7 +396,7 @@ void drawBoxAndSetNextFunctionOnUserInput(std::string title, const struct Entry 
 				GameState::gameFunction = action.next_ptr;
 			};
 		} catch(const std::exception& e) {
-			statusMessage = "That's not an option";
+			statusMessage = Languages::status[GameState::settings.language][Languages::STATUS_Unavailable_Option];
 		};
 	};
 	return;
