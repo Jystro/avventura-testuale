@@ -1,16 +1,23 @@
 // Authors: Lorenzo Colombo - Lorenzo De Filippo - Giovanni Nerviani
-#include "GameState.hpp"
-#include "Languages.hpp"
+
+/**
+ * @file		GameState.cpp
+ * @brief	Contains all variables and functions needed to know or change the state of the game
+*/
 #include <fstream>
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "GameState.hpp"
+#include "Languages.hpp"
+
+
+
 
 bool GameState::gameOver = false;
 int GameState::argc = 0;
 char** GameState::argv = NULL;
-unsigned int GameState::round = 0;
 void(*GameState::gameFunction)() = NULL;
 void(*GameState::prevGameFunction)() = NULL;
 
@@ -20,10 +27,6 @@ GameState::Settings GameState::settings = {
 
 
 
-unsigned int GameState::increaseRound() {
-	GameState::round++;
-	return GameState::round;
-};
 
 void GameState::init(int argc, char** argv) {
 	GameState::argc = argc;
@@ -35,11 +38,12 @@ void GameState::init(int argc, char** argv) {
 	return;
 };
 
+
 void GameState::reset() {
 	GameState::gameOver = false;
-	GameState::round = 0;
 	return;
 };
+
 
 void GameState::resetSettings() {
 	GameState::settings = {
@@ -47,6 +51,7 @@ void GameState::resetSettings() {
 	};
 	return;
 };
+
 
 void GameState::writeSettings() {
 	std::string executableFolder(GameState::argv[0]);
@@ -62,6 +67,7 @@ void GameState::writeSettings() {
 	return;
 };
 
+
 void GameState::readSettings() {
 	std::string executableFolder(GameState::argv[0]);
 	executableFolder = executableFolder.substr(0, executableFolder.find_last_of("\\/") + 1);
@@ -75,4 +81,3 @@ void GameState::readSettings() {
 
 	return;
 };
-

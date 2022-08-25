@@ -1,4 +1,9 @@
 // Authors: Lorenzo Colombo - Lorenzo De Filippo - Giovanni Nerviani
+
+/**
+ * @file		Functions.cpp
+ * @brief	Declarations for Functions.hpp and local helper functions
+*/
 #include <algorithm>
 #include <ctype.h>
 #include <fstream>
@@ -11,37 +16,54 @@
 
 
 
+
+/**
+ * @brief	Struct representing the dimensions of a terminal window
+*/
 struct TerminalSize {
-	unsigned int x;
-	unsigned int y;
+	unsigned int x; /**<	Number of columns or width */
+	unsigned int y; /**<	Number of rows or height */
 };
 
+/**
+ * @brief	Struct representing and entry
+*/
 struct Entry {
-	std::string text;
-	void(*next_ptr)();
+	std::string text; /**<	Text to display and match when selecting this entry */
+	void(*next_ptr)(); /**<	Pointer to the function that will be set to GameState::gameFunction */
 };
+
 
 
 
 #ifdef WIN32
+#include <windows.h>
+
+/**
+ * @brief	Struct representing and entry
+*/
 struct Border {
-	const char* horizontal = "*";
-	const char* vertical = "*";
-	const char* top_left = "*";
-	const char* top_right = "*";
-	const char* bottom_left = "*";
-	const char* bottom_right = "*";
+	const char* horizontal = "*"; /**<						Character or string to use for the horizontal border */
+	const char* vertical = "*"; /**<							Character or string to use for the vertical border */
+	const char* top_left = "*"; /**<							Character or string to use for the top left vertex */
+	const char* top_right = "*"; /**<						Character or string to use for the top right vertex */
+	const char* bottom_left = "*"; /**<						Character or string to use for the bottom left vertex */
+	const char* bottom_right = "*"; /**<					Character or string to use for the bottom right vertex */
 
-	const char* horizontal_connector_down = "*";
-	const char* horizontal_connector_up = "*";
+	const char* horizontal_connector_down = "*"; /**<	Character or string to use for the horizontal connector connecting down */
+	const char* horizontal_connector_up = "*"; /**<		Character or string to use for the horizontal connector connecting up */
 
-	const char* vertical_connector_right = "*";
-	const char* vertical_connector_left = "*";
+	const char* vertical_connector_right = "*"; /**<	Character or string to use for the vertical connector connecting right */
+	const char* vertical_connector_left = "*"; /**<		Character or string to use for the vertical connector connecting left */
 
-	const char* connector = "*";
+	const char* connector = "*"; /**<						Character or string to use for the connector to all directions */
 } border;
 
-#include <windows.h>
+/**
+ * @brief	OS dependent function to retrieve the size of the terminal window
+ *
+ * @return	TerminalSize with x and y set to terminal size
+*/
 TerminalSize getTerminalSize() {
 	struct TerminalSize terminal;
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
@@ -53,26 +75,35 @@ TerminalSize getTerminalSize() {
 };
 
 #else
-struct Border {
-	const char* horizontal = "═";
-	const char* vertical = "║";
-	const char* top_left = "╔";
-	const char* top_right = "╗";
-	const char* bottom_left = "╚";
-	const char* bottom_right = "╝";
-
-	const char* horizontal_connector_down = "╦";
-	const char* horizontal_connector_up = "╩";
-
-	const char* vertical_connector_right = "╠";
-	const char* vertical_connector_left = "╣";
-
-	const char* connector = "╬";
-} border;
-
 #include <sys/ioctl.h>
 #include <stdio.h>
 #include <unistd.h>
+
+/**
+ * @brief	Struct representing and entry
+*/
+struct Border {
+	const char* horizontal = "═"; /**<						Character or string to use for the horizontal border */
+	const char* vertical = "║"; /**<							Character or string to use for the vertical border */
+	const char* top_left = "╔"; /**<							Character or string to use for the top left vertex */
+	const char* top_right = "╗"; /**<						Character or string to use for the top right vertex */
+	const char* bottom_left = "╚"; /**<						Character or string to use for the bottom left vertex */
+	const char* bottom_right = "╝"; /**<					Character or string to use for the bottom right vertex */
+
+	const char* horizontal_connector_down = "╦"; /**<	Character or string to use for the horizontal connector connecting down */
+	const char* horizontal_connector_up = "╩"; /**<		Character or string to use for the horizontal connector connecting up */
+
+	const char* vertical_connector_right = "╠"; /**<	Character or string to use for the vertical connector connecting right */
+	const char* vertical_connector_left = "╣"; /**<		Character or string to use for the vertical connector connecting left */
+
+	const char* connector = "╬"; /**<						Character or string to use for the connector to all directions */
+} border;
+
+/**
+ * @brief	OS dependent function to retrieve the size of the terminal window
+ *
+ * @return	TerminalSize with x and y set to terminal size
+*/
 TerminalSize getTerminalSize() {
 	struct winsize w;
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
@@ -236,6 +267,13 @@ std::string Functions::box(const std::string title, const std::string (&entries)
 	return box;
 };
 
+template<const unsigned int rows, const unsigned int columns>
+std::string Functions::fullScreenBox(const std::string title, const std::string (&entries)[rows][columns]) {
+
+	TerminalSize terminal = getTerminalSize();
+	return Functions::box<rows, columns>(title, entries, terminal.x, terminal.y);
+};
+
 
 std::string Functions::textBox(const std::string title, std::string text, const unsigned int width, unsigned int height) {
 	// String to be returned
@@ -335,15 +373,6 @@ std::string Functions::textBox(const std::string title, std::string text, const 
 	return box;
 };
 
-
-template<const unsigned int rows, const unsigned int columns>
-std::string Functions::fullScreenBox(const std::string title, const std::string (&entries)[rows][columns]) {
-
-	TerminalSize terminal = getTerminalSize();
-	return Functions::box<rows, columns>(title, entries, terminal.x, terminal.y);
-};
-
-
 std::string Functions::fullScreenTextBox(const std::string title, std::string text) {
 
 	TerminalSize terminal = getTerminalSize();
@@ -352,6 +381,19 @@ std::string Functions::fullScreenTextBox(const std::string title, std::string te
 
 
 
+
+/**
+ * @brief	Search if a string is equal to one of the entries.text
+ * Searches all entries.text and compares them to a passed string, returning the first matching entry or throwing a std::exception if no matches are found
+ *
+ * @param	length		The length of the entries array
+ * @param	entries		An array of entries of length length
+ * @param	search		A string to search in entries
+ *
+ * @return	The matched entry
+ *
+ * @see		Entry
+*/
 template<const unsigned int length>
 Entry entryFromString(const Entry (&entries)[length], std::string search) {
 	// Transform search string to lower case
@@ -368,7 +410,21 @@ Entry entryFromString(const Entry (&entries)[length], std::string search) {
 };
 
 
-
+/**
+ * @brief	Draws a full screen box with options and waits for user's input
+ * Draws a full screen box from given entries and waits for user's input before calling entryFromString to compare the input to one of the entries
+ *
+ * @param	rows				The number of rows of entry
+ * @param	columns			The number of columns of entry
+ * @param	title				The title for the box
+ * @param	entries			A 2D array of entries of size rows * columns
+ * @param	statusMessage	A string to display before taking user's input
+ * @param	caller			A pointer to the function that called this function
+ *
+ * @see		Entry
+ * @see		entryFromString
+ * @see		Functions::fullScreenBox
+*/
 template<const unsigned int rows, unsigned int columns>
 void drawBoxAndSetNextFunctionOnUserInput(std::string title, const struct Entry (&entries)[rows][columns], std::string statusMessage, void(*caller)()) {
 	// Strings to display
@@ -403,6 +459,22 @@ void drawBoxAndSetNextFunctionOnUserInput(std::string title, const struct Entry 
 };
 
 
+/**
+ * @brief	Draws a full screen text box from text and waits for user's input
+ * Draws a full screen text box from given string and waits for user's input before calling entryFromString to compare the input to one of the entries
+ *
+ * @param	rows				The number of rows of entry
+ * @param	columns			The number of columns of entry
+ * @param	title				The title for the box
+ * @param	text				The text for the box
+ * @param	entries			A 2D array of entries of size rows * columns to choose from
+ * @param	statusMessage	A string to display before taking user's input
+ * @param	caller			A pointer to the function that called this function
+ *
+ * @see		Entry
+ * @see		entryFromString
+ * @see		Functions::fullScreenTextBox
+*/
 template<const unsigned int rows, unsigned int columns>
 void drawTextBoxAndSetNextFunctionOnUserInput(std::string title, const std::string text, const struct Entry (&entries)[rows][columns], std::string statusMessage, void(*caller)()) {
 	// 1D array to search for input
@@ -434,7 +506,16 @@ void drawTextBoxAndSetNextFunctionOnUserInput(std::string title, const std::stri
 };
 
 
-
+/**
+ * @brief	Changes the game language
+ * Sets GameState::settings.language to the option selected by the user
+ *
+ * @see		Entry
+ * @see		Functions::fullScreenBox
+ * @see		entryFromString
+ * @see		Languages.hpp
+ * @see		GameState::settings
+*/
 void setLanguage() {
 	// Entries available to select
 	const unsigned int rows = 3;
@@ -489,12 +570,20 @@ void setLanguage() {
 };
 
 
+/**
+ * @brief	Resets the settings
+ * Calls GameState::resetSettings and gives control flow back to Functions::settings
+ *
+ * @see		GameState::settings
+ * @see		Functions::settings
+*/
 void resetSettings() {
 	GameState::resetSettings();
 
 	GameState::gameFunction = Functions::settings;
 	return;
 };
+
 
 
 
