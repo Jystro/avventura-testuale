@@ -34,7 +34,12 @@ namespace Languages {
 		STORY_Phase1_North,
 		STORY_Phase1_East,
 		STORY_Phase1_South,
-		STORY_Phase1_LookAround
+		STORY_Phase1_LookAround,
+		STORY_Phase2W_West,
+		STORY_Phase2W_North,
+		STORY_Phase2W_South,
+		STORY_Phase2W_LookAround,
+		STORY_Phase2W_Climb
 	};
 	extern std::string* strings[];
 	extern std::string* status[];

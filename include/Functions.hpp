@@ -3,6 +3,8 @@
 #define FUNCTIONS_HPP
 
 #include <string>
+#include <cstdlib>
+#include <ctime>
 
 namespace Functions {
 
@@ -21,9 +23,16 @@ namespace Functions {
 	void settings();
 	void quit();
 	void startMenu();
+	void Introduction();
+	bool chance();
 
 	namespace Phase1 {
 		void start();
+		void west();
+		void north();
+		void east();
+		void south();
+		void lookAround();
 	};
 }; // FUNCTIONS
 
