@@ -35,9 +35,7 @@ namespace Languages {
 		STORY_Phase1_East,
 		STORY_Phase1_South,
 		STORY_Phase1_LookAround,
-		STORY_Phase2W_West,
-		STORY_Phase2W_North,
-		STORY_Phase2W_South,
+		STORY_Phase2W_Obstacle,
 		STORY_Phase2W_LookAround,
 		STORY_Phase2W_Climb
 	};

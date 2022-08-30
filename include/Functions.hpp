@@ -34,6 +34,16 @@ namespace Functions {
 		void south();
 		void lookAround();
 	};
+
+	namespace Phase2 {
+		namespace W {
+			void obstacle();
+			void lookAround();
+			void climb();
+			void ficus();
+			void palm();
+		}
+	}
 }; // FUNCTIONS
 
 #endif // FUNCTIONS_HPP
