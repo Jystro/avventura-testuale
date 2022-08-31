@@ -22,8 +22,8 @@ namespace Functions {
 	// Game functions
 	void settings();
 	void quit();
-	void startMenu();
-	void Introduction();
+	void mainMenu();
+	void introduction();
 	bool chance();
 
 	namespace Phase1 {
