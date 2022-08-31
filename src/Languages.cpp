@@ -28,13 +28,15 @@ std::string it_story[] = { "Sei un Muirqui e sei appena scappato dallo Zoo di Sa
                            "Decidi di procedere dritto.\nEntri più nel profondo della giungla, dopo una lunga camminata ti fermi sulla strada.",
                            "Decidi di imboccare la strada a destra.\nCorri e corri e arrivi ad un corso d'acqua cristallino. Ti senti assetato.",
                            "Valuti l'opzione di tornare indietro, ma senti di non volerlo davvero.",
-                           "Vedi la giungla: alti e verdi alberi ti coprono da uno scottante giallo sole.\nSenti il silenzioso suono della natura vivente ed in moto.\nIn qualche modo riesci a distinguere tre percorsi dalla selva."
+                           "Vedi la giungla: alti e verdi alberi ti coprono da uno scottante giallo sole.\nSenti il silenzioso suono della natura vivente ed in moto.\nIn qualche modo riesci a distinguere tre percorsi dalla selva.",
                            "Cerchi di passare attraverso gli alberi, ma i loro tronchi e le loro radici non ti permettono di passare.",
                            "Guardi gli alberi:\nun gruppo ha frutti viola e verdi che pendono dai suoi rami;\nl'altro gruppo ha frutti tondi, marroni e pelosi sotto le sue foglie.",
                            "Scegli di arrampicarti su un albero, rifletti su quale degli alberi scalerai (1/2).",
                            "Scegli di arrampicarti su uno degli alberi dai frutti viola.\nSei affamato.",
                            "Scegli di arrampicarti su uno degli alberi dal frutto marrone.\nSei affamato."
                            };
+
+
 std::string* Languages::strings[] = { en_string, it_strings };
 std::string* Languages::status[] = { en_status, it_status};
 std::string* Languages::story[] = { en_story, it_story};
