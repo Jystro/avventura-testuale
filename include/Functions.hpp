@@ -23,7 +23,6 @@ namespace Functions {
 	void settings();
 	void quit();
 	void startMenu();
-	void Introduction();
 	bool chance();
 
 	namespace Phase1 {
@@ -43,7 +42,19 @@ namespace Functions {
 			void ficus();
 			void palm();
 		}
+	};
+
+	namespace Phase3 {
+		namespace W {
+			void ficusEat();
+			void ficusProceed();
+			void ficusLookAround();
+			void palmEat();
+			void palmProceed();
+			void palmLookAround();
+		}
 	}
+	
 }; // FUNCTIONS
 
 #endif // FUNCTIONS_HPP

@@ -37,7 +37,15 @@ namespace Languages {
 		STORY_Phase1_LookAround,
 		STORY_Phase2W_Obstacle,
 		STORY_Phase2W_LookAround,
-		STORY_Phase2W_Climb
+		STORY_Phase2W_Climb,
+		STORY_Phase2W_Ficus,
+		STORY_Phase2W_Palm,
+		STORY_Phase3W_FicusEat,
+		STORY_Phase3W_FicusProceed,
+		STORY_Phase3W_FicusLookAround,
+		STORY_Phase3W_PalmEat,
+		STORY_Phase3W_PalmProceed,
+		STORY_Phase3W_PalmLookAround
 	};
 	extern std::string* strings[];
 	extern std::string* status[];

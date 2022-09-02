@@ -530,7 +530,7 @@ void Functions::startMenu() {
 	const unsigned int rows = 3;
 	const unsigned int columns = 1;
 	const struct Entry entries[rows][columns] = {
-		{{ Languages::strings[GameState::settings.language][Languages::STRING_Start], Functions::Introduction() }},
+		{{ Languages::strings[GameState::settings.language][Languages::STRING_Start], Functions::Phase1::start}},
 		{{ Languages::strings[GameState::settings.language][Languages::STRING_Settings], Functions::settings }},
 		{{ Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
 	};
@@ -540,11 +540,6 @@ void Functions::startMenu() {
 	drawBoxAndSetNextFunctionOnUserInput<rows, columns>("Main Menu", entries, statusMessage, Functions::startMenu);
 	GameState::prevGameFunction = Functions::startMenu;
 	return;
-};
-
-void Functions::Introduction() {
-	fullScreenTextBox("Prologo", Languages::story[GameState::settings.language][Languages::STORY_Intro])
-	GameState::gameFunction = Functions::Phase1::start;
 };
 
 bool Functions::chance(){
@@ -561,13 +556,13 @@ void Functions::Phase1::start() {
 	};
 
 	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Bivio", Languages::story[GameState::settings.language][Languages::STORY_Phase1_Start], entries, "Write a command", Functions::Phase1::start);
-	GameState::prevGameFunction = Functions::Introduction;
+	GameState::prevGameFunction = Functions::Phase1::start;
 	return;
 };
 
 void Functions::Phase1::west() {
 	const unsigned int rows = 2;
-	const unsigned int columns = 4;
+	const unsigned int columns = 5;
 	const struct Entry entries[rows][columns] {
 		{{ "Ovest", Functions::Phase2::W::obstacle}, { "Nord", Functions::Phase2::W::obstacle}, { "Est", Functions::Phase1::start}, { "Sud", Functions::Phase2::W::obstacle}},
 		{{ "Guardati attorno", Functions::Phase2::W::lookAround}, { "Arrampicati", Functions::Phase2::W::climb}, {"Ficus", NULL}, {"Palma", NULL}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
@@ -580,7 +575,7 @@ void Functions::Phase1::west() {
 
 void Functions::Phase1::north() {
 	const unsigned int rows = 2;
-	const unsigned int columns = 3;
+	const unsigned int columns = 4;
 
 	const struct Entry entries[rows][columns] {
 		{{ "Ovest", NULL}, { "Nord", NULL}, { "Est", NULL}, { "Sud", Functions::Phase1::start}},
@@ -594,7 +589,7 @@ void Functions::Phase1::north() {
 
 void Functions::Phase1::east() {
 	const unsigned int rows = 2;
-	const unsigned int columns = 3;
+	const unsigned int columns = 4;
 	const struct Entry entries[rows][columns] {
 		{{ "Ovest", Functions::Phase1::start}, { "Nord", NULL}, { "Est", NULL}, { "Sud", NULL}},
 		{{ "Guardati attorno", NULL}, { "Bevi", NULL}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
@@ -633,7 +628,7 @@ void Functions::Phase1::lookAround() {
 
 void Functions::Phase2::W::obstacle() {
 	const unsigned int rows = 2;
-	const unsigned int columns = 4;
+	const unsigned int columns = 5;
 	const struct Entry entries[rows][columns] {
 		{{ "Ovest", Functions::Phase2::W::obstacle}, { "Nord", Functions::Phase2::W::obstacle}, { "Est", Functions::Phase1::start}, { "Sud", Functions::Phase2::W::obstacle}},
 		{{ "Guardati attorno", Functions::Phase2::W::lookAround}, { "Arrampicati", Functions::Phase2::W::climb}, {"Ficus", NULL}, {"Palma", NULL}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
@@ -646,7 +641,7 @@ void Functions::Phase2::W::obstacle() {
 
 void Functions::Phase2::W::lookAround() {
 	const unsigned int rows = 2;
-	const unsigned int columns = 4;
+	const unsigned int columns = 5;
 	const struct Entry entries[rows][columns] {
 		{{ "Ovest", Functions::Phase2::W::obstacle}, { "Nord", Functions::Phase2::W::obstacle}, { "Est", Functions::Phase1::start}, { "Sud", Functions::Phase2::W::obstacle}},
 		{{ "Guardati attorno", Functions::Phase2::W::lookAround}, { "Arrampicati", Functions::Phase2::W::climb}, {"Ficus", NULL}, {"Palma", NULL}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
@@ -661,8 +656,8 @@ void Functions::Phase2::W::climb() {
 	const unsigned int rows = 2;
 	const unsigned int columns = 3;
 	const struct Entry entries[rows][columns] {
-		{{"1", NULL}, {"2", NULL}},
-		{{"Ficus", NULL}, {"Palma", NULL}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+		{{"1", Functions::Phase2::W::ficus}, {"2", Functions::Phase2::W::palm}},
+		{{"Ficus", Functions::Phase2::W::ficus}, {"Palma", Functions::Phase2::W::palm}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
 	};
 
 	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Foresta", Languages::story[GameState::settings.language][Languages::STORY_Phase2W_Climb], entries, "Write a command", Functions::Phase2::W::climb);
@@ -674,7 +669,7 @@ void Functions::Phase2::W::ficus() {
 	const unsigned int rows = 1;
 	const unsigned int columns = 4;
 	const struct Entry entries[rows][columns] {
-		{{"Mangia", NULL}, {"Prosegui", NULL}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+		{{"Mangia", Functions::Phase3::W::ficusEat}, {"Prosegui", Functions::Phase3::W::ficusProceed}, {"Guardati attorno", Functions::Phase3::W::ficusLookAround}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
 	};
 
 	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Ficus", Languages::story[GameState::settings.language][Languages::STORY_Phase2W_Ficus], entries, "Write a command", Functions::Phase2::W::ficus);
@@ -686,10 +681,85 @@ void Functions::Phase2::W::palm() {
 	const unsigned int rows = 1;
 	const unsigned int columns = 4;
 	const struct Entry entries[rows][columns] {
-		{{"Mangia", NULL}, {"Prosegui", NULL}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+		{{"Mangia", Functions::Phase3::W::palmEat}, {"Prosegui", Functions::Phase3::W::palmProceed}, {"Guardati attorno", Functions::Phase3::W::palmLookAround}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
 	};
 
 	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Palma", Languages::story[GameState::settings.language][Languages::STORY_Phase2W_Palm], entries, "Write a command", Functions::Phase2::W::palm);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+void Functions::Phase3::W::ficusEat() {
+	const unsigned int rows = 1;
+	const unsigned int columns = 4;
+	const struct Entry entries[rows][columns] {
+		{{"Combatti", Functions::Phase4::W::hunterFight}, {"Fai amicizia", Functions::Phase4::W::hunterBefriend}, {"Scappa", NULL}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Cacciatore", Languages::story[GameState::settings.language][Languages::STORY_Phase3W_FicusEat], entries, "Write a command", Functions::Phase3::W::ficusEat);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+void Functions::Phase3::W::ficusProceed() {
+	const unsigned int rows = 1;
+	const unsigned int columns = 4;
+	const struct Entry entries[rows][columns] {
+		{{"Combatti", Functions::Phase4::W::hunterFight}, {"Fai amicizia", Functions::Phase4::W::hunterBefriend}, {"Scappa", NULL}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Cacciatore", Languages::story[GameState::settings.language][Languages::STORY_Phase3W_FicusProceed], entries, "Write a command", Functions::Phase3::W::ficusProceed);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+void Functions::Phase3::W::ficusLookAround() {
+	const unsigned int rows = 1;
+	const unsigned int columns = 4;
+	const struct Entry entries[rows][columns] {
+		{{"Mangia", Functions::Phase3::W::ficusEat}, {"Prosegui", Functions::Phase3::W::ficusProceed}, {"Guardati attorno", Functions::Phase3::W::ficusLookAround}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Ficus", Languages::story[GameState::settings.language][Languages::STORY_Phase3W_FicusLookAround], entries, "Write a command", Functions::Phase3::W::ficusLookAround);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+void Functions::Phase3::W::palmEat() {
+	const unsigned int rows = 1;
+	const unsigned int columns = 4;
+	if(rand()%2){
+		const struct Entry entries[rows][columns] {
+			{{"Combatti", Functions::Phase4::W::hunterFight}, {"Fai amicizia", Functions::Phase4::W::hunterBefriend}, {"Scappa", NULL}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+		};
+		drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Cacciatore", Languages::story[GameState::settings.language][Languages::STORY_Phase3W_PalmEat], entries, "Write a command", Functions::Phase3::W::palmEat);
+	}
+	else{
+		GameState::gameOver = true;
+	}
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+void Functions::Phase3::W::palmProceed() {
+	const unsigned int rows = 1;
+	const unsigned int columns = 4;
+	const struct Entry entries[rows][columns] {
+		{{"Combatti", Functions::Phase4::W::hunterFight}, {"Fai amicizia", Functions::Phase4::W::hunterBefriend}, {"Scappa", NULL}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Cacciatore", Languages::story[GameState::settings.language][Languages::STORY_Phase3W_PalmProceed], entries, "Write a command", Functions::Phase3::W::palmProceed);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+void Functions::Phase3::W::palmLookAround() {
+	const unsigned int rows = 1;
+	const unsigned int columns = 4;
+	const struct Entry entries[rows][columns] {
+		{{"Mangia", Functions::Phase3::W::palmEat}, {"Prosegui", Functions::Phase3::W::palmProceed}, {"Guardati attorno", Functions::Phase3::W::palmLookAround}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Palma", Languages::story[GameState::settings.language][Languages::STORY_Phase3W_PalmLookAround], entries, "Write a command", Functions::Phase2::W::palmLookAround);
 	GameState::prevGameFunction = Functions::Phase1::start;
 	return;
 };
