@@ -1,9 +1,4 @@
 // Authors: Lorenzo Colombo - Lorenzo De Filippo - Giovanni Nerviani
-
-/**
- * @file		Functions.cpp
- * @brief	Declarations for Functions.hpp and local helper functions
-*/
 #include <algorithm>
 #include <ctype.h>
 #include <fstream>
@@ -16,54 +11,37 @@
 
 
 
-
-/**
- * @brief	Struct representing the dimensions of a terminal window
-*/
 struct TerminalSize {
-	unsigned int x; /**<	Number of columns or width */
-	unsigned int y; /**<	Number of rows or height */
+	unsigned int x;
+	unsigned int y;
 };
 
-/**
- * @brief	Struct representing and entry
-*/
 struct Entry {
-	std::string text; /**<	Text to display and match when selecting this entry */
-	void(*next_ptr)(); /**<	Pointer to the function that will be set to GameState::gameFunction */
+	std::string text;
+	void(*next_ptr)();
 };
-
 
 
 
 #ifdef WIN32
-#include <windows.h>
-
-/**
- * @brief	Struct representing and entry
-*/
 struct Border {
-	const char* horizontal = "*"; /**<						Character or string to use for the horizontal border */
-	const char* vertical = "*"; /**<							Character or string to use for the vertical border */
-	const char* top_left = "*"; /**<							Character or string to use for the top left vertex */
-	const char* top_right = "*"; /**<						Character or string to use for the top right vertex */
-	const char* bottom_left = "*"; /**<						Character or string to use for the bottom left vertex */
-	const char* bottom_right = "*"; /**<					Character or string to use for the bottom right vertex */
+	const char* horizontal = "*";
+	const char* vertical = "*";
+	const char* top_left = "*";
+	const char* top_right = "*";
+	const char* bottom_left = "*";
+	const char* bottom_right = "*";
 
-	const char* horizontal_connector_down = "*"; /**<	Character or string to use for the horizontal connector connecting down */
-	const char* horizontal_connector_up = "*"; /**<		Character or string to use for the horizontal connector connecting up */
+	const char* horizontal_connector_down = "*";
+	const char* horizontal_connector_up = "*";
 
-	const char* vertical_connector_right = "*"; /**<	Character or string to use for the vertical connector connecting right */
-	const char* vertical_connector_left = "*"; /**<		Character or string to use for the vertical connector connecting left */
+	const char* vertical_connector_right = "*";
+	const char* vertical_connector_left = "*";
 
-	const char* connector = "*"; /**<						Character or string to use for the connector to all directions */
+	const char* connector = "*";
 } border;
 
-/**
- * @brief	OS dependent function to retrieve the size of the terminal window
- *
- * @return	TerminalSize with x and y set to terminal size
-*/
+#include <windows.h>
 TerminalSize getTerminalSize() {
 	struct TerminalSize terminal;
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
@@ -75,35 +53,26 @@ TerminalSize getTerminalSize() {
 };
 
 #else
+struct Border {
+	const char* horizontal = "═";
+	const char* vertical = "║";
+	const char* top_left = "╔";
+	const char* top_right = "╗";
+	const char* bottom_left = "╚";
+	const char* bottom_right = "╝";
+
+	const char* horizontal_connector_down = "╦";
+	const char* horizontal_connector_up = "╩";
+
+	const char* vertical_connector_right = "╠";
+	const char* vertical_connector_left = "╣";
+
+	const char* connector = "╬";
+} border;
+
 #include <sys/ioctl.h>
 #include <stdio.h>
 #include <unistd.h>
-
-/**
- * @brief	Struct representing and entry
-*/
-struct Border {
-	const char* horizontal = "═"; /**<						Character or string to use for the horizontal border */
-	const char* vertical = "║"; /**<							Character or string to use for the vertical border */
-	const char* top_left = "╔"; /**<							Character or string to use for the top left vertex */
-	const char* top_right = "╗"; /**<						Character or string to use for the top right vertex */
-	const char* bottom_left = "╚"; /**<						Character or string to use for the bottom left vertex */
-	const char* bottom_right = "╝"; /**<					Character or string to use for the bottom right vertex */
-
-	const char* horizontal_connector_down = "╦"; /**<	Character or string to use for the horizontal connector connecting down */
-	const char* horizontal_connector_up = "╩"; /**<		Character or string to use for the horizontal connector connecting up */
-
-	const char* vertical_connector_right = "╠"; /**<	Character or string to use for the vertical connector connecting right */
-	const char* vertical_connector_left = "╣"; /**<		Character or string to use for the vertical connector connecting left */
-
-	const char* connector = "╬"; /**<						Character or string to use for the connector to all directions */
-} border;
-
-/**
- * @brief	OS dependent function to retrieve the size of the terminal window
- *
- * @return	TerminalSize with x and y set to terminal size
-*/
 TerminalSize getTerminalSize() {
 	struct winsize w;
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
@@ -267,13 +236,6 @@ std::string Functions::box(const std::string title, const std::string (&entries)
 	return box;
 };
 
-template<const unsigned int rows, const unsigned int columns>
-std::string Functions::fullScreenBox(const std::string title, const std::string (&entries)[rows][columns]) {
-
-	TerminalSize terminal = getTerminalSize();
-	return Functions::box<rows, columns>(title, entries, terminal.x, terminal.y);
-};
-
 
 std::string Functions::textBox(const std::string title, std::string text, const unsigned int width, unsigned int height) {
 	// String to be returned
@@ -336,7 +298,7 @@ std::string Functions::textBox(const std::string title, std::string text, const 
 		box += borderRow;
 	};
 
-	for(int i = 0; i < height - 4; i++) {
+	for(int i = 0; i < height - 2; i++) {
 		if(i < height * .1 || i > height * .9) {
 			box += emptyRow;
 		}
@@ -373,6 +335,15 @@ std::string Functions::textBox(const std::string title, std::string text, const 
 	return box;
 };
 
+
+template<const unsigned int rows, const unsigned int columns>
+std::string Functions::fullScreenBox(const std::string title, const std::string (&entries)[rows][columns]) {
+
+	TerminalSize terminal = getTerminalSize();
+	return Functions::box<rows, columns>(title, entries, terminal.x, terminal.y);
+};
+
+
 std::string Functions::fullScreenTextBox(const std::string title, std::string text) {
 
 	TerminalSize terminal = getTerminalSize();
@@ -381,19 +352,6 @@ std::string Functions::fullScreenTextBox(const std::string title, std::string te
 
 
 
-
-/**
- * @brief	Search if a string is equal to one of the entries.text
- * Searches all entries.text and compares them to a passed string, returning the first matching entry or throwing a std::exception if no matches are found
- *
- * @param	length		The length of the entries array
- * @param	entries		An array of entries of length length
- * @param	search		A string to search in entries
- *
- * @return	The matched entry
- *
- * @see		Entry
-*/
 template<const unsigned int length>
 Entry entryFromString(const Entry (&entries)[length], std::string search) {
 	// Transform search string to lower case
@@ -410,21 +368,7 @@ Entry entryFromString(const Entry (&entries)[length], std::string search) {
 };
 
 
-/**
- * @brief	Draws a full screen box with options and waits for user's input
- * Draws a full screen box from given entries and waits for user's input before calling entryFromString to compare the input to one of the entries
- *
- * @param	rows				The number of rows of entry
- * @param	columns			The number of columns of entry
- * @param	title				The title for the box
- * @param	entries			A 2D array of entries of size rows * columns
- * @param	statusMessage	A string to display before taking user's input
- * @param	caller			A pointer to the function that called this function
- *
- * @see		Entry
- * @see		entryFromString
- * @see		Functions::fullScreenBox
-*/
+
 template<const unsigned int rows, unsigned int columns>
 void drawBoxAndSetNextFunctionOnUserInput(std::string title, const struct Entry (&entries)[rows][columns], std::string statusMessage, void(*caller)()) {
 	// Strings to display
@@ -452,29 +396,13 @@ void drawBoxAndSetNextFunctionOnUserInput(std::string title, const struct Entry 
 				GameState::gameFunction = action.next_ptr;
 			};
 		} catch(const std::exception& e) {
-			statusMessage = Languages::status[GameState::settings.language][Languages::STATUS_Unavailable_Option];
+			statusMessage = "That's not an option";
 		};
 	};
 	return;
 };
 
 
-/**
- * @brief	Draws a full screen text box from text and waits for user's input
- * Draws a full screen text box from given string and waits for user's input before calling entryFromString to compare the input to one of the entries
- *
- * @param	rows				The number of rows of entry
- * @param	columns			The number of columns of entry
- * @param	title				The title for the box
- * @param	text				The text for the box
- * @param	entries			A 2D array of entries of size rows * columns to choose from
- * @param	statusMessage	A string to display before taking user's input
- * @param	caller			A pointer to the function that called this function
- *
- * @see		Entry
- * @see		entryFromString
- * @see		Functions::fullScreenTextBox
-*/
 template<const unsigned int rows, unsigned int columns>
 void drawTextBoxAndSetNextFunctionOnUserInput(std::string title, const std::string text, const struct Entry (&entries)[rows][columns], std::string statusMessage, void(*caller)()) {
 	// 1D array to search for input
@@ -506,16 +434,7 @@ void drawTextBoxAndSetNextFunctionOnUserInput(std::string title, const std::stri
 };
 
 
-/**
- * @brief	Changes the game language
- * Sets GameState::settings.language to the option selected by the user
- *
- * @see		Entry
- * @see		Functions::fullScreenBox
- * @see		entryFromString
- * @see		Languages.hpp
- * @see		GameState::settings
-*/
+
 void setLanguage() {
 	// Entries available to select
 	const unsigned int rows = 3;
@@ -570,20 +489,12 @@ void setLanguage() {
 };
 
 
-/**
- * @brief	Resets the settings
- * Calls GameState::resetSettings and gives control flow back to Functions::settings
- *
- * @see		GameState::settings
- * @see		Functions::settings
-*/
 void resetSettings() {
 	GameState::resetSettings();
 
 	GameState::gameFunction = Functions::settings;
 	return;
 };
-
 
 
 
@@ -619,7 +530,7 @@ void Functions::startMenu() {
 	const unsigned int rows = 3;
 	const unsigned int columns = 1;
 	const struct Entry entries[rows][columns] = {
-		{{ Languages::strings[GameState::settings.language][Languages::STRING_Start], NULL }},
+		{{ Languages::strings[GameState::settings.language][Languages::STRING_Start], Functions::Phase1::start}},
 		{{ Languages::strings[GameState::settings.language][Languages::STRING_Settings], Functions::settings }},
 		{{ Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
 	};
@@ -631,18 +542,224 @@ void Functions::startMenu() {
 	return;
 };
 
-
+bool Functions::chance(){
+	return rand()%2;
+};
 
 
 void Functions::Phase1::start() {
 	const unsigned int rows = 2;
 	const unsigned int columns = 4;
 	const struct Entry entries[rows][columns] {
-		{{ "Ovest", NULL}, { "Nord", NULL}, { "Est", NULL}, { "Sud", NULL}},
-		{{ "Guardati attorno", }, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+		{{ "Ovest", Phase1::west}, { "Nord", Functions::Phase1::north}, { "Est", Functions::Phase1::east}, { "Sud", Functions::Phase1::south}},
+		{{ "Guardati attorno", NULL}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
 	};
 
-	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Avventura", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mattis nibh placerat ultricies pharetra. Etiam et auctor diam. Nullam pellentesque sem vitae ipsum volutpat, accumsan molestie nibh porttitor. Proin ultrices convallis mi, vel lacinia augue hendrerit sit amet. Praesent pellentesque augue eros, id vulputate dui ullamcorper eu. Donec quis velit.", entries, "Write a command", Functions::Phase1::start);
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Bivio", Languages::story[GameState::settings.language][Languages::STORY_Phase1_Start], entries, "Write a command", Functions::Phase1::start);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+void Functions::Phase1::west() {
+	const unsigned int rows = 2;
+	const unsigned int columns = 5;
+	const struct Entry entries[rows][columns] {
+		{{ "Ovest", Functions::Phase2::W::obstacle}, { "Nord", Functions::Phase2::W::obstacle}, { "Est", Functions::Phase1::start}, { "Sud", Functions::Phase2::W::obstacle}},
+		{{ "Guardati attorno", Functions::Phase2::W::lookAround}, { "Arrampicati", Functions::Phase2::W::climb}, {"Ficus", NULL}, {"Palma", NULL}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Foresta", Languages::story[GameState::settings.language][Languages::STORY_Phase1_West], entries, "Write a command", Functions::Phase1::west);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+void Functions::Phase1::north() {
+	const unsigned int rows = 2;
+	const unsigned int columns = 4;
+
+	const struct Entry entries[rows][columns] {
+		{{ "Ovest", NULL}, { "Nord", NULL}, { "Est", NULL}, { "Sud", Functions::Phase1::start}},
+		{{ "Guardati attorno", NULL}, { "Arrampicati", NULL}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Foresta di teak", Languages::story[GameState::settings.language][Languages::STORY_Phase1_North], entries, "Write a command", Functions::Phase1::north);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+void Functions::Phase1::east() {
+	const unsigned int rows = 2;
+	const unsigned int columns = 4;
+	const struct Entry entries[rows][columns] {
+		{{ "Ovest", Functions::Phase1::start}, { "Nord", NULL}, { "Est", NULL}, { "Sud", NULL}},
+		{{ "Guardati attorno", NULL}, { "Bevi", NULL}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Il fiume", Languages::story[GameState::settings.language][Languages::STORY_Phase1_East], entries, "Write a command", Functions::Phase1::east);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+void Functions::Phase1::south() {
+	const unsigned int rows = 2;
+	const unsigned int columns = 4;
+	const struct Entry entries[rows][columns] {
+		{{ "Ovest", Functions::Phase1::west}, { "Nord", Functions::Phase1::north}, { "Est", Functions::Phase1::east}, { "Sud", Functions::Phase1::south}},
+		{{ "Guardati attorno", NULL}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Bivio", Languages::story[GameState::settings.language][Languages::STORY_Phase1_South], entries, "Write a command", Functions::Phase1::east);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+void Functions::Phase1::lookAround() {
+	const unsigned int rows = 2;
+	const unsigned int columns = 4;
+	const struct Entry entries[rows][columns] {
+		{{ "Ovest", Functions::Phase1::west}, { "Nord", Functions::Phase1::north}, { "Est", Functions::Phase1::east}, { "Sud", Functions::Phase1::south}},
+		{{ "Guardati attorno", NULL}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Bivio", Languages::story[GameState::settings.language][Languages::STORY_Phase1_LookAround], entries, "Write a command", Functions::Phase1::lookAround);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+void Functions::Phase2::W::obstacle() {
+	const unsigned int rows = 2;
+	const unsigned int columns = 5;
+	const struct Entry entries[rows][columns] {
+		{{ "Ovest", Functions::Phase2::W::obstacle}, { "Nord", Functions::Phase2::W::obstacle}, { "Est", Functions::Phase1::start}, { "Sud", Functions::Phase2::W::obstacle}},
+		{{ "Guardati attorno", Functions::Phase2::W::lookAround}, { "Arrampicati", Functions::Phase2::W::climb}, {"Ficus", NULL}, {"Palma", NULL}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Foresta", Languages::story[GameState::settings.language][Languages::STORY_Phase2W_Obstacle], entries, "Write a command", Functions::Phase2::W::obstacle);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+void Functions::Phase2::W::lookAround() {
+	const unsigned int rows = 2;
+	const unsigned int columns = 5;
+	const struct Entry entries[rows][columns] {
+		{{ "Ovest", Functions::Phase2::W::obstacle}, { "Nord", Functions::Phase2::W::obstacle}, { "Est", Functions::Phase1::start}, { "Sud", Functions::Phase2::W::obstacle}},
+		{{ "Guardati attorno", Functions::Phase2::W::lookAround}, { "Arrampicati", Functions::Phase2::W::climb}, {"Ficus", NULL}, {"Palma", NULL}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Foresta", Languages::story[GameState::settings.language][Languages::STORY_Phase2W_LookAround], entries, "Write a command", Functions::Phase2::W::lookAround);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+void Functions::Phase2::W::climb() {
+	const unsigned int rows = 2;
+	const unsigned int columns = 3;
+	const struct Entry entries[rows][columns] {
+		{{"1", Functions::Phase2::W::ficus}, {"2", Functions::Phase2::W::palm}},
+		{{"Ficus", Functions::Phase2::W::ficus}, {"Palma", Functions::Phase2::W::palm}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Foresta", Languages::story[GameState::settings.language][Languages::STORY_Phase2W_Climb], entries, "Write a command", Functions::Phase2::W::climb);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+void Functions::Phase2::W::ficus() {
+	const unsigned int rows = 1;
+	const unsigned int columns = 4;
+	const struct Entry entries[rows][columns] {
+		{{"Mangia", Functions::Phase3::W::ficusEat}, {"Prosegui", Functions::Phase3::W::ficusProceed}, {"Guardati attorno", Functions::Phase3::W::ficusLookAround}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Ficus", Languages::story[GameState::settings.language][Languages::STORY_Phase2W_Ficus], entries, "Write a command", Functions::Phase2::W::ficus);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+void Functions::Phase2::W::palm() {
+	const unsigned int rows = 1;
+	const unsigned int columns = 4;
+	const struct Entry entries[rows][columns] {
+		{{"Mangia", Functions::Phase3::W::palmEat}, {"Prosegui", Functions::Phase3::W::palmProceed}, {"Guardati attorno", Functions::Phase3::W::palmLookAround}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Palma", Languages::story[GameState::settings.language][Languages::STORY_Phase2W_Palm], entries, "Write a command", Functions::Phase2::W::palm);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+void Functions::Phase3::W::ficusEat() {
+	const unsigned int rows = 1;
+	const unsigned int columns = 4;
+	const struct Entry entries[rows][columns] {
+		{{"Combatti", Functions::Phase4::W::hunterFight}, {"Fai amicizia", Functions::Phase4::W::hunterBefriend}, {"Scappa", NULL}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Cacciatore", Languages::story[GameState::settings.language][Languages::STORY_Phase3W_FicusEat], entries, "Write a command", Functions::Phase3::W::ficusEat);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+void Functions::Phase3::W::ficusProceed() {
+	const unsigned int rows = 1;
+	const unsigned int columns = 4;
+	const struct Entry entries[rows][columns] {
+		{{"Combatti", Functions::Phase4::W::hunterFight}, {"Fai amicizia", Functions::Phase4::W::hunterBefriend}, {"Scappa", NULL}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Cacciatore", Languages::story[GameState::settings.language][Languages::STORY_Phase3W_FicusProceed], entries, "Write a command", Functions::Phase3::W::ficusProceed);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+void Functions::Phase3::W::ficusLookAround() {
+	const unsigned int rows = 1;
+	const unsigned int columns = 4;
+	const struct Entry entries[rows][columns] {
+		{{"Mangia", Functions::Phase3::W::ficusEat}, {"Prosegui", Functions::Phase3::W::ficusProceed}, {"Guardati attorno", Functions::Phase3::W::ficusLookAround}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Ficus", Languages::story[GameState::settings.language][Languages::STORY_Phase3W_FicusLookAround], entries, "Write a command", Functions::Phase3::W::ficusLookAround);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+void Functions::Phase3::W::palmEat() {
+	const unsigned int rows = 1;
+	const unsigned int columns = 4;
+	if(rand()%2){
+		const struct Entry entries[rows][columns] {
+			{{"Combatti", Functions::Phase4::W::hunterFight}, {"Fai amicizia", Functions::Phase4::W::hunterBefriend}, {"Scappa", NULL}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+		};
+		drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Cacciatore", Languages::story[GameState::settings.language][Languages::STORY_Phase3W_PalmEat], entries, "Write a command", Functions::Phase3::W::palmEat);
+	}
+	else{
+		GameState::gameOver = true;
+	}
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+void Functions::Phase3::W::palmProceed() {
+	const unsigned int rows = 1;
+	const unsigned int columns = 4;
+	const struct Entry entries[rows][columns] {
+		{{"Combatti", Functions::Phase4::W::hunterFight}, {"Fai amicizia", Functions::Phase4::W::hunterBefriend}, {"Scappa", NULL}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Cacciatore", Languages::story[GameState::settings.language][Languages::STORY_Phase3W_PalmProceed], entries, "Write a command", Functions::Phase3::W::palmProceed);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+void Functions::Phase3::W::palmLookAround() {
+	const unsigned int rows = 1;
+	const unsigned int columns = 4;
+	const struct Entry entries[rows][columns] {
+		{{"Mangia", Functions::Phase3::W::palmEat}, {"Prosegui", Functions::Phase3::W::palmProceed}, {"Guardati attorno", Functions::Phase3::W::palmLookAround}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Palma", Languages::story[GameState::settings.language][Languages::STORY_Phase3W_PalmLookAround], entries, "Write a command", Functions::Phase2::W::palmLookAround);
 	GameState::prevGameFunction = Functions::Phase1::start;
 	return;
 };
