@@ -693,7 +693,7 @@ void Functions::Phase3::W::ficusEat() {
 	const unsigned int rows = 1;
 	const unsigned int columns = 4;
 	const struct Entry entries[rows][columns] {
-		{{"Combatti", Functions::Phase4::W::hunterFight}, {"Fai amicizia", Functions::Phase4::W::hunterBefriend}, {"Scappa", NULL}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+		{{"Combatti", Functions::Phase4::W::fight}, {"Fai amicizia", Functions::Phase4::W::befriend}, {"Scappa", Functions::Phase4::W::run}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
 	};
 
 	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Cacciatore", Languages::story[GameState::settings.language][Languages::STORY_Phase3W_FicusEat], entries, "Write a command", Functions::Phase3::W::ficusEat);
@@ -705,7 +705,7 @@ void Functions::Phase3::W::ficusProceed() {
 	const unsigned int rows = 1;
 	const unsigned int columns = 4;
 	const struct Entry entries[rows][columns] {
-		{{"Combatti", Functions::Phase4::W::hunterFight}, {"Fai amicizia", Functions::Phase4::W::hunterBefriend}, {"Scappa", NULL}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+		{{"Combatti", Functions::Phase4::W::fight}, {"Fai amicizia", Functions::Phase4::W::befriend}, {"Scappa", Phase4::W::run}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
 	};
 	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Cacciatore", Languages::story[GameState::settings.language][Languages::STORY_Phase3W_FicusProceed], entries, "Write a command", Functions::Phase3::W::ficusProceed);
 	GameState::prevGameFunction = Functions::Phase1::start;
@@ -729,7 +729,7 @@ void Functions::Phase3::W::palmEat() {
 	const unsigned int columns = 4;
 	if(rand()%2){
 		const struct Entry entries[rows][columns] {
-			{{"Combatti", Functions::Phase4::W::hunterFight}, {"Fai amicizia", Functions::Phase4::W::hunterBefriend}, {"Scappa", NULL}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+			{{"Combatti", Functions::Phase4::W::fight}, {"Fai amicizia", Functions::Phase4::W::befriend}, {"Scappa", Functions::Phase4::W::run}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
 		};
 		drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Cacciatore", Languages::story[GameState::settings.language][Languages::STORY_Phase3W_PalmEat], entries, "Write a command", Functions::Phase3::W::palmEat);
 	}
@@ -744,7 +744,7 @@ void Functions::Phase3::W::palmProceed() {
 	const unsigned int rows = 1;
 	const unsigned int columns = 4;
 	const struct Entry entries[rows][columns] {
-		{{"Combatti", Functions::Phase4::W::hunterFight}, {"Fai amicizia", Functions::Phase4::W::hunterBefriend}, {"Scappa", NULL}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+		{{"Combatti", Functions::Phase4::W::fight}, {"Fai amicizia", Functions::Phase4::W::befriend}, {"Scappa", Functions::Phase4::W::run}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
 	};
 
 	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Cacciatore", Languages::story[GameState::settings.language][Languages::STORY_Phase3W_PalmProceed], entries, "Write a command", Functions::Phase3::W::palmProceed);
@@ -763,3 +763,17 @@ void Functions::Phase3::W::palmLookAround() {
 	GameState::prevGameFunction = Functions::Phase1::start;
 	return;
 };
+
+void Functions::Phase4::W::fight() {
+	GameState::gameOver = true;
+};
+
+void Functions::Phase4::W::befriend() {
+	GameState::gameOver = true;
+};
+
+void Functions::Phase4::W::run() {
+	GameState::gameOver = true;
+};
+
+

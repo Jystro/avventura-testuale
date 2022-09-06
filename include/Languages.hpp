@@ -45,7 +45,9 @@ namespace Languages {
 		STORY_Phase3W_FicusLookAround,
 		STORY_Phase3W_PalmEat,
 		STORY_Phase3W_PalmProceed,
-		STORY_Phase3W_PalmLookAround
+		STORY_Phase3W_PalmLookAround,
+		STORY_Phase4W_Befriend,
+		STORY_Phase4W_Run,
 	};
 	extern std::string* strings[];
 	extern std::string* status[];

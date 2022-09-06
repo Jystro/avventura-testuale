@@ -55,6 +55,14 @@ namespace Functions {
 		}
 	}
 	
-}; // FUNCTIONS
+};
+
+namespace Phase4 {
+	namespace W {
+		void fight();
+		void befriend();
+		void run();
+	}
+} // FUNCTIONS
 
 #endif // FUNCTIONS_HPP
