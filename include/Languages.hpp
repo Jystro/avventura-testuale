@@ -45,7 +45,8 @@ namespace Languages {
 		STATUS_Unavailable_Option,
 		STATUS_Select_A_Language,
 		STATUS_Select_An_Option,
-		STATUS_Enter_A_Command
+		STATUS_Enter_A_Command,
+		STATUS_Press_Any_Key_To_Continue
 	};
 
 	/**
