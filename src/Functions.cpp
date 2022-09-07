@@ -631,12 +631,18 @@ void Functions::mainMenu() {
 	return;
 };
 
+
+
+
 void Functions::introduction() {
-	fullScreenTextBox("Prologo", Languages::story[GameState::settings.language][Languages::STORY_Intro]);
+	std::cout << fullScreenTextBox("Prologo", Languages::story[GameState::settings.language][Languages::STORY_Intro]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Any_Key_To_Continue] << std::endl;
 	GameState::gameFunction = Functions::Phase1::start;
+
+	std::cin.get();
+	return;
 };
 
-bool Functions::chance(){
+inline bool Functions::chance(){
 	return rand()%2;
 };
 
