@@ -43,6 +43,8 @@ namespace Languages {
 		STORY_Phase2W_Climb,
 		STORY_Phase2W_Ficus,
 		STORY_Phase2W_Palm,
+		STORY_Phase2N_Obstacle,
+		STORY_Phase2N_LookAround,
 		STORY_Phase3W_FicusEat,
 		STORY_Phase3W_FicusProceed,
 		STORY_Phase3W_FicusLookAround,

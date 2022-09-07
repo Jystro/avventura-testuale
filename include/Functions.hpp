@@ -54,6 +54,11 @@ namespace Functions {
 			void ficus();
 			void palm();
 		}
+
+		namespace N {
+			void obstacle();
+			void lookAround();
+		}
 	};
 
 	namespace Phase3 {
