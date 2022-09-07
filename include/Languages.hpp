@@ -27,6 +27,9 @@ namespace Languages {
 		STATUS_Enter_A_Command
 	};
 
+	/**
+	 * enum with available story parts
+	*/
 	enum {
 		STORY_Intro,
 		STORY_Phase1_Start,

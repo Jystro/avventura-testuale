@@ -22,7 +22,16 @@ namespace Functions {
 	// Game functions
 	void settings();
 	void quit();
-	void startMenu();
+	/**
+	 * @brief	Presents the user with the main menu
+	 *
+	 * @see		Entry
+	 * @see		Functions::settings
+	 * @see		Functions::quit
+	 * @see		drawBoxAndSetNextFunctionOnUserInput
+	*/
+	void mainMenu();
+	void introduction();
 	bool chance();
 
 	namespace Phase1 {
@@ -34,6 +43,9 @@ namespace Functions {
 		void lookAround();
 	};
 
+	/**
+	 * @brief	Namespace containing functions for the phase 2 of the story
+	*/
 	namespace Phase2 {
 		namespace W {
 			void obstacle();
@@ -53,16 +65,17 @@ namespace Functions {
 			void palmProceed();
 			void palmLookAround();
 		}
-	}
+	};
 	
-};
+	namespace Phase4 {
+		namespace W {
+			void fight();
+			void befriend();
+			void run();
+		}
+	};
+	/*@}*/
+}; // FUNCTIONS
 
-namespace Phase4 {
-	namespace W {
-		void fight();
-		void befriend();
-		void run();
-	}
-} // FUNCTIONS
 
 #endif // FUNCTIONS_HPP

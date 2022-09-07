@@ -525,21 +525,26 @@ void Functions::quit() {
 };
 
 
-void Functions::startMenu() {
+void Functions::mainMenu() {
 	// Entries available to select
 	const unsigned int rows = 3;
 	const unsigned int columns = 1;
 	const struct Entry entries[rows][columns] = {
-		{{ Languages::strings[GameState::settings.language][Languages::STRING_Start], Functions::Phase1::start}},
+		{{ Languages::strings[GameState::settings.language][Languages::STRING_Start], Functions::introduction}},
 		{{ Languages::strings[GameState::settings.language][Languages::STRING_Settings], Functions::settings }},
 		{{ Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
 	};
 
 	std::string statusMessage = Languages::status[GameState::settings.language][Languages::STATUS_Enter_A_Command];
 
-	drawBoxAndSetNextFunctionOnUserInput<rows, columns>("Main Menu", entries, statusMessage, Functions::startMenu);
-	GameState::prevGameFunction = Functions::startMenu;
+	drawBoxAndSetNextFunctionOnUserInput<rows, columns>("Main Menu", entries, statusMessage, Functions::mainMenu);
+	GameState::prevGameFunction = Functions::mainMenu;
 	return;
+};
+
+void Functions::introduction() {
+	fullScreenTextBox("Prologo", Languages::story[GameState::settings.language][Languages::STORY_Intro]);
+	GameState::gameFunction = Functions::Phase1::start;
 };
 
 bool Functions::chance(){
@@ -556,7 +561,8 @@ void Functions::Phase1::start() {
 	};
 
 	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Bivio", Languages::story[GameState::settings.language][Languages::STORY_Phase1_Start], entries, "Write a command", Functions::Phase1::start);
-	GameState::prevGameFunction = Functions::Phase1::start;
+
+	GameState::prevGameFunction = Functions::introduction;
 	return;
 };
 
@@ -672,7 +678,7 @@ void Functions::Phase2::W::ficus() {
 		{{"Mangia", Functions::Phase3::W::ficusEat}, {"Prosegui", Functions::Phase3::W::ficusProceed}, {"Guardati attorno", Functions::Phase3::W::ficusLookAround}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
 	};
 
-	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Ficus", Languages::story[GameState::settings.language][Languages::STORY_Phase2W_Ficus], entries, "Write a command", Functions::Phase2::W::ficus);
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Ficus", Languages::story[GameState::settings.language][Languages::STORY_Intro], entries, "Write a command", Functions::Phase2::W::ficus);
 	GameState::prevGameFunction = Functions::Phase1::start;
 	return;
 };
@@ -684,7 +690,7 @@ void Functions::Phase2::W::palm() {
 		{{"Mangia", Functions::Phase3::W::palmEat}, {"Prosegui", Functions::Phase3::W::palmProceed}, {"Guardati attorno", Functions::Phase3::W::palmLookAround}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
 	};
 
-	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Palma", Languages::story[GameState::settings.language][Languages::STORY_Phase2W_Palm], entries, "Write a command", Functions::Phase2::W::palm);
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Palma", Languages::story[GameState::settings.language][Languages::STORY_Intro], entries, "Write a command", Functions::Phase2::W::palm);
 	GameState::prevGameFunction = Functions::Phase1::start;
 	return;
 };
@@ -775,5 +781,3 @@ void Functions::Phase4::W::befriend() {
 void Functions::Phase4::W::run() {
 	GameState::gameOver = true;
 };
-
-
