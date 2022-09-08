@@ -95,7 +95,14 @@ namespace Functions {
 			void villageEnter();
 			void villageIgnore();
 			void villageLookAround();
-		}
+		};
+	};
+
+	namespace Phase5 {
+		namespace N {
+			void fruitEat();
+			void fruitIgnore();
+		};
 	};
 	/*@}*/
 }; // FUNCTIONS

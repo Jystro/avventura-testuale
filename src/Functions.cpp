@@ -940,3 +940,16 @@ void Functions::Phase4::N::villageLookAround() {
 	GameState::prevGameFunction = Functions::Phase1::start;
 	return;
 };
+
+void Functions::Phase5::N::fruitEat() {
+	if(rand()%2){
+		GameState::gameOver = true;
+	}
+	else{
+		GameState::gameOver = true;
+	}
+};
+
+void Functions::Phase5::N::fruitIgnore() {
+	GameState::gameOver = true;
+};

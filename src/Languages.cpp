@@ -44,6 +44,8 @@ std::string en_story[] = { "You're a Muriqui and have just escaped the Sao Paulo
                            "You approach the village and enter one of the constructions.",
                            "You avoid the strange constructions and after a while, you hear strange voices, you follow them and notice other hairless monkeys with nets and cylinders.\nThey immediately notice you, point the cylinder and then...black.\nYou hear familiar noises, smell familiar scents, you open your eyes: you are back where you started: you are at the Sao Paulo Zoo.",
                            "You see some fruits on a surface and hear some voices from outside the construction."
+                           "You eat some of the fruits, one of the voices screams at you and you promptly escape.\nYou hear a familiar call,\nthere they are! Your troop is waiting for you, you have reunited with your kind.",
+                           "You decide to ignore the food and head out of that weird place.\nAfter a while walking, you hear a familiar call,\nthere they are! Your troop is waiting for you, you have reunited with your kind."
                            };
 /**
  * Array of strings to contain all Italian story translations
@@ -79,7 +81,9 @@ std::string it_story[] = { "Sei un Muirqui e sei appena scappato dallo Zoo di Sa
                            "Scappi dalla creatura e dopo un bel po' di strada, senti strane voci, le segui e noti altre scimmie senza peli con reti e cilindri.\nSi accorgono di te immediatamente, puntano a te i cilindri e poi...nero.\nSenti suoni familiari, senti odori familiari, apri gli occhi: sei tornato al punto di partenza: sei allo zoo di San Paolo.",
                            "Ti avvicini al villaggio ed entri una delle costruzioni.",
                            "Eviti le strane costruzioni e dopo un bel po' di strada, senti strane voci, le segui e noti altre scimmie senza peli con reti e cilindri.\nSi accorgono di te immediatamente, puntano a te i cilindri e poi...nero.\nSenti suoni familiari, senti odori familiari, apri gli occhi: sei tornato al punto di partenza: sei allo zoo di San Paolo.",
-                           "Vedi della frutta su una superficie e senti delle voci provenienti da fuori la costruzione."
+                           "Vedi della frutta su una superficie e senti delle voci provenienti da fuori la costruzione.",
+                           "Mangi un po' della frutta sulla superficie e una delle voci ti urla contro e prontamente scappi.\nSenti un richiamo familiare,\neccoli! Il tuo branco ti attende, ti sei riunito con i tuoi simili.",
+                           "Decidi di ignorare il cibo e andartene da quello strano posto.\nDopo un po' di camminata, senti un richiamo familiare,\neccoli! Il tuo branco ti attende, ti sei riunito con i tuoi simili."
                            };
 
 std::string* Languages::strings[] = { en_string, it_strings };

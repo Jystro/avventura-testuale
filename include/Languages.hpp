@@ -62,7 +62,9 @@ namespace Languages {
 		STORY_Phase4W_Run,
 		STORY_Phase4N_VillageEnter,
 		STORY_Phase4N_VillageIgnore,
-		STORY_Phase4N_VillageLookAround
+		STORY_Phase4N_VillageLookAround,
+		STORY_Phase5N_FruitEat,
+		STORY_Phase5N_FruitIgnore
 	};
 	extern std::string* strings[];
 	extern std::string* status[];
