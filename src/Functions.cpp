@@ -798,6 +798,110 @@ void Functions::Phase3::W::palmLookAround() {
 	return;
 };
 
+void Functions::Phase3::N::jaguar() {
+	const unsigned int rows = 1;
+	const unsigned int columns = 5;
+	const struct Entry entries[rows][columns] {
+		{{"Combatti", Functions::Phase3::N::jaguarFight}, {"Scappa", Functions::Phase3::N::jaguarRun}, {"Arrampicati", Functions::Phase4::N::village}, {"Guardati attorno", Functions::Phase3::N::jaguarLookAround}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Giaguaro", Languages::story[GameState::settings.language][Languages::STORY_Phase3N_Jaguar], entries, "Write a command", Functions::Phase3::N::jaguar);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+void Functions::Phase3::N::jaguarFight() {
+	GameState::gameOver = true;
+};
+
+void Functions::Phase3::N::jaguarRun() {
+	Gamestate::gameover = true;
+};
+
+void Functions::Phase3::N::jaguarClimb() {
+	const unsigned int rows = 1;
+	const unsigned int columns = 5;
+	const struct Entry entries[rows][columns] {
+		{{"Entra", Functions::Phase4::N::villageEnter}, {"Ignora", Functions::Phase4::N::villageIgnore}, {"Guardati attorno", Functions::Phase3::N::jaguarLookAround}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Villaggio", Languages::story[GameState::settings.language][Languages::STORY_Phase3N_JaguarClimb], entries, "Write a command", Functions::Phase3::N::jaguarClimb);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+void Functions::Phase3::N::jaguarLookAround() {
+	const unsigned int rows = 1;
+	const unsigned int columns = 5;
+	const struct Entry entries[rows][columns] {
+		{{"Combatti", Functions::Phase3::N::jaguarFight}, {"Scappa", Functions::Phase3::N::jaguarRun}, {"Arrampicati", Functions::Phase3::N::jaguarClimb}, {"Guardati attorno", Functions::Phase3::N::jaguarLookAround}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Giaguaro", Languages::story[GameState::settings.language][Languages::STORY_Phase3N_JaguarLookAround], entries, "Write a command", Functions::Phase3::N::jaguarLookAround);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+
+void Functions::Phase3::N::hornet() {
+	const unsigned int rows = 1;
+	const unsigned int columns = 5;
+	const struct Entry entries[rows][columns] {
+		{{"Mangia", Functions::Phase3::N::hornetEat}, {"Procedi", Functions::Phase3::N::hornetProceed}, {"Guardati attorno", Functions::Phase3::N::hornetLookAround}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Nido di calabroni", Languages::story[GameState::settings.language][Languages::STORY_Phase3N_Hornet], entries, "Write a command", Functions::Phase3::N::hornet);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+void Functions::Phase3::N::hornetEat() {
+	if(rand()%2){
+		const unsigned int rows = 1;
+		const unsigned int columns = 5;
+		const struct Entry entries[rows][columns] {
+			{{"Entra", Functions::Phase4::N::villageEnter}, {"Ignora", Functions::Phase4::N::villageIgnore}, {"Guardati attorno", Functions::Phase4::N::villageLookAround}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+		};
+
+		drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Nido di calabroni", Languages::story[GameState::settings.language][Languages::STORY_Phase3N_HornetEat], entries, "Write a command", Functions::Phase3::N::hornetEat);
+		GameState::prevGameFunction = Functions::Phase1::start;
+		return;
+	}
+	else{
+		GameState::gameOver = true;
+	}
+};
+
+void Functions::Phase3::N::hornetProceed() {
+	if(rand()%2){
+		const unsigned int rows = 1;
+		const unsigned int columns = 5;
+		const struct Entry entries[rows][columns] {
+			{{"Entra", Functions::Phase4::N::villageEnter}, {"Ignora", Functions::Phase4::N::villageIgnore}, {"Guardati attorno", Functions::Phase4::N::villageLookAround}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+		};
+
+		drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Nido di calabroni", Languages::story[GameState::settings.language][Languages::STORY_Phase3N_HornetProceed], entries, "Write a command", Functions::Phase3::N::hornetProceed);
+		GameState::prevGameFunction = Functions::Phase1::start;
+		return;
+	}
+	else{
+		GameState::gameOver = true;
+	}
+};
+
+void Functions::Phase3::N::hornetLookAround() {
+	const unsigned int rows = 1;
+	const unsigned int columns = 5;
+	const struct Entry entries[rows][columns] {
+		{{"Mangia", Functions::Phase3::N::hornetEat}, {"Procedi", Functions::Phase3::N::hornetProceed}, {"Guardati attorno", Functions::Phase3::N::hornetLookAround}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Nido di calabroni", Languages::story[GameState::settings.language][Languages::STORY_Phase3N_HornetLookAround], entries, "Write a command", Functions::Phase3::N::hornetLookAround);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+
 void Functions::Phase4::W::fight() {
 	GameState::gameOver = true;
 };

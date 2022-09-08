@@ -69,6 +69,18 @@ namespace Functions {
 			void palmEat();
 			void palmProceed();
 			void palmLookAround();
+		};
+
+		namespace N {
+			void jaguar();
+			void jaguarFight();
+			void jaguarRun();
+			void jaguarClimb();
+			void jaguarLookAround();
+			void hornet();
+			void hornetEat();
+			void hornetProceed();
+			void hornetLookAround();
 		}
 	};
 	

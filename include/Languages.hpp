@@ -51,6 +51,13 @@ namespace Languages {
 		STORY_Phase3W_PalmEat,
 		STORY_Phase3W_PalmProceed,
 		STORY_Phase3W_PalmLookAround,
+		STORY_Phase3N_jaguar,
+		STORY_Phase3N_jaguarClimb,
+		STORY_Phase3N_jaguarLookAround,
+		STORY_Phase3N_hornet,
+		STORY_Phase3N_hornetEat,
+		STORY_Phase3N_hornetProceed,
+		STORY_Phase3N_hornetLookAround,
 		STORY_Phase4W_Befriend,
 		STORY_Phase4W_Run,
 	};
