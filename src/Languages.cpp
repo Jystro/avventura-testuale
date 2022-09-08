@@ -50,7 +50,7 @@ std::string en_status[] = {
 	"Select a language",
 	"Select an option",
 	"Enter a command",
-	"Press any key to continue"
+	"Press enter to continue"
 };
 
 
@@ -63,7 +63,7 @@ std::string it_status[] = {
 	"Seleziona una lingua",
 	"Seleziona un'opzione",
 	"Inserire un comando",
-	"Premere un tasto per continuare"
+	"Premere invio per continuare"
 };
 
 /**

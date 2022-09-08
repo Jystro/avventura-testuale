@@ -46,7 +46,7 @@ namespace Languages {
 		STATUS_Select_A_Language,
 		STATUS_Select_An_Option,
 		STATUS_Enter_A_Command,
-		STATUS_Press_Any_Key_To_Continue
+		STATUS_Press_Enter_To_Continue
 	};
 
 	/**
