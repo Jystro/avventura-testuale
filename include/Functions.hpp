@@ -89,6 +89,12 @@ namespace Functions {
 			void fight();
 			void befriend();
 			void run();
+		};
+
+		namespace N {
+			void villageEnter();
+			void villageIgnore();
+			void villageLookAround();
 		}
 	};
 	/*@}*/

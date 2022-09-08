@@ -901,7 +901,6 @@ void Functions::Phase3::N::hornetLookAround() {
 	return;
 };
 
-
 void Functions::Phase4::W::fight() {
 	GameState::gameOver = true;
 };
@@ -912,4 +911,32 @@ void Functions::Phase4::W::befriend() {
 
 void Functions::Phase4::W::run() {
 	GameState::gameOver = true;
+};
+
+void Functions::Phase4::N::villageEnter() {
+	const unsigned int rows = 1;
+	const unsigned int columns = 4;
+	const struct Entry entries[rows][columns] {
+		{{"Mangia", Functions::Phase4::N::fruitEat}, {"Ignora", Functions::Phase4::N::fruitIgnore}, {"Guardati attorno", Functions::Phase4::N::villageLookAround}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Villaggio", Languages::story[GameState::settings.language][Languages::STORY_Phase4N_VillageEnter], entries, "Write a command", Functions::Phase4::N::villageEnter);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+void Functions::Phase4::N::villageIgnore() {
+	Gamestate::gameOver = true;
+};
+
+void Functions::Phase4::N::villageLookAround() {
+	const unsigned int rows = 1;
+	const unsigned int columns = 4;
+	const struct Entry entries[rows][columns] {
+		{{"Mangia", Functions::Phase5::N::fruitEat}, {"Ignora", Functions::Phase5::N::fruitIgnore}, {"Guardati attorno", Functions::Phase4::N::villageLookAround}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Villaggio", Languages::story[GameState::settings.language][Languages::STORY_Phase4N_VillageLookAround], entries, "Write a command", Functions::Phase4::N::villageLookAround);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
 };

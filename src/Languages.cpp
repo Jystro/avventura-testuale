@@ -40,7 +40,10 @@ std::string en_story[] = { "You're a Muriqui and have just escaped the Sao Paulo
                            "You ignore the strange object and proceed thorugh the trees.\nYou look down to find a group of pyramidal constructions.",
                            "You look at the object more closely and notice big red insects frenetically entering and exiting the strange sphere.\nYou see a way through the branches and hear your stomach rumbling.",
                            "You slowly approach the strange creature, initially he points the cylinder at you, but then he takes out a fruit and hands it to you.\nHe signals you to come, reluctant but tired, you hop on his shoulder and eat.\nYou proceed with him: you hear distant voices but the man avoids them.\nAfter a long time walking, you hear a familiar call. You take a last look at the kind giant and follow the call,\nthere they are! Your troop is waiting for you, you have reunited with your kind.",
-                           "You run from the creature and after a while, you hear strange voices, you follow them and notice other hairless monkeys with nets and cylinders.\nThey immediately notice you, point the cylinder and then...black.\nYou hear familiar noises, smell familiar scents, you open your eyes: you are back where you started: you are at the Sao Paulo Zoo."
+                           "You run from the creature and after a while, you hear strange voices, you follow them and notice other hairless monkeys with nets and cylinders.\nThey immediately notice you, point the cylinder and then...black.\nYou hear familiar noises, smell familiar scents, you open your eyes: you are back where you started: you are at the Sao Paulo Zoo.",
+                           "You approach the village and enter one of the constructions.",
+                           "You avoid the strange constructions and after a while, you hear strange voices, you follow them and notice other hairless monkeys with nets and cylinders.\nThey immediately notice you, point the cylinder and then...black.\nYou hear familiar noises, smell familiar scents, you open your eyes: you are back where you started: you are at the Sao Paulo Zoo.",
+                           "You see some fruits on a surface and hear some voices from outside the construction."
                            };
 /**
  * Array of strings to contain all Italian story translations
@@ -73,7 +76,10 @@ std::string it_story[] = { "Sei un Muirqui e sei appena scappato dallo Zoo di Sa
                            "Ignori lo strano oggetto e procedi tra gli alberi.\nGuardi in basso e trovi un gruppo di costruzioni a piramide.",
                            "Guardi pi\158 attentamente all'oggetto e noti grandi e rossi insetti che entrano ed escono freneticamente dalla strana sfera.\nVedi una via tra i rami e senti il tuo stomaco brontolare.",
                            "Lentamente ti avvicini alla strana creatura, inizialmente punta il cilindro verso di te, ma poi prende un frutto e te lo passa.\nTi fa cenno di raggiungerlo, esitante ma stanco, salti sulla sua spalla e mangi.\nProcedi con lui: senti distanti voci, ma l'uomo le evita.\nDopo una lunga camminata, senti un richiamo familiare. Guardi un'ultima volta al gigante gentile e insegui il richiamo,\neccoli! Il tuo branco ti attende, ti sei riunito con i tuoi simili.",
-                           "Scappi dalla creatura a dopo un bel po' di strada, senti strane voci, le segui e noti altre scimmie senza peli con reti e cilindri.\nSi accorgono di te immediatamente, puntano a te i cilindri e poi...nero.\nSenti suoni familiari, senti odori familiari, apri gli occhi: sei tornato al punto di partenza: sei allo zoo di San Paolo."
+                           "Scappi dalla creatura e dopo un bel po' di strada, senti strane voci, le segui e noti altre scimmie senza peli con reti e cilindri.\nSi accorgono di te immediatamente, puntano a te i cilindri e poi...nero.\nSenti suoni familiari, senti odori familiari, apri gli occhi: sei tornato al punto di partenza: sei allo zoo di San Paolo.",
+                           "Ti avvicini al villaggio ed entri una delle costruzioni.",
+                           "Eviti le strane costruzioni e dopo un bel po' di strada, senti strane voci, le segui e noti altre scimmie senza peli con reti e cilindri.\nSi accorgono di te immediatamente, puntano a te i cilindri e poi...nero.\nSenti suoni familiari, senti odori familiari, apri gli occhi: sei tornato al punto di partenza: sei allo zoo di San Paolo.",
+                           "Vedi della frutta su una superficie e senti delle voci provenienti da fuori la costruzione."
                            };
 
 std::string* Languages::strings[] = { en_string, it_strings };
