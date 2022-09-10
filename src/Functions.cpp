@@ -635,7 +635,7 @@ void Functions::mainMenu() {
 
 
 void Functions::introduction() {
-	std::cout << fullScreenTextBox("Prologo", Languages::story[GameState::settings.language][Languages::STORY_Intro]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Any_Key_To_Continue] << std::endl;
+	std::cout << fullScreenTextBox("Prologo", Languages::story[GameState::settings.language][Languages::STORY_Intro]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Enter_To_Continue] << std::endl;
 	GameState::gameFunction = Functions::Phase1::start;
 
 	std::cin.get();
