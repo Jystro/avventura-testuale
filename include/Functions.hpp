@@ -59,6 +59,13 @@ namespace Functions {
 			void obstacle();
 			void lookAround();
 		}
+
+		namespace E {
+			void obstacle();
+			void lookAround();
+			void drink();
+			void boat();
+		}
 	};
 
 	namespace Phase3 {

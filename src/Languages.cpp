@@ -25,7 +25,10 @@ std::string en_story[] = { "You're a Muriqui and have just escaped the Sao Paulo
                            "You choose to climb one of the purple-colored fruit trees.\nYou feel hungry.",
                            "You choose to climb one of the brown-colored fruit trees.\nYou feel hungry.",
                            "You consider straying from the way, but aside from the little space you're staying and the straight way you see no opening.",
-                           "You see the little space you're staying in, the way in front of you and a strong tree beside you.\nYou hear a strong buzz coming from that tree."
+                           "You see the little space you're staying in, the way in front of you and a strong tree beside you.\nYou hear a strong buzz coming from that tree.",
+                           "You consider following the stream, but you see that the river ends in a cliff.",
+                           "You look at the stream, you see your reflection in it and see, on top of the water, a wooden construction tied to your side of the river.",
+                           "You hop on the wooden construction and start rowing with your hands until you reach the other side of the stream.\nYou see some tall hairless monkeys with brightly colored bodies and strange black squares in their hands.\nThey look at you: some frightened, some amused."
                            "You ate a couple of the fruits on the tree; you are sated.\nYou find a strange, hairless monkey with a strange metal cylinder in his hands.\nIt noticed you, it looks threatening.",
                            "You proceed through the branches.\nYou find a strange, hairless monkey with a strange metal cylinder in his hands.\nIt noticed you, it looks threatening.",
                            "You see the fruits on the tree and an interminable series of branches.",
@@ -64,6 +67,9 @@ std::string it_story[] = { "Sei un Muirqui e sei appena scappato dallo Zoo di Sa
                            "Scegli di arrampicarti su uno degli alberi dal frutto marrone.\nSei affamato.",
                            "Consideri di deviare dalla strada davanti a te, ma oltre al piccolo spiazzo in cui ti trovi e la suddetta via, non vedi aperture.",
                            "Vedi il piccolo spiazzo dove ti trovi, la strada davanti a te e un grosso albero affianco a te.\nSenti un forte ronzio provenire dall'albero.",
+                           "Consideri di seguire il corso del fiume, ma presto ti accorgi che il fiume termina a strapiombo.",
+                           "Guardi il corso d'acqua, ti specchi sulla sua superificie e vedi, sul pelo dell'acqua, una costruzione in legno legata alla tua sponda del fiume.",
+                           "Salti sulla costruzione di legno e inizi a remare con le braccia finchè non raggiungi l'altra sponda.\nVedi delle scimmie alte e senza peli con corpi di colori sgargianti e strani quadrati neri nelle mani.\nTi guardano: alcuni spaventati, altri divertiti.",
                            "Hai mangiato un paio dei frutti sull'albero; sei sazio.\nTi imbatti in una strana, scimmia senza peli con uno strano cilindro di metallo nelle sue mani.\nSi \138 accorta della tua presenza, ha l'aria minacciosa.",
                            "Procedi attraverso i rami.\nTi imbatti in una strana, scimmia senza peli con uno strano cilindro di metallo nelle sue mani.\nSi \138 accorta della tua presenza, ha l'aria minacciosa.",
                            "Vedi i frutti sull'albero e una serie interminabile di rami.",

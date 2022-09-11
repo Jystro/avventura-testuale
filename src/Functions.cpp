@@ -595,13 +595,13 @@ void Functions::Phase1::north() {
 
 void Functions::Phase1::east() {
 	const unsigned int rows = 2;
-	const unsigned int columns = 4;
+	const unsigned int columns = 5;
 	const struct Entry entries[rows][columns] {
-		{{ "Ovest", Functions::Phase1::start}, { "Nord", NULL}, { "Est", NULL}, { "Sud", NULL}},
-		{{ "Guardati attorno", NULL}, { "Bevi", NULL}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+		{{ "Ovest", Functions::Phase1::start}, { "Nord", Functions::Phase2::E::obstacle}, { "Est", Functions::Phase2::E::drink}, { "Sud", Functions::Phase2::E::obstacle}},
+		{{ "Guardati attorno", Functions::Phase2::E::lookAround}, { "Bevi", Functions::Phase2::E::drink}, {"Barca", Functions::Phase2::E::boat}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
 	};
 
-	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Il fiume", Languages::story[GameState::settings.language][Languages::STORY_Phase1_East], entries, "Write a command", Functions::Phase1::east);
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Fiume", Languages::story[GameState::settings.language][Languages::STORY_Phase1_East], entries, "Write a command", Functions::Phase1::east);
 	GameState::prevGameFunction = Functions::Phase1::start;
 	return;
 };
@@ -719,6 +719,48 @@ void Functions::Phase2::N::lookAround() {
 	};
 
 	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Piazza", Languages::story[GameState::settings.language][Languages::STORY_Phase2N_LookAround], entries, "Write a command", Functions::Phase2::N::lookAround);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+void Functions::Phase2::E::obstacle() {
+	const unsigned int rows = 2;
+	const unsigned int columns = 5;
+	const struct Entry entries[rows][columns] {
+		{{ "Ovest", Functions::Phase1::start}, { "Nord", Functions::Phase2::E::obstacle}, { "Est", Functions::Phase2::E::drink}, { "Sud", Functions::Phase2::E::obstacle}},
+		{{ "Guardati attorno", Functions::Phase2::E::lookAround}, { "Bevi", Functions::Phase2::E::drink}, {"Barca", Functions::Phase2::E::boat}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Fiume", Languages::story[GameState::settings.language][Languages::STORY_Phase2E_Obstacle], entries, "Write a command", Functions::Phase2::E::obstacle);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+void Functions::Phase2::E::lookAround() {
+	const unsigned int rows = 2;
+	const unsigned int columns = 5;
+	const struct Entry entries[rows][columns] {
+		{{ "Ovest", Functions::Phase1::start}, { "Nord", Functions::Phase2::E::obstacle}, { "Est", Functions::Phase2::E::drink}, { "Sud", Functions::Phase2::E::obstacle}},
+		{{ "Guardati attorno", Functions::Phase2::E::lookAround}, { "Bevi", Functions::Phase2::E::drink}, {"Barca", Functions::Phase2::E::boat}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Fiume", Languages::story[GameState::settings.language][Languages::STORY_Phase2E_LookAround], entries, "Write a command", Functions::Phase2::E::lookAround);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+void Functions::Phase2::E::drink() {
+	GameState::gameOver = false;
+}
+
+void Functions::Phase2::E::boat() {
+	const unsigned int rows = 1;
+	const unsigned int columns = 4;
+	const struct Entry entries[rows][columns] {
+		{{"Combatti", Functions::Phase3::E::fight}, {"Fai amicizia", Functions::Phase3::E::befriend}, {"Guardati attorno", Functions::Phase4::W::run}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Turisti", Languages::story[GameState::settings.language][Languages::STORY_Phase2E_Boat], entries, "Write a command", Functions::Phase2::E::boat);
 	GameState::prevGameFunction = Functions::Phase1::start;
 	return;
 };
