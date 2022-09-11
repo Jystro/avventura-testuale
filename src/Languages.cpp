@@ -23,14 +23,22 @@ std::string en_string[] = {
 	"Italian",
 	"Language",
 	"Back",
-	"Reset settings"
+	"Reset settings",
+	"Bye bye",
+	"West",
+	"East",
+	"South",
+	"Look around",
+	"Climb",
+	"Fig",
+	"Palm"
 };
 
 /**
  * Array of strings to contain all Italian string translations
 */
 std::string it_strings[] = {
-	"Men\158",
+	"Menù",
 	"Inizia",
 	"Esci",
 	"Impostazioni",
@@ -38,8 +46,17 @@ std::string it_strings[] = {
 	"Italiano",
 	"Lingua",
 	"Indietro",
-	"Impostazioni predefinite"
+	"Impostazioni predefinite",
+	"Ciao ciao",
+	"Ovest",
+	"Est",
+	"Sud",
+	"Guardati attorno",
+	"Arrampicati",
+	"Fico",
+	"Palma"
 };
+
 
 /**
  * Array of strings to contain all English status messages translations
@@ -53,7 +70,6 @@ std::string en_status[] = {
 	"Press enter to continue"
 };
 
-
 /**
  * Array of strings to contain all Italian status messages translations
 */
@@ -65,6 +81,7 @@ std::string it_status[] = {
 	"Inserire un comando",
 	"Premere invio per continuare"
 };
+
 
 /**
  * Array of strings to contain all English story translations
@@ -83,6 +100,7 @@ std::string en_story[] = {
 	"You choose to climb one of the purple-colored fruit trees.\nYou feel hungry.",
 	"You choose to climb one of the brown-colored fruit trees.\nYou feel hungry."
 };
+
 /**
  * Array of strings to contain all Italian story translations
 */
@@ -102,6 +120,32 @@ std::string it_story[] = {
 };
 
 
+/**
+ * Array of strings to contain all English title translations
+*/
+std::string en_titles[] = {
+	"Language",
+	"Settings",
+	"Main menu",
+	"Prologue",
+	"Crossroad",
+	"Teak forest"
+};
+
+/**
+ * Array of strings to contain all English title translations
+*/
+std::string it_titles[] = {
+	"Lingua",
+	"Impostazioni",
+	"Menù principale",
+	"Prologo",
+	"Bivio",
+	"Foresta di teak"
+};
+
+
 std::string* Languages::strings[] = { en_string, it_strings };
 std::string* Languages::status[] = { en_status, it_status};
 std::string* Languages::story[] = { en_story, it_story};
+std::string* Languages::titles[] = { en_titles, it_titles};

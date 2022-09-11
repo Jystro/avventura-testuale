@@ -34,7 +34,16 @@ namespace Languages {
 		STRING_Italian,
 		STRING_Language,
 		STRING_Back,
-		STRING_Reset_settings
+		STRING_Reset_settings,
+		STRING_Bye,
+		STRING_West,
+		STRING_North,
+		STRING_East,
+		STRING_South,
+		STRING_Look_Around,
+		STRING_Climb,
+		STRING_Fig,
+		STRING_Palm
 	};
 
 	/**
@@ -65,10 +74,24 @@ namespace Languages {
 		STORY_Phase2W_Climb
 	};
 
+	/**
+	 * @brief Enum with available box titles
+	*/
+	enum {
+		TITLE_Language,
+		TITLE_Settings,
+		TITLE_Main_Menu,
+		TITLE_Prologue,
+		TITLE_Crossroad,
+		TITLE_Forest,
+		TITLE_Teak_Forest
+	};
+
 
 	extern std::string* strings[]; /**< 2D Array with language on first array and strings in second one */
 	extern std::string* status[]; /**< 2D Array with language on first array and status messages in second one */
 	extern std::string* story[]; /**< 2D Array with language on first array and stories in second one */
+	extern std::string* titles[]; /**< 2D Array with language on first array and titles in second one */
 }; // LANGUAGES
 
 #endif // LANGUAGES_HPP
