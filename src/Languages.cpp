@@ -26,12 +26,16 @@ std::string en_string[] = {
 	"Reset settings",
 	"Bye bye",
 	"West",
+	"North",
 	"East",
 	"South",
 	"Look around",
 	"Climb",
 	"Fig",
-	"Palm"
+	"Palm",
+	"Drink",
+	"Eat",
+	"Proceed"
 };
 
 /**
@@ -49,12 +53,16 @@ std::string it_strings[] = {
 	"Impostazioni predefinite",
 	"Ciao ciao",
 	"Ovest",
+	"Nord",
 	"Est",
 	"Sud",
 	"Guardati attorno",
 	"Arrampicati",
 	"Fico",
-	"Palma"
+	"Palma",
+	"Bevi",
+	"Mangia",
+	"Procedi"
 };
 
 
@@ -105,7 +113,7 @@ std::string en_story[] = {
  * Array of strings to contain all Italian story translations
 */
 std::string it_story[] = {
-	"Sei un Muirqui e sei appena scappato dallo Zoo di San Paolo.\nHai la giungla davanti a te e la libertà ti chiama.\nStai cercando i tuoi simili.",
+	"Sei un Muriqui e sei appena scappato dallo Zoo di San Paolo.\nHai la giungla davanti a te e la libertà ti chiama.\nStai cercando i tuoi simili.",
 	"Ti trovi di fronte ad un bivio: puoi andare a sinistra, dritto o alla tua destra.\nSei rivolto a Nord.",
 	"Decidi di imboccare la strada a sinistra.\nTi imbatti in due folti gruppi di alberi.",
 	"Decidi di procedere dritto.\nEntri più nel profondo della giungla, dopo una lunga camminata ti fermi sulla strada.",
@@ -129,7 +137,10 @@ std::string en_titles[] = {
 	"Main menu",
 	"Prologue",
 	"Crossroad",
-	"Teak forest"
+	"Forest",
+	"River",
+	"Fig",
+	"Palm"
 };
 
 /**
@@ -141,7 +152,10 @@ std::string it_titles[] = {
 	"Menù principale",
 	"Prologo",
 	"Bivio",
-	"Foresta di teak"
+	"Foresta",
+	"Fiume",
+	"Fico",
+	"Palma"
 };
 
 

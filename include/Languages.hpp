@@ -43,7 +43,10 @@ namespace Languages {
 		STRING_Look_Around,
 		STRING_Climb,
 		STRING_Fig,
-		STRING_Palm
+		STRING_Palm,
+		STRING_Drink,
+		STRING_Eat,
+		STRING_Proceed
 	};
 
 	/**
@@ -71,7 +74,9 @@ namespace Languages {
 		STORY_Phase1_LookAround,
 		STORY_Phase2W_Obstacle,
 		STORY_Phase2W_LookAround,
-		STORY_Phase2W_Climb
+		STORY_Phase2W_Climb,
+		STORY_Phase2W_Climb_Fig,
+		STORY_Phase2W_Climb_Palm
 	};
 
 	/**
@@ -84,7 +89,9 @@ namespace Languages {
 		TITLE_Prologue,
 		TITLE_Crossroad,
 		TITLE_Forest,
-		TITLE_Teak_Forest
+		TITLE_River,
+		TITLE_Fig,
+		TITLE_Palm
 	};
 
 
