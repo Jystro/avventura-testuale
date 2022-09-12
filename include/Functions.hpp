@@ -88,6 +88,11 @@ namespace Functions {
 			void hornetEat();
 			void hornetProceed();
 			void hornetLookAround();
+		};
+
+		namespace E {
+			void fight();
+			void befriend();
 		}
 	};
 	

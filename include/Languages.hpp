@@ -61,6 +61,8 @@ namespace Languages {
 		STORY_Phase3N_hornetEat,
 		STORY_Phase3N_hornetProceed,
 		STORY_Phase3N_hornetLookAround,
+		STORY_Phase3E_Fight,
+		STORY_Phase3E_Befriend,
 		STORY_Phase4W_Befriend,
 		STORY_Phase4W_Run,
 		STORY_Phase4N_VillageEnter,

@@ -750,14 +750,14 @@ void Functions::Phase2::E::lookAround() {
 };
 
 void Functions::Phase2::E::drink() {
-	GameState::gameOver = false;
+	GameState::gameOver = true;
 }
 
 void Functions::Phase2::E::boat() {
 	const unsigned int rows = 1;
-	const unsigned int columns = 4;
+	const unsigned int columns = 3;
 	const struct Entry entries[rows][columns] {
-		{{"Combatti", Functions::Phase3::E::fight}, {"Fai amicizia", Functions::Phase3::E::befriend}, {"Guardati attorno", Functions::Phase4::W::run}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+		{{"Combatti", Functions::Phase3::E::fight}, {"Fai amicizia", Functions::Phase3::E::befriend}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
 	};
 
 	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Turisti", Languages::story[GameState::settings.language][Languages::STORY_Phase2E_Boat], entries, "Write a command", Functions::Phase2::E::boat);
@@ -884,7 +884,6 @@ void Functions::Phase3::N::jaguarLookAround() {
 	return;
 };
 
-
 void Functions::Phase3::N::hornet() {
 	const unsigned int rows = 1;
 	const unsigned int columns = 5;
@@ -939,6 +938,22 @@ void Functions::Phase3::N::hornetLookAround() {
 	};
 
 	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Nido di calabroni", Languages::story[GameState::settings.language][Languages::STORY_Phase3N_HornetLookAround], entries, "Write a command", Functions::Phase3::N::hornetLookAround);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
+};
+
+void Functions::Phase3::E::fight() {
+	GameState::gameOver = true;
+};
+
+void Functions::Phase3::E::befriend() {
+	const unsigned int rows = 1;
+	const unsigned int columns = 4;
+	const struct Entry entries[rows][columns] {
+		{{"Fidati", Functions::Phase4::E::trust}, {"Scappa", Functions::Phase4::E::run}, {"Guardati attorno", Functions::Phase4::E::lookAround}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
+
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>("Turisti", Languages::story[GameState::settings.language][Languages::STORY_Phase3E_Befriend], entries, "Write a command", Functions::Phase3::E::befriend);
 	GameState::prevGameFunction = Functions::Phase1::start;
 	return;
 };
