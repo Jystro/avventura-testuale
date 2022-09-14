@@ -11,7 +11,7 @@ int main(int argc, char** argv) {
 	GameState::init(argc, argv);
 
 	// init void(*fun)() to the menu
-	GameState::gameFunction = Functions::startMenu;
+	GameState::gameFunction = Functions::mainMenu;
 
 	// Game loop
 	while(!GameState::gameOver) {

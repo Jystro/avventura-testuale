@@ -1,4 +1,6 @@
+compile_commands.json
 Debug
-*.exe
+Release
 .cache
 .vscode
+*.exe

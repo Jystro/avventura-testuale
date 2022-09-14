@@ -11,6 +11,8 @@
 #define FUNCTIONS_HPP
 
 #include <string>
+#include <cstdlib>
+#include <ctime>
 
 
 
@@ -112,19 +114,35 @@ namespace Functions {
 	 * @see		Functions::quit
 	 * @see		drawBoxAndSetNextFunctionOnUserInput
 	*/
-	void startMenu();
+	void mainMenu();
+	void introduction();
+	inline bool chance();
 
 
 	/**
 	 * @brief	Namespace containing functions for the phase 1 of the story
 	*/
 	namespace Phase1 {
-
-		/**
-		 * @brief	Function to the start of the story
-		*/
-		void start();
+		void start(); /**<		Function to the start of the story */
+		void west(); /**<			Function called when the player selects west */
+		void north(); /**<		Function called when the player selects north */
+		void east(); /**<			Function called when the player selects east */
+		void south(); /**<		Function called when the player selects north */
+		void lookAround(); /**<	Function called when the player decides to look around */
 	};
+
+	/**
+	 * @brief	Namespace containing functions for the phase 2 of the story
+	*/
+	namespace Phase2 {
+		namespace W {
+			void obstacle(); /**<	Function called when the player meets an obstacle */
+			void lookAround(); /**<	Function called when the player decides to look around */
+			void climb(); /**<		Function called when the player decides to climb */
+			void ficus(); /**<		Function called when the player is on the ficus tree */
+			void palm(); /**<			Function called when the player is on the ficus tree */
+		}
+	}
 	/*@}*/
 }; // FUNCTIONS
 
