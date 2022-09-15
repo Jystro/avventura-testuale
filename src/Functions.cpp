@@ -998,6 +998,14 @@ void Functions::Phase4::N::villageLookAround() {
 	return;
 };
 
+void Functions::Phase4::E::trust() {
+	GameState::gameOver = true;
+}
+
+void Functions::Phase4::E::run() {
+	GameState::gameOver = true;
+}
+
 void Functions::Phase5::N::fruitEat() {
 	if(rand()%2){
 		GameState::gameOver = true;

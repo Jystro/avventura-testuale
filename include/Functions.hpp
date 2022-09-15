@@ -108,6 +108,11 @@ namespace Functions {
 			void villageIgnore();
 			void villageLookAround();
 		};
+
+		namespace E {
+			void trust();
+			void run();
+		}
 	};
 
 	namespace Phase5 {

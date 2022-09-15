@@ -68,6 +68,8 @@ namespace Languages {
 		STORY_Phase4N_VillageEnter,
 		STORY_Phase4N_VillageIgnore,
 		STORY_Phase4N_VillageLookAround,
+		STORY_Phase4E_Trust,
+		STORY_Phase4E_Run,
 		STORY_Phase5N_FruitEat,
 		STORY_Phase5N_FruitIgnore
 	};
