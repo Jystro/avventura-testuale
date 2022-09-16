@@ -54,26 +54,28 @@ namespace Languages {
 		STORY_Phase2W_Obstacle,
 		STORY_Phase2W_LookAround,
 		STORY_Phase2W_Climb,
+		STORY_Phase2W_Climb_Fig,
+		STORY_Phase2W_Climb_Palm,
 		STORY_Phase2W_Ficus,
 		STORY_Phase2W_Palm,
 		STORY_Phase2N_Obstacle,
 		STORY_Phase2N_LookAround,
 		STORY_Phase2E_Obstacle,
 		STORY_Phase2E_LookAround,
-		STROY_Phase2E_Boat,
+		STORY_Phase2E_Boat,
 		STORY_Phase3W_FicusEat,
 		STORY_Phase3W_FicusProceed,
 		STORY_Phase3W_FicusLookAround,
 		STORY_Phase3W_PalmEat,
 		STORY_Phase3W_PalmProceed,
 		STORY_Phase3W_PalmLookAround,
-		STORY_Phase3N_jaguar,
-		STORY_Phase3N_jaguarClimb,
-		STORY_Phase3N_jaguarLookAround,
-		STORY_Phase3N_hornet,
-		STORY_Phase3N_hornetEat,
-		STORY_Phase3N_hornetProceed,
-		STORY_Phase3N_hornetLookAround,
+		STORY_Phase3N_Jaguar,
+		STORY_Phase3N_JaguarClimb,
+		STORY_Phase3N_JaguarLookAround,
+		STORY_Phase3N_Hornet,
+		STORY_Phase3N_HornetEat,
+		STORY_Phase3N_HornetProceed,
+		STORY_Phase3N_HornetLookAround,
 		STORY_Phase3E_Fight,
 		STORY_Phase3E_Befriend,
 		STORY_Phase4W_Befriend,
@@ -85,12 +87,6 @@ namespace Languages {
 		STORY_Phase4E_Run,
 		STORY_Phase5N_FruitEat,
 		STORY_Phase5N_FruitIgnore
-	};
-	extern std::string* strings[];
-	extern std::string* status[];
-	extern std::string* story[];
-		STORY_Phase2W_Climb_Fig,
-		STORY_Phase2W_Climb_Palm
 	};
 
 	/**
@@ -113,6 +109,6 @@ namespace Languages {
 	extern std::string* status[]; /**< 2D Array with language on first array and status messages in second one */
 	extern std::string* story[]; /**< 2D Array with language on first array and stories in second one */
 	extern std::string* titles[]; /**< 2D Array with language on first array and titles in second one */
- // LANGUAGES
+}; // LANGUAGES
 
 #endif // LANGUAGES_HPP

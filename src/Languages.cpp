@@ -147,6 +147,7 @@ std::string it_story[] = { "Sei un Muirqui e sei appena scappato dallo Zoo di Sa
                            "Mangi un po' della frutta sulla superficie e una delle voci ti urla contro e prontamente scappi.\nSenti un richiamo familiare,\neccoli! Il tuo branco ti attende, ti sei riunito con i tuoi simili.",
                            "Decidi di ignorare il cibo e andartene da quello strano posto.\nDopo un po' di camminata, senti un richiamo familiare,\neccoli! Il tuo branco ti attende, ti sei riunito con i tuoi simili."
                            };
+/**
  * Array of strings to contain all English status messages translations
 */
 std::string en_status[] = {
@@ -203,6 +204,6 @@ std::string it_titles[] = {
 };
 
 std::string* Languages::strings[] = { en_string, it_strings };
-std::string* Languages::status[] = { en_status, it_status};
-std::string* Languages::story[] = { en_story, it_story};
-std::string* Languages::titles[] = { en_titles, it_titles};
+std::string* Languages::status[] = { en_status, it_status };
+std::string* Languages::story[] = { en_story, it_story };
+std::string* Languages::titles[] = { en_titles, it_titles };

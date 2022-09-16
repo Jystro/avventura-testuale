@@ -86,7 +86,7 @@ namespace Functions {
 		namespace E {
 			void fight();
 			void befriend();
-		}
+		};
 	};
 	
 	namespace Phase4 {
@@ -105,14 +105,16 @@ namespace Functions {
 		namespace E {
 			void trust();
 			void run();
-		}
+		};
 	};
 
 	namespace Phase5 {
 		namespace N {
 			void fruitEat();
 			void fruitIgnore();
-		};  // FUNCTIONS
-};
+		};
+	};
+}; // FUNCTIONS
+
 
 #endif // FUNCTIONS_HPP

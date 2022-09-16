@@ -544,15 +544,6 @@ void Functions::mainMenu() {
 	return;
 };
 
-void Functions::introduction() {
-	fullScreenTextBox("Prologo", Languages::story[GameState::settings.language][Languages::STORY_Intro]);
-	GameState::gameFunction = Functions::Phase1::start;
-};
-
-bool Functions::chance(){
-	return rand()%2;
-};
-
 
 void Functions::introduction() {
 	std::cout << fullScreenTextBox(Languages::titles[GameState::settings.language][Languages::TITLE_Prologue], Languages::story[GameState::settings.language][Languages::STORY_Intro]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Enter_To_Continue] << std::endl;
@@ -987,7 +978,7 @@ void Functions::Phase3::N::jaguarFight() {
 };
 
 void Functions::Phase3::N::jaguarRun() {
-	Gamestate::gameover = true;
+	GameState::gameOver = true;
 };
 
 void Functions::Phase3::N::jaguarClimb() {
@@ -1113,7 +1104,7 @@ void Functions::Phase4::N::villageEnter() {
 };
 
 void Functions::Phase4::N::villageIgnore() {
-	Gamestate::gameOver = true;
+	GameState::gameOver = true;
 };
 
 void Functions::Phase4::N::villageLookAround() {
