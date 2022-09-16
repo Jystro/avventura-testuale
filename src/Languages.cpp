@@ -2,12 +2,60 @@
 #include "Languages.hpp"
 #include <string>
 
+/**
+ * Array of strings to contain all English string translations
+*/
+std::string en_string[] = {
+	"Menu",
+	"Start",
+	"Quit",
+	"Settings",
+	"English",
+	"Italian",
+	"Language",
+	"Back",
+	"Reset settings",
+	"Bye bye",
+	"West",
+	"North",
+	"East",
+	"South",
+	"Look around",
+	"Climb",
+	"Fig",
+	"Palm",
+	"Drink",
+	"Eat",
+	"Proceed"
+};
 
-std::string en_string[] = { "Menu", "Start", "Quit", "Settings", "English", "Italian", "Language", "Back", "Reset settings" }; /**< Array of strings to contain all English string translations */
-std::string it_strings[] = { "Men\158", "Inizia", "Esci", "Impostazioni", "Inglese", "Italiano", "Lingua", "Indietro", "Impostazioni predefinite" }; /**< Array of strings to contain all Italian string translations */
+/**
+ * Array of strings to contain all Italian string translations
+*/
+std::string it_strings[] = {
+	"Menù",
+	"Inizia",
+	"Esci",
+	"Impostazioni",
+	"Inglese",
+	"Italiano",
+	"Lingua",
+	"Indietro",
+	"Impostazioni predefinite",
+	"Ciao ciao",
+	"Ovest",
+	"Nord",
+	"Est",
+	"Sud",
+	"Guardati attorno",
+	"Arrampicati",
+	"Fico",
+	"Palma",
+	"Bevi",
+	"Mangia",
+	"Procedi"
+};
 
-std::string en_status[] = { "Bye Bye!", "That's not an option", "Select a language", "Select an option", "Enter a command" }; /**< Array of strings to contain all English status messages translations */
-std::string it_status[] = { "Ciao ciao!", "Quella opzione non è disponibile", "Seleziona una lingua", "Seleziona un'opzione", "Inserire un comando" }; /**< Array of strings to contain all Italian status messages translations */
 
 /**
  * Array of strings to contain all English story translations
@@ -99,7 +147,62 @@ std::string it_story[] = { "Sei un Muirqui e sei appena scappato dallo Zoo di Sa
                            "Mangi un po' della frutta sulla superficie e una delle voci ti urla contro e prontamente scappi.\nSenti un richiamo familiare,\neccoli! Il tuo branco ti attende, ti sei riunito con i tuoi simili.",
                            "Decidi di ignorare il cibo e andartene da quello strano posto.\nDopo un po' di camminata, senti un richiamo familiare,\neccoli! Il tuo branco ti attende, ti sei riunito con i tuoi simili."
                            };
+ * Array of strings to contain all English status messages translations
+*/
+std::string en_status[] = {
+	"Bye Bye!",
+	"That's not an option",
+	"Select a language",
+	"Select an option",
+	"Enter a command",
+	"Press enter to continue"
+};
+
+/**
+ * Array of strings to contain all Italian status messages translations
+*/
+std::string it_status[] = {
+	"Ciao ciao!",
+	"Quella opzione non è disponibile",
+	"Seleziona una lingua",
+	"Seleziona un'opzione",
+	"Inserire un comando",
+	"Premere invio per continuare"
+};
+
+
+
+/**
+ * Array of strings to contain all English title translations
+*/
+std::string en_titles[] = {
+	"Language",
+	"Settings",
+	"Main menu",
+	"Prologue",
+	"Crossroad",
+	"Forest",
+	"River",
+	"Fig",
+	"Palm"
+};
+
+/**
+ * Array of strings to contain all English title translations
+*/
+std::string it_titles[] = {
+	"Lingua",
+	"Impostazioni",
+	"Menù principale",
+	"Prologo",
+	"Bivio",
+	"Foresta",
+	"Fiume",
+	"Fico",
+	"Palma"
+};
 
 std::string* Languages::strings[] = { en_string, it_strings };
 std::string* Languages::status[] = { en_status, it_status};
 std::string* Languages::story[] = { en_story, it_story};
+std::string* Languages::titles[] = { en_titles, it_titles};

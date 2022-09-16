@@ -9,6 +9,11 @@ set(CMAKE_CXX_EXTENTIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
+find_package(Doxygen)
+if(Doxygen_FOUND)
+	add_subdirectory(docs)
+endif()
+
 
 add_subdirectory(src)
 
