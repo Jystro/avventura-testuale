@@ -1,16 +1,18 @@
 // Authors: Lorenzo Colombo - Lorenzo De Filippo - Giovanni Nerviani
-#include "GameState.hpp"
-#include "Languages.hpp"
+
 #include <fstream>
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+
+#include "Languages.hpp"
+#include "GameState.hpp"
 
 
-bool GameState::gameOver = false;
+
 int GameState::argc = 0;
 char** GameState::argv = NULL;
-unsigned int GameState::round = 0;
 void(*GameState::gameFunction)() = NULL;
 void(*GameState::prevGameFunction)() = NULL;
 
@@ -19,27 +21,17 @@ GameState::Settings GameState::settings = {
 };
 
 
-
-unsigned int GameState::increaseRound() {
-	GameState::round++;
-	return GameState::round;
-};
-
 void GameState::init(int argc, char** argv) {
 	GameState::argc = argc;
 	GameState::argv = argv;
 
+	srand(time(NULL));
+
 	GameState::readSettings();
 
-	GameState::reset();
 	return;
 };
 
-void GameState::reset() {
-	GameState::gameOver = false;
-	GameState::round = 0;
-	return;
-};
 
 void GameState::resetSettings() {
 	GameState::settings = {
@@ -47,6 +39,7 @@ void GameState::resetSettings() {
 	};
 	return;
 };
+
 
 void GameState::writeSettings() {
 	std::string executableFolder(GameState::argv[0]);
@@ -61,6 +54,7 @@ void GameState::writeSettings() {
 
 	return;
 };
+
 
 void GameState::readSettings() {
 	std::string executableFolder(GameState::argv[0]);

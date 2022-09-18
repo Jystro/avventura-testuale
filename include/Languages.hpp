@@ -1,13 +1,27 @@
 // Authors: Lorenzo Colombo - Lorenzo De Filippo - Giovanni Nerviani
+
 #ifndef LANGUAGES_HPP
 #define LANGUAGES_HPP
 
+
 #include <string>
 
+
+
+/**
+ * @brief Namespace with everything related to languages
+*/
 namespace Languages {
+	/**
+	 * @brief Enum with available languages
+	*/
 	enum Language {
 		EN, IT
 	};
+
+	/**
+	 * @brief Enum with available string translations
+	*/
 	enum {
 		STRING_Menu,
 		STRING_Start,
@@ -29,19 +43,32 @@ namespace Languages {
 		STRING_Palm,
 		STRING_Drink,
 		STRING_Eat,
-		STRING_Proceed
+		STRING_Proceed,
+		STRING_Boat,
+		STRING_Fight,
+		STRING_Befriend,
+		STRING_Run,
+		STRING_Enter,
+		STRING_Ignore,
+		STRING_Trust,
+		STRING_Play_Again
 	};
+
+	/**
+	 * @brief Enum with available status translations
+	*/
 	enum {
 		STATUS_Bye,
 		STATUS_Unavailable_Option,
 		STATUS_Select_A_Language,
 		STATUS_Select_An_Option,
 		STATUS_Enter_A_Command,
-		STATUS_Press_Enter_To_Continue
+		STATUS_Press_Enter_To_Continue,
+		STATUS_The_End
 	};
 
 	/**
-	 * enum with available story parts
+	 * @brief Enum with available story parts translations
 	*/
 	enum {
 		STORY_Intro,
@@ -54,30 +81,34 @@ namespace Languages {
 		STORY_Phase2W_Obstacle,
 		STORY_Phase2W_LookAround,
 		STORY_Phase2W_Climb,
-		STORY_Phase2W_Climb_Fig,
-		STORY_Phase2W_Climb_Palm,
-		STORY_Phase2W_Ficus,
+		STORY_Phase2W_Fig,
 		STORY_Phase2W_Palm,
 		STORY_Phase2N_Obstacle,
 		STORY_Phase2N_LookAround,
 		STORY_Phase2E_Obstacle,
 		STORY_Phase2E_LookAround,
+		STORY_Phase2E_Drink,
 		STORY_Phase2E_Boat,
 		STORY_Phase3W_FicusEat,
 		STORY_Phase3W_FicusProceed,
 		STORY_Phase3W_FicusLookAround,
 		STORY_Phase3W_PalmEat,
+		STORY_Phase3W_PalmEat_alt,
 		STORY_Phase3W_PalmProceed,
 		STORY_Phase3W_PalmLookAround,
 		STORY_Phase3N_Jaguar,
+		STORY_Phase3N_JaguarFight,
+		STORY_Phase3N_JaguarRun,
 		STORY_Phase3N_JaguarClimb,
 		STORY_Phase3N_JaguarLookAround,
 		STORY_Phase3N_Hornet,
 		STORY_Phase3N_HornetEat,
+		STORY_Phase3N_HornetEat_alt,
 		STORY_Phase3N_HornetProceed,
 		STORY_Phase3N_HornetLookAround,
 		STORY_Phase3E_Fight,
 		STORY_Phase3E_Befriend,
+		STORY_Phase4W_Fight,
 		STORY_Phase4W_Befriend,
 		STORY_Phase4W_Run,
 		STORY_Phase4N_VillageEnter,
@@ -90,7 +121,7 @@ namespace Languages {
 	};
 
 	/**
-	 * @brief Enum with available box titles
+	 * @brief Enum with available box titles translations
 	*/
 	enum {
 		TITLE_Language,
@@ -101,14 +132,24 @@ namespace Languages {
 		TITLE_Forest,
 		TITLE_River,
 		TITLE_Fig,
-		TITLE_Palm
+		TITLE_Palm,
+		TITLE_Square,
+		TITLE_Tourists,
+		TITLE_Hunter,
+		TITLE_Jaguar,
+		TITLE_Hornet_Nest,
+		TITLE_Village,
+		TITLE_Good_End,
+		TITLE_Bad_End,
+		TITLE_Neutral_End,
+		TITLE_The_End
 	};
 
 
-	extern std::string* strings[]; /**< 2D Array with language on first array and strings in second one */
-	extern std::string* status[]; /**< 2D Array with language on first array and status messages in second one */
-	extern std::string* story[]; /**< 2D Array with language on first array and stories in second one */
-	extern std::string* titles[]; /**< 2D Array with language on first array and titles in second one */
+	extern std::string* strings[]; /**<	2D Array with language on first array and strings in second one */
+	extern std::string* status[]; /**<	2D Array with language on first array and status messages in second one */
+	extern std::string* story[]; /**<	2D Array with language on first array and stories in second one */
+	extern std::string* titles[]; /**<	2D Array with language on first array and titles in second one */
 }; // LANGUAGES
 
 #endif // LANGUAGES_HPP

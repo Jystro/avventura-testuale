@@ -1,8 +1,7 @@
 # Authors: Lorenzo Colombo - Lorenzo De Filippo - Giovanni Nerviani
 cmake_minimum_required(VERSION 3.23)
 
-project(avventura
-	LANGUAGES CXX)
+project(avventura-testuale LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_EXTENTIONS OFF)
@@ -18,5 +17,5 @@ endif()
 add_subdirectory(src)
 
 
-add_executable(avventura main.cpp)
-target_link_libraries(avventura PUBLIC GameState Functions Languages)
+add_executable(avventura-testuale main.cpp)
+target_link_libraries(avventura-testuale PUBLIC GameState Functions Languages)
