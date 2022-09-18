@@ -1,13 +1,27 @@
 // Authors: Lorenzo Colombo - Lorenzo De Filippo - Giovanni Nerviani
+
 #ifndef LANGUAGES_HPP
 #define LANGUAGES_HPP
 
+
 #include <string>
 
+
+
+/**
+ * @brief Namespace with everything related to languages
+*/
 namespace Languages {
+	/**
+	 * @brief Enum with available languages
+	*/
 	enum Language {
 		EN, IT
 	};
+
+	/**
+	 * @brief Enum with available string translations
+	*/
 	enum {
 		STRING_Menu,
 		STRING_Start,
@@ -38,6 +52,10 @@ namespace Languages {
 		STRING_Ignore,
 		STRING_Trust
 	};
+
+	/**
+	 * @brief Enum with available status translations
+	*/
 	enum {
 		STATUS_Bye,
 		STATUS_Unavailable_Option,
@@ -48,7 +66,7 @@ namespace Languages {
 	};
 
 	/**
-	 * enum with available story parts
+	 * @brief Enum with available story parts translations
 	*/
 	enum {
 		STORY_Intro,
@@ -104,7 +122,7 @@ namespace Languages {
 	};
 
 	/**
-	 * @brief Enum with available box titles
+	 * @brief Enum with available box titles translations
 	*/
 	enum {
 		TITLE_Language,
@@ -120,18 +138,18 @@ namespace Languages {
 		TITLE_Tourists,
 		TITLE_Hunter,
 		TITLE_Jaguar,
+		TITLE_Hornet_Nest,
 		TITLE_Village,
-		TITLE_HornetNest,
-		TITLE_GoodEnd,
-		TITLE_BadEnd,
-		TITLE_NeutralEnd
+		TITLE_Good_End,
+		TITLE_Bad_End,
+		TITLE_Neutral_End
 	};
 
 
-	extern std::string* strings[]; /**< 2D Array with language on first array and strings in second one */
-	extern std::string* status[]; /**< 2D Array with language on first array and status messages in second one */
-	extern std::string* story[]; /**< 2D Array with language on first array and stories in second one */
-	extern std::string* titles[]; /**< 2D Array with language on first array and titles in second one */
+	extern std::string* strings[]; /**<	2D Array with language on first array and strings in second one */
+	extern std::string* status[]; /**<	2D Array with language on first array and status messages in second one */
+	extern std::string* story[]; /**<	2D Array with language on first array and stories in second one */
+	extern std::string* titles[]; /**<	2D Array with language on first array and titles in second one */
 }; // LANGUAGES
 
 #endif // LANGUAGES_HPP

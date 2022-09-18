@@ -1,7 +1,11 @@
 // Authors: Lorenzo Colombo - Lorenzo De Filippo - Giovanni Nerviani
-#include "GameState.hpp"
-#include "Functions.hpp"
+
 #include <iostream>
+
+#include "Functions.hpp"
+#include "GameState.hpp"
+
+
 
 int main(int argc, char** argv) {
 
@@ -15,7 +19,6 @@ int main(int argc, char** argv) {
 	while(true) {	
 		try {
 			GameState::gameFunction();
-		//printf("%s", GameState::gameOver ? "true" : "false");
 		} catch(const std::exception& e) {
 			std::cout << "Error: " << e.what() << std::endl;
 			GameState::prevGameFunction();
