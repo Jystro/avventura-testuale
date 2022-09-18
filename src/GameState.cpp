@@ -4,6 +4,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "Languages.hpp"
 #include "GameState.hpp"
@@ -23,6 +24,8 @@ GameState::Settings GameState::settings = {
 void GameState::init(int argc, char** argv) {
 	GameState::argc = argc;
 	GameState::argv = argv;
+
+	srand(time(NULL));
 
 	GameState::readSettings();
 
