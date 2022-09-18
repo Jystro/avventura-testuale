@@ -756,7 +756,10 @@ void Functions::Phase2::E::lookAround() {
 };
 
 void Functions::Phase2::E::drink() {
+	std::cout << fullScreenTextBox(Languages::titles[GameState::settings.language][Languages::TITLE_River], Languages::story[GameState::settings.language][Languages::STORY_Phase2E_Drink]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Enter_To_Continue] << std::endl;
+	std::cin.get();
 	GameState::gameOver = true;
+	return;
 }
 
 void Functions::Phase2::E::boat() {
@@ -816,6 +819,8 @@ void Functions::Phase3::W::palmEat() {
 		drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>(Languages::titles[GameState::settings.language][Languages::TITLE_Hunter], Languages::story[GameState::settings.language][Languages::STORY_Phase3W_PalmEat], entries, Languages::status[GameState::settings.language][Languages::STATUS_Enter_A_Command], Functions::Phase3::W::palmEat);
 	}
 	else{
+		std::cout << fullScreenTextBox(Languages::titles[GameState::settings.language][Languages::TITLE_Palm], Languages::story[GameState::settings.language][Languages::STORY_Phase3W_PalmEat_alt]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Enter_To_Continue] << std::endl;
+		std::cin.get();
 		GameState::gameOver = true;
 	}
 	GameState::prevGameFunction = Functions::Phase1::start;
@@ -859,11 +864,17 @@ void Functions::Phase3::N::jaguar() {
 };
 
 void Functions::Phase3::N::jaguarFight() {
+	std::cout << fullScreenTextBox(Languages::titles[GameState::settings.language][Languages::TITLE_Jaguar], Languages::story[GameState::settings.language][Languages::STORY_Phase3N_JaguarFight]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Enter_To_Continue] << std::endl;
+	std::cin.get();
 	GameState::gameOver = true;
+	return;
 };
 
 void Functions::Phase3::N::jaguarRun() {
+	std::cout << fullScreenTextBox(Languages::titles[GameState::settings.language][Languages::TITLE_Jaguar], Languages::story[GameState::settings.language][Languages::STORY_Phase3N_JaguarRun]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Enter_To_Continue] << std::endl;
+	std::cin.get();
 	GameState::gameOver = true;
+	return;
 };
 
 void Functions::Phase3::N::jaguarClimb() {
@@ -915,25 +926,23 @@ void Functions::Phase3::N::hornetEat() {
 		return;
 	}
 	else{
+		std::cout << fullScreenTextBox(Languages::titles[GameState::settings.language][Languages::TITLE_HornetNest], Languages::story[GameState::settings.language][Languages::STORY_Phase3N_HornetEat_alt]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Enter_To_Continue] << std::endl;
+		std::cin.get();
 		GameState::gameOver = true;
+		return;
 	}
 };
 
 void Functions::Phase3::N::hornetProceed() {
-	if(rand()%2){
-		const unsigned int rows = 1;
-		const unsigned int columns = 5;
-		const struct Entry entries[rows][columns] {
-			{{Languages::strings[GameState::settings.language][Languages::STRING_Enter], Functions::Phase4::N::villageEnter}, {Languages::strings[GameState::settings.language][Languages::STRING_Ignore], Functions::Phase4::N::villageIgnore}, {Languages::strings[GameState::settings.language][Languages::STRING_Look_Around], Functions::Phase4::N::villageLookAround}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
-		};
+	const unsigned int rows = 1;
+	const unsigned int columns = 5;
+	const struct Entry entries[rows][columns] {
+		{{Languages::strings[GameState::settings.language][Languages::STRING_Enter], Functions::Phase4::N::villageEnter}, {Languages::strings[GameState::settings.language][Languages::STRING_Ignore], Functions::Phase4::N::villageIgnore}, {Languages::strings[GameState::settings.language][Languages::STRING_Look_Around], Functions::Phase4::N::villageLookAround}, { Languages::strings[GameState::settings.language][Languages::STRING_Quit], Functions::quit }}
+	};
 
-		drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>(Languages::titles[GameState::settings.language][Languages::TITLE_HornetNest], Languages::story[GameState::settings.language][Languages::STORY_Phase3N_HornetProceed], entries, Languages::status[GameState::settings.language][Languages::STATUS_Enter_A_Command], Functions::Phase3::N::hornetProceed);
-		GameState::prevGameFunction = Functions::Phase1::start;
-		return;
-	}
-	else{
-		GameState::gameOver = true;
-	}
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>(Languages::titles[GameState::settings.language][Languages::TITLE_HornetNest], Languages::story[GameState::settings.language][Languages::STORY_Phase3N_HornetProceed], entries, Languages::status[GameState::settings.language][Languages::STATUS_Enter_A_Command], Functions::Phase3::N::hornetProceed);
+	GameState::prevGameFunction = Functions::Phase1::start;
+	return;
 };
 
 void Functions::Phase3::N::hornetLookAround() {
@@ -949,7 +958,10 @@ void Functions::Phase3::N::hornetLookAround() {
 };
 
 void Functions::Phase3::E::fight() {
+	std::cout << fullScreenTextBox(Languages::titles[GameState::settings.language][Languages::TITLE_Tourists], Languages::story[GameState::settings.language][Languages::STORY_Phase3E_Fight]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Enter_To_Continue] << std::endl;
+	std::cin.get();
 	GameState::gameOver = true;
+	return;
 };
 
 void Functions::Phase3::E::befriend() {
@@ -965,15 +977,24 @@ void Functions::Phase3::E::befriend() {
 };
 
 void Functions::Phase4::W::fight() {
+	std::cout << fullScreenTextBox(Languages::titles[GameState::settings.language][Languages::TITLE_Hunter], Languages::story[GameState::settings.language][Languages::STORY_Phase4W_Fight]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Enter_To_Continue] << std::endl;
+	std::cin.get();
 	GameState::gameOver = true;
+	return;
 };
 
 void Functions::Phase4::W::befriend() {
+	std::cout << fullScreenTextBox(Languages::titles[GameState::settings.language][Languages::TITLE_GoodEnd], Languages::story[GameState::settings.language][Languages::STORY_Phase4W_Befriend]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Enter_To_Continue] << std::endl;
+	std::cin.get();
 	GameState::gameOver = true;
+	return;
 };
 
 void Functions::Phase4::W::run() {
+	std::cout << fullScreenTextBox(Languages::titles[GameState::settings.language][Languages::TITLE_BadEnd], Languages::story[GameState::settings.language][Languages::STORY_Phase4W_Run]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Enter_To_Continue] << std::endl;
+	std::cin.get();
 	GameState::gameOver = true;
+	return;
 };
 
 void Functions::Phase4::N::villageEnter() {
@@ -989,7 +1010,10 @@ void Functions::Phase4::N::villageEnter() {
 };
 
 void Functions::Phase4::N::villageIgnore() {
+	std::cout << fullScreenTextBox(Languages::titles[GameState::settings.language][Languages::TITLE_BadEnd], Languages::story[GameState::settings.language][Languages::STORY_Phase4N_VillageIgnore]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Enter_To_Continue] << std::endl;
+	std::cin.get();
 	GameState::gameOver = true;
+	return;
 };
 
 void Functions::Phase4::N::villageLookAround() {
@@ -1005,22 +1029,29 @@ void Functions::Phase4::N::villageLookAround() {
 };
 
 void Functions::Phase4::E::trust() {
+	std::cout << fullScreenTextBox(Languages::titles[GameState::settings.language][Languages::TITLE_NeutralEnd], Languages::story[GameState::settings.language][Languages::STORY_Phase4E_Trust]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Enter_To_Continue] << std::endl;
+	std::cin.get();
 	GameState::gameOver = true;
+	return;
 }
 
 void Functions::Phase4::E::run() {
+	std::cout << fullScreenTextBox(Languages::titles[GameState::settings.language][Languages::TITLE_GoodEnd], Languages::story[GameState::settings.language][Languages::STORY_Phase4E_Run]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Enter_To_Continue] << std::endl;
+	std::cin.get();
 	GameState::gameOver = true;
+	return;
 }
 
 void Functions::Phase5::N::fruitEat() {
-	if(rand()%2){
-		GameState::gameOver = true;
-	}
-	else{
-		GameState::gameOver = true;
-	}
+	std::cout << fullScreenTextBox(Languages::titles[GameState::settings.language][Languages::TITLE_GoodEnd], Languages::story[GameState::settings.language][Languages::STORY_Phase5N_FruitEat]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Enter_To_Continue] << std::endl;
+	std::cin.get();
+	GameState::gameOver = true;
+	return;
 };
 
 void Functions::Phase5::N::fruitIgnore() {
+	std::cout << fullScreenTextBox(Languages::titles[GameState::settings.language][Languages::TITLE_GoodEnd], Languages::story[GameState::settings.language][Languages::STORY_Phase5N_FruitIgnore]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Enter_To_Continue] << std::endl;
+	std::cin.get();
 	GameState::gameOver = true;
+	return;
 };
