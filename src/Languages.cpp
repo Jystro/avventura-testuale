@@ -26,7 +26,14 @@ std::string en_string[] = {
 	"Palm",
 	"Drink",
 	"Eat",
-	"Proceed"
+	"Proceed",
+    "Boat",
+    "Fight",
+    "Befriend",
+    "Run",
+    "Enter",
+    "Ignore",
+    "Trust"
 };
 
 /**
@@ -53,7 +60,14 @@ std::string it_strings[] = {
 	"Palma",
 	"Bevi",
 	"Mangia",
-	"Procedi"
+	"Procedi",
+    "Barca",
+    "Combatti",
+    "Fai amicizia",
+    "Scappa",
+    "Entra",
+    "Ignora",
+    "Fidati"
 };
 
 
@@ -185,7 +199,13 @@ std::string en_titles[] = {
 	"Forest",
 	"River",
 	"Fig",
-	"Palm"
+	"Palm",
+    "Square",
+    "Tourists",
+    "Hunter",
+    "Jaguar",
+    "Village",
+    "Hornet Nest"
 };
 
 /**
@@ -200,7 +220,13 @@ std::string it_titles[] = {
 	"Foresta",
 	"Fiume",
 	"Fico",
-	"Palma"
+	"Palma",
+    "Piazza",
+    "Turisti",
+    "Cacciatore",
+    "Giaguaro",
+    "Villaggio",
+    "Nido di Calabroni"
 };
 
 std::string* Languages::strings[] = { en_string, it_strings };

@@ -29,7 +29,14 @@ namespace Languages {
 		STRING_Palm,
 		STRING_Drink,
 		STRING_Eat,
-		STRING_Proceed
+		STRING_Proceed,
+		STRING_Boat,
+		STRING_Fight,
+		STRING_Befriend,
+		STRING_Run,
+		STRING_Enter,
+		STRING_Ignore,
+		STRING_Trust
 	};
 	enum {
 		STATUS_Bye,
@@ -101,7 +108,13 @@ namespace Languages {
 		TITLE_Forest,
 		TITLE_River,
 		TITLE_Fig,
-		TITLE_Palm
+		TITLE_Palm,
+		TITLE_Square,
+		TITLE_Tourists,
+		TITLE_Hunter,
+		TITLE_Jaguar,
+		TITLE_Village,
+		TITLE_HornetNest
 	};
 
 
