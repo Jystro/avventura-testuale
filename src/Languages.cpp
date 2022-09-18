@@ -31,13 +31,14 @@ std::string en_string[] = {
 	"Drink",
 	"Eat",
 	"Proceed",
-    "Boat",
-    "Fight",
-    "Befriend",
-    "Run",
-    "Enter",
-    "Ignore",
-    "Trust"
+	"Boat",
+	"Fight",
+	"Befriend",
+	"Run",
+	"Enter",
+	"Ignore",
+	"Trust",
+	"Play again"
 };
 
 /**
@@ -71,7 +72,8 @@ std::string it_strings[] = {
 	"Scappa",
 	"Entra",
 	"Ignora",
-	"Fidati"
+	"Fidati",
+	"Gioca ancora"
 };
 
 
@@ -85,7 +87,8 @@ std::string en_status[] = {
 	"Select a language",
 	"Select an option",
 	"Enter a command",
-	"Press enter to continue"
+	"Press enter to continue",
+	"The end"
 };
 
 /**
@@ -97,7 +100,8 @@ std::string it_status[] = {
 	"Seleziona una lingua",
 	"Seleziona un'opzione",
 	"Inserire un comando",
-	"Premere invio per continuare"
+	"Premere invio per continuare",
+	"Fine"
 };
 
 
@@ -122,13 +126,13 @@ std::string en_story[] = {
 	"You see the little space you're staying in, the way in front of you and a strong tree beside you.\nYou hear a strong buzz coming from that tree.",
 	"You consider following the stream, but you see that the river ends in a cliff.",
 	"You look at the stream, you see your reflection in it and see, on top of the water, a wooden construction tied to your side of the river.",
-	"You get close to the water when suddendly, before you can even react, a big, scaly creatures bites you head and drags you in the water.\nYou are dead.",
+	"You get close to the water when suddenly, before you can even react, a big, scaly creatures bites you head and drags you in the water.\nYou are dead.",
 	"You hop on the wooden construction and start rowing with your hands until you reach the other side of the stream.\nYou see some tall hairless monkeys with brightly colored bodies and strange black squares in their hands.\nThey look at you: some frightened, some amused.",
 	"You ate a couple of the fruits on the tree; you are sated.\nYou find a strange, hairless monkey with a strange metal cylinder in his hands.\nIt noticed you, it looks threatening.",
 	"You proceed through the branches.\nYou find a strange, hairless monkey with a strange metal cylinder in his hands.\nIt noticed you, it looks threatening.",
 	"You see the fruits on the tree and an interminable series of branches.",
-	"You try to reach for one of the fruits, but suddendly a giant slithering creature attacks you, but you manage to throw the fruit at him and run.\nYou are hungry and wounded.\nYou find a strange, hairless monkey with a strange metal cylinder in his hands.\nIt noticed you, it looks threatening.",
-	"You try to reach for one of the fruits, but suddendly a giant slithering creature attacks you.\nHe coils around you crushing you bones, you feel a growing pressure then black.\nYou're dead.",
+	"You try to reach for one of the fruits, but suddenly a giant slithering creature attacks you, but you manage to throw the fruit at him and run.\nYou are hungry and wounded.\nYou find a strange, hairless monkey with a strange metal cylinder in his hands.\nIt noticed you, it looks threatening.",
+	"You try to reach for one of the fruits, but suddenly a giant slithering creature attacks you.\nHe coils around you crushing you bones, you feel a growing pressure then black.\nYou're dead.",
 	"You head to the top of the tree and you proceed jumping from leaf to leaf.\nAfter some time, you climb down the top of the tree to rest.\nYou find a strange, hairless monkey with a strange metal cylinder in his hands.\nIt noticed you, it looks threatening.",
 	"You see the fruits under the tree's leaves, you also see how these leaves can support your weight.\nYou notice nothing else, despite this, you feel threatened",
 	"You proceed following the road ahead of you, you hear a grunt. You don't notice it at first, but a jaguar is waiting you,\nwatching.",
@@ -143,7 +147,7 @@ std::string en_story[] = {
 	"You look at the object more closely and notice big red insects frenetically entering and exiting the strange sphere.\nYou see a way through the branches and hear your stomach rumbling.",
 	"You start screaming at them and show your teeth, they scream in terror.\nYou hear a whistle then... dark.\nYou hear familiar noises, smell familiar scents, you open your eyes: you are back where you started: you are at the Sao Paulo Zoo.",
 	"You slowly walk towards one of the creatures: he initially flinches, but then he slowly lends his arm towards you. You hop on his shoulder and walk with him and other similar creatures that look at you in awe.\nAfter walking for a lot of time, the creature heads towards a strange metal box.\nMeanwhile you hear a familiar call in the distance.",
-	"You scream at him and show your teeth, he points the cylinder at you and then...an explosion, then darkness.\nYou are dead.",
+	"You scream at him and show your teeth, he points the cylinder at you and then... an explosion, then darkness.\nYou are dead.",
 	"You slowly approach the strange creature, initially he points the cylinder at you, but then he takes out a fruit and hands it to you.\nHe signals you to come, reluctant but tired, you hop on his shoulder and eat.\nYou proceed with him: you hear distant voices but the man avoids them.\nAfter a long time walking, you hear a familiar call. You take a last look at the kind giant and follow the call,\nthere they are! Your troop is waiting for you, you have reunited with your kind.",
 	"You run from the creature and after a while, you hear strange voices, you follow them and notice other hairless monkeys with nets and cylinders.\nThey immediately notice you, point the cylinder and then...black.\nYou hear familiar noises, smell familiar scents, you open your eyes: you are back where you started: you are at the Sao Paulo Zoo.",
 	"You approach the village and enter one of the constructions.",
@@ -177,27 +181,27 @@ std::string it_story[] = {
 	"Guardi il corso d'acqua, ti specchi sulla sua superificie e vedi, sul pelo dell'acqua, una costruzione in legno legata alla tua sponda del fiume.",
 	"Ti avvicini all'acqua, ma improvvisamente, prima di poter anche solo reagire, una grossa, squamosa creatura ti morde la testa e ti porta in acqua.\nSei morto.",
 	"Salti sulla costruzione di legno e inizi a remare con le braccia finchè non raggiungi l'altra sponda.\nVedi delle scimmie alte e senza peli con corpi di colori sgargianti e strani quadrati neri nelle mani.\nTi guardano: alcuni spaventati, altri divertiti.",
-	"Hai mangiato un paio dei frutti sull'albero; sei sazio.\nTi imbatti in una strana, scimmia senza peli con uno strano cilindro di metallo nelle sue mani.\nSi \138 accorta della tua presenza, ha l'aria minacciosa.",
-	"Procedi attraverso i rami.\nTi imbatti in una strana, scimmia senza peli con uno strano cilindro di metallo nelle sue mani.\nSi \138 accorta della tua presenza, ha l'aria minacciosa.",
+	"Hai mangiato un paio dei frutti sull'albero; sei sazio.\nTi imbatti in una strana, scimmia senza peli con uno strano cilindro di metallo nelle sue mani.\nSi è accorta della tua presenza, ha l'aria minacciosa.",
+	"Procedi attraverso i rami.\nTi imbatti in una strana, scimmia senza peli con uno strano cilindro di metallo nelle sue mani.\nSi è accorta della tua presenza, ha l'aria minacciosa.",
 	"Vedi i frutti sull'albero e una serie interminabile di rami.",
-	"Cerchi di arrivare ad uno dei frutti, ma improvvisamente una creatura gigante e strisciante ti attacca, riesci a colpirla con il frutto e scappare.\nSei affamato e ferito.\nTi imbatti in una strana, scimmia senza peli con uno strano cilindro di metallo nelle sue mani.\nSi \138 accorta della tua presenza, ha l'aria minacciosa.",
+	"Cerchi di arrivare ad uno dei frutti, ma improvvisamente una creatura gigante e strisciante ti attacca, riesci a colpirla con il frutto e scappare.\nSei affamato e ferito.\nTi imbatti in una strana, scimmia senza peli con uno strano cilindro di metallo nelle sue mani.\nSi è accorta della tua presenza, ha l'aria minacciosa.",
 	"Cerchi di arrivare ad uno dei frutti, ma improvvisamente una creatura gigante e stisciante ti attacca.\nSi attorciglia intorno a te rompendoti le ossa, senti una deastante e sempre crescente pressione e poi: buio.\nSei morto.",
-	"Ti dirigi in cima all'albero e procedi saltando da foglia a foglia.\nTempo dopo scendi dalla cima per riposarti.\nTi imbatti in una strana, scimmia senza peli con uno strano cilindro di metallo nelle sue mani.\nSi \138 accorta della tua presenza, ha l'aria minacciosa.",
-	"Vedi i frutti sotto le foglie dell'albero, vedi anche che queste foglie riescono a sostenere il tuo peso.\nNon noti nient'altro, nonostante ci\149, ti senti in pericolo.",
+	"Ti dirigi in cima all'albero e procedi saltando da foglia a foglia.\nTempo dopo scendi dalla cima per riposarti.\nTi imbatti in una strana, scimmia senza peli con uno strano cilindro di metallo nelle sue mani.\nSi è accorta della tua presenza, ha l'aria minacciosa.",
+	"Vedi i frutti sotto le foglie dell'albero, vedi anche che queste foglie riescono a sostenere il tuo peso.\nNon noti nient'altro, nonostante ciò, ti senti in pericolo.",
 	"Procedi lungo la via di fronte a te, senti un grugnito. Non te ne accorgi inizialmente, ma un giaguaro ti sta aspettando, ti osserva.",
 	"Urli, mostri i denti e carichi il grosso gatto.\nTi salta addosso e inizia ad azzannarti.\nSei morto.",
 	"Cerchi di scappare, ma il predatore è più veloce e ti raggiunge.\nTi salta addosso e inizia ad azzannarti.\nSei morto.",
-	"Raggiungi rapidamente il tronco dell'albero, il grosso gatto \138 dietro di te.\nTi arrampichi velocemente sull'albero, nonstante il suo impegno, il giaguaro non riesce a seguirti e abbandona l'idea di cacciarti.\nTi liberi della paura e procedi trovando una serie di costruzioni piramidali.",
+	"Raggiungi rapidamente il tronco dell'albero, il grosso gatto è dietro di te.\nTi arrampichi velocemente sull'albero, nonstante il suo impegno, il giaguaro non riesce a seguirti e abbandona l'idea di cacciarti.\nTi liberi della paura e procedi trovando una serie di costruzioni piramidali.",
 	"Riesci a malapena a scorgere il predatore, ma riesci ad individuarlo.\nVedi la strada continuare davanti a te ed un robusto albero a distanza di corsa.",
 	"Ti arrampichi sull'albero ronzante e trovi una cosa tonda, bianca e ondulata attaccata al tronco.",
 	"Addenti il cerchio bianco e vieni subito punto dai grandi insetti che ci vivevano dentro.\nScappi per un po' e riesci a seminarli.\nTrovi una serie di costruzioni piramidali.",
 	"Addenti il cerchio bianco e vieni subito punto dai grandi insetti che ci vivevano dentro.\nDiventi sempre più debole mentre procedi e poi: buio.\nSei morto.",
 	"Ignori lo strano oggetto e procedi tra gli alberi.\nGuardi in basso e trovi un gruppo di costruzioni a piramide.",
-	"Guardi pi\158 attentamente all'oggetto e noti grandi e rossi insetti che entrano ed escono freneticamente dalla strana sfera.\nVedi una via tra i rami e senti il tuo stomaco brontolare.",
+	"Guardi più attentamente all'oggetto e noti grandi e rossi insetti che entrano ed escono freneticamente dalla strana sfera.\nVedi una via tra i rami e senti il tuo stomaco brontolare.",
 	"Urli contro di loro e mostri i denti; terrorizzati, urlano a loro volta.\nSenti un fischio e poi... nero.\nSenti suoni familiari, senti odori familiari, apri gli occhi: sei tornato al punto di partenza: sei allo zoo di San Paolo.",
 	"Lentamente ti avvicini alla creatura la quale inizialmente tentenna, ma poi, lentamente, tende il suo braccio verso di te. Salti sulla sua spalla e cammini con lui e delle altre creature simili a lui che ti guardano meravigliate.\nDopo aver camminato per molto tempo, la creatura si dirige verso una strana scatola metallica.\nNel frattempo, senti un richiamo familiare nella distanza.",
+	"Inizi ad urlare e mostrare i denti, il gigante spaventato punta verso di te il cilindro e poi... un'esplosione, poi nero.\nSei morto.",
 	"Lentamente ti avvicini alla strana creatura, inizialmente punta il cilindro verso di te, ma poi prende un frutto e te lo passa.\nTi fa cenno di raggiungerlo, esitante ma stanco, salti sulla sua spalla e mangi.\nProcedi con lui: senti distanti voci, ma l'uomo le evita.\nDopo una lunga camminata, senti un richiamo familiare. Guardi un'ultima volta al gigante gentile e insegui il richiamo,\neccoli! Il tuo branco ti attende, ti sei riunito con i tuoi simili.",
-	"Inizi ad urlare e mostrare i denti, il gigante spaventato punta verso di te il cilindro e poi...un'esplosione, poi nero.\nSei morto.",
 	"Scappi dalla creatura e dopo un bel po' di strada, senti strane voci, le segui e noti altre scimmie senza peli con reti e cilindri.\nSi accorgono di te immediatamente, puntano a te i cilindri e poi...nero.\nSenti suoni familiari, senti odori familiari, apri gli occhi: sei tornato al punto di partenza: sei allo zoo di San Paolo.",
 	"Ti avvicini al villaggio ed entri una delle costruzioni.",
 	"Eviti le strane costruzioni e dopo un bel po' di strada, senti strane voci, le segui e noti altre scimmie senza peli con reti e cilindri.\nSi accorgono di te immediatamente, puntano a te i cilindri e poi...nero.\nSenti suoni familiari, senti odori familiari, apri gli occhi: sei tornato al punto di partenza: sei allo zoo di San Paolo.",
@@ -223,15 +227,16 @@ std::string en_titles[] = {
 	"River",
 	"Fig",
 	"Palm",
-    "Square",
-    "Tourists",
-    "Hunter",
-    "Jaguar",
-    "Village",
-    "Hornet Nest",
-    "Good Ending",
-    "Bad Ending",
-    "Neutral Ending"
+	"Square",
+	"Tourists",
+	"Hunter",
+	"Jaguar",
+	"Village",
+	"Hornet Nest",
+	"Good Ending",
+	"Bad Ending",
+	"Neutral Ending",
+	"The End"
 };
 
 /**
@@ -247,15 +252,16 @@ std::string it_titles[] = {
 	"Fiume",
 	"Fico",
 	"Palma",
-    "Piazza",
-    "Turisti",
-    "Cacciatore",
-    "Giaguaro",
-    "Villaggio",
-    "Nido di Calabroni",
-    "Good Ending",
-    "Bad Ending",
-    "Neutral Ending"
+	"Piazza",
+	"Turisti",
+	"Cacciatore",
+	"Giaguaro",
+	"Villaggio",
+	"Nido di Calabroni",
+	"Good Ending",
+	"Bad Ending",
+	"Neutral Ending",
+	"Fine"
 };
 
 std::string* Languages::strings[] = { en_string, it_strings };

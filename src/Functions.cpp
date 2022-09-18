@@ -616,6 +616,37 @@ void Functions::mainMenu() {
 };
 
 
+void Functions::endMenu() {
+	const unsigned int rows = 3;
+	const unsigned int columns = 1;
+	const struct Entry entries[rows][columns] = {
+		{
+			{
+				Languages::strings[GameState::settings.language][Languages::STRING_Play_Again],
+				Functions::introduction
+			}
+		},
+		{
+			{
+				Languages::strings[GameState::settings.language][Languages::STRING_Menu],
+				Functions::mainMenu
+			}
+		},
+		{
+			{
+				Languages::strings[GameState::settings.language][Languages::STRING_Quit],
+				Functions::quit
+			}
+		}
+	};
+
+	drawBoxAndSetNextFunctionOnUserInput<rows, columns>(Languages::titles[GameState::settings.language][Languages::TITLE_The_End], entries, Languages::status[GameState::settings.language][Languages::STATUS_The_End], Functions::endMenu);
+
+	GameState::prevGameFunction = Functions::endMenu;
+	return;
+}
+
+
 void Functions::introduction() {
 	std::cout << fullScreenTextBox(Languages::titles[GameState::settings.language][Languages::TITLE_Prologue], Languages::story[GameState::settings.language][Languages::STORY_Intro]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Enter_To_Continue] << std::endl;
 
@@ -708,11 +739,11 @@ void Functions::Phase1::west() {
 			},
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Fig],
-				NULL
+				Functions::Phase2::W::ficus
 			},
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Palm],
-				NULL
+				Functions::Phase2::W::palm
 			},
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Quit],
@@ -730,7 +761,6 @@ void Functions::Phase1::west() {
 void Functions::Phase1::north() {
 	const unsigned int rows = 2;
 	const unsigned int columns = 4;
-
 	const struct Entry entries[rows][columns] = {
 		{
 			{
@@ -1096,7 +1126,6 @@ void Functions::Phase2::W::palm() {
 void Functions::Phase2::N::obstacle() {
 	const unsigned int rows = 2;
 	const unsigned int columns = 4;
-
 	const struct Entry entries[rows][columns] = {
 		{
 			{
@@ -1280,8 +1309,10 @@ void Functions::Phase2::E::lookAround() {
 
 void Functions::Phase2::E::drink() {
 	std::cout << fullScreenTextBox(Languages::titles[GameState::settings.language][Languages::TITLE_River], Languages::story[GameState::settings.language][Languages::STORY_Phase2E_Drink]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Enter_To_Continue] << std::endl;
+
 	std::cin.get();
-	//GameState::gameOver = true;
+	GameState::gameFunction = Functions::endMenu;
+
 	return;
 };
 
@@ -1364,6 +1395,7 @@ void Functions::Phase3::W::ficusProceed() {
 			}
 		}
 	};
+
 	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>(Languages::titles[GameState::settings.language][Languages::TITLE_Hunter], Languages::story[GameState::settings.language][Languages::STORY_Phase3W_FicusProceed], entries, Languages::status[GameState::settings.language][Languages::STATUS_Enter_A_Command], Functions::Phase3::W::ficusProceed);
 
 	GameState::prevGameFunction = Functions::Phase1::start;
@@ -1403,6 +1435,7 @@ void Functions::Phase3::W::ficusLookAround() {
 void Functions::Phase3::W::palmEat() {
 	const unsigned int rows = 1;
 	const unsigned int columns = 4;
+
 	if(chance()) {
 		const struct Entry entries[rows][columns] = {
 			{
@@ -1529,15 +1562,19 @@ void Functions::Phase3::N::jaguar() {
 
 void Functions::Phase3::N::jaguarFight() {
 	std::cout << fullScreenTextBox(Languages::titles[GameState::settings.language][Languages::TITLE_Jaguar], Languages::story[GameState::settings.language][Languages::STORY_Phase3N_JaguarFight]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Enter_To_Continue] << std::endl;
+
 	std::cin.get();
-	//GameState::gameOver = true;
+	GameState::gameFunction = Functions::endMenu;
+
 	return;
 };
 
 void Functions::Phase3::N::jaguarRun() {
 	std::cout << fullScreenTextBox(Languages::titles[GameState::settings.language][Languages::TITLE_Jaguar], Languages::story[GameState::settings.language][Languages::STORY_Phase3N_JaguarRun]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Enter_To_Continue] << std::endl;
+
 	std::cin.get();
-	//GameState::gameOver = true;
+	GameState::gameFunction = Functions::endMenu;
+
 	return;
 };
 
@@ -1632,6 +1669,7 @@ void Functions::Phase3::N::hornet() {
 	};
 
 	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>(Languages::titles[GameState::settings.language][Languages::TITLE_Hornet_Nest], Languages::story[GameState::settings.language][Languages::STORY_Phase3N_Hornet], entries, Languages::status[GameState::settings.language][Languages::STATUS_Enter_A_Command], Functions::Phase3::N::hornet);
+
 	GameState::prevGameFunction = Functions::Phase1::start;
 	return;
 };
@@ -1640,7 +1678,7 @@ void Functions::Phase3::N::hornetEat() {
 	if(rand()%2) {
 		const unsigned int rows = 1;
 		const unsigned int columns = 5;
-		const struct Entry entries[rows][columns] {
+		const struct Entry entries[rows][columns] = {
 			{
 				{
 					Languages::strings[GameState::settings.language][Languages::STRING_Enter],
@@ -1662,12 +1700,14 @@ void Functions::Phase3::N::hornetEat() {
 		};
 
 		drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>(Languages::titles[GameState::settings.language][Languages::TITLE_Hornet_Nest], Languages::story[GameState::settings.language][Languages::STORY_Phase3N_HornetEat], entries, Languages::status[GameState::settings.language][Languages::STATUS_Enter_A_Command], Functions::Phase3::N::hornetEat);
+
 		GameState::prevGameFunction = Functions::Phase1::start;
 	}
-	else{
+	else {
 		std::cout << fullScreenTextBox(Languages::titles[GameState::settings.language][Languages::TITLE_Hornet_Nest], Languages::story[GameState::settings.language][Languages::STORY_Phase3N_HornetEat_alt]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Enter_To_Continue] << std::endl;
+
 		std::cin.get();
-		//GameState::gameOver = true;
+		GameState::gameFunction = Functions::endMenu;
 	};
 	return;
 };
@@ -1675,7 +1715,7 @@ void Functions::Phase3::N::hornetEat() {
 void Functions::Phase3::N::hornetProceed() {
 	const unsigned int rows = 1;
 	const unsigned int columns = 4;
-	const struct Entry entries[rows][columns] {
+	const struct Entry entries[rows][columns] = {
 		{
 			{
 			 Languages::strings[GameState::settings.language][Languages::STRING_Enter],
@@ -1697,6 +1737,7 @@ void Functions::Phase3::N::hornetProceed() {
 	};
 
 	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>(Languages::titles[GameState::settings.language][Languages::TITLE_Hornet_Nest], Languages::story[GameState::settings.language][Languages::STORY_Phase3N_HornetProceed], entries, Languages::status[GameState::settings.language][Languages::STATUS_Enter_A_Command], Functions::Phase3::N::hornetProceed);
+
 	GameState::prevGameFunction = Functions::Phase1::start;
 	return;
 };
@@ -1704,7 +1745,7 @@ void Functions::Phase3::N::hornetProceed() {
 void Functions::Phase3::N::hornetLookAround() {
 	const unsigned int rows = 1;
 	const unsigned int columns = 4;
-	const struct Entry entries[rows][columns] {
+	const struct Entry entries[rows][columns] = {
 		{
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Eat],
@@ -1726,21 +1767,24 @@ void Functions::Phase3::N::hornetLookAround() {
 	};
 
 	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>(Languages::titles[GameState::settings.language][Languages::TITLE_Hornet_Nest], Languages::story[GameState::settings.language][Languages::STORY_Phase3N_HornetLookAround], entries, Languages::status[GameState::settings.language][Languages::STATUS_Enter_A_Command], Functions::Phase3::N::hornetLookAround);
+
 	GameState::prevGameFunction = Functions::Phase1::start;
 	return;
 };
 
 void Functions::Phase3::E::fight() {
 	std::cout << fullScreenTextBox(Languages::titles[GameState::settings.language][Languages::TITLE_Tourists], Languages::story[GameState::settings.language][Languages::STORY_Phase3E_Fight]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Enter_To_Continue] << std::endl;
+
 	std::cin.get();
-	//GameState::gameOver = true;
+	GameState::gameFunction = Functions::endMenu;
+
 	return;
 };
 
 void Functions::Phase3::E::befriend() {
 	const unsigned int rows = 1;
 	const unsigned int columns = 3;
-	const struct Entry entries[rows][columns] {
+	const struct Entry entries[rows][columns] = {
 		{
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Trust],
@@ -1758,35 +1802,42 @@ void Functions::Phase3::E::befriend() {
 	};
 
 	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>(Languages::titles[GameState::settings.language][Languages::TITLE_Tourists], Languages::story[GameState::settings.language][Languages::STORY_Phase3E_Befriend], entries, Languages::status[GameState::settings.language][Languages::STATUS_Enter_A_Command], Functions::Phase3::E::befriend);
+
 	GameState::prevGameFunction = Functions::Phase1::start;
 	return;
 };
 
 void Functions::Phase4::W::fight() {
 	std::cout << fullScreenTextBox(Languages::titles[GameState::settings.language][Languages::TITLE_Hunter], Languages::story[GameState::settings.language][Languages::STORY_Phase4W_Fight]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Enter_To_Continue] << std::endl;
+
 	std::cin.get();
-	//GameState::gameOver = true;
+	GameState::gameFunction = Functions::endMenu;
+
 	return;
 };
 
 void Functions::Phase4::W::befriend() {
 	std::cout << fullScreenTextBox(Languages::titles[GameState::settings.language][Languages::TITLE_Good_End], Languages::story[GameState::settings.language][Languages::STORY_Phase4W_Befriend]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Enter_To_Continue] << std::endl;
+
 	std::cin.get();
-	//GameState::gameOver = true;
+	GameState::gameFunction = Functions::endMenu;
+
 	return;
 };
 
 void Functions::Phase4::W::run() {
 	std::cout << fullScreenTextBox(Languages::titles[GameState::settings.language][Languages::TITLE_Bad_End], Languages::story[GameState::settings.language][Languages::STORY_Phase4W_Run]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Enter_To_Continue] << std::endl;
+
 	std::cin.get();
-	//GameState::gameOver = true;
+	GameState::gameFunction = Functions::endMenu;
+
 	return;
 };
 
 void Functions::Phase4::N::villageEnter() {
 	const unsigned int rows = 1;
 	const unsigned int columns = 4;
-	const struct Entry entries[rows][columns] {
+	const struct Entry entries[rows][columns] = {
 		{
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Eat],
@@ -1808,21 +1859,24 @@ void Functions::Phase4::N::villageEnter() {
 	};
 
 	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>(Languages::titles[GameState::settings.language][Languages::TITLE_Village], Languages::story[GameState::settings.language][Languages::STORY_Phase4N_VillageEnter], entries, Languages::status[GameState::settings.language][Languages::STATUS_Enter_A_Command], Functions::Phase4::N::villageEnter);
+
 	GameState::prevGameFunction = Functions::Phase1::start;
 	return;
 };
 
 void Functions::Phase4::N::villageIgnore() {
 	std::cout << fullScreenTextBox(Languages::titles[GameState::settings.language][Languages::TITLE_Bad_End], Languages::story[GameState::settings.language][Languages::STORY_Phase4N_VillageIgnore]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Enter_To_Continue] << std::endl;
+
 	std::cin.get();
-	//GameState::gameOver = true;
+	GameState::gameFunction = Functions::endMenu;
+
 	return;
 };
 
 void Functions::Phase4::N::villageLookAround() {
 	const unsigned int rows = 1;
 	const unsigned int columns = 4;
-	const struct Entry entries[rows][columns] {
+	const struct Entry entries[rows][columns] = {
 		{
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Eat],
@@ -1844,34 +1898,43 @@ void Functions::Phase4::N::villageLookAround() {
 	};
 
 	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>(Languages::titles[GameState::settings.language][Languages::TITLE_Village], Languages::story[GameState::settings.language][Languages::STORY_Phase4N_VillageLookAround], entries, Languages::status[GameState::settings.language][Languages::STATUS_Enter_A_Command], Functions::Phase4::N::villageLookAround);
+
 	GameState::prevGameFunction = Functions::Phase1::start;
 	return;
 };
 
 void Functions::Phase4::E::trust() {
 	std::cout << fullScreenTextBox(Languages::titles[GameState::settings.language][Languages::TITLE_Neutral_End], Languages::story[GameState::settings.language][Languages::STORY_Phase4E_Trust]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Enter_To_Continue] << std::endl;
+
 	std::cin.get();
-	//GameState::gameOver = true;
+	GameState::gameFunction = Functions::endMenu;
+
 	return;
 };
 
 void Functions::Phase4::E::run() {
 	std::cout << fullScreenTextBox(Languages::titles[GameState::settings.language][Languages::TITLE_Good_End], Languages::story[GameState::settings.language][Languages::STORY_Phase4E_Run]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Enter_To_Continue] << std::endl;
+
 	std::cin.get();
-	//GameState::gameOver = true;
+	GameState::gameFunction = Functions::endMenu;
+
 	return;
 };
 
 void Functions::Phase5::N::fruitEat() {
 	std::cout << fullScreenTextBox(Languages::titles[GameState::settings.language][Languages::TITLE_Good_End], Languages::story[GameState::settings.language][Languages::STORY_Phase5N_FruitEat]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Enter_To_Continue] << std::endl;
+
 	std::cin.get();
-	//GameState::gameOver = true;
+	GameState::gameFunction = Functions::endMenu;
+
 	return;
 };
 
 void Functions::Phase5::N::fruitIgnore() {
 	std::cout << fullScreenTextBox(Languages::titles[GameState::settings.language][Languages::TITLE_Good_End], Languages::story[GameState::settings.language][Languages::STORY_Phase5N_FruitIgnore]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Enter_To_Continue] << std::endl;
+
 	std::cin.get();
-	//GameState::gameOver = true;
+	GameState::gameFunction = Functions::endMenu;
+
 	return;
 };

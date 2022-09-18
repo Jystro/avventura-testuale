@@ -103,6 +103,16 @@ namespace Functions {
 	void mainMenu();
 
 	/**
+	 * @brief	Presents the user with the end menu
+	 *
+	 * @see		Entry
+	 * @see		Functions::settings
+	 * @see		Functions::quit
+	 * @see		drawBoxAndSetNextFunctionOnUserInput
+	*/
+	void endMenu();
+
+	/**
 	 * @brief	Tells the user the introduction to the story
 	*/
 	void introduction();

@@ -50,7 +50,8 @@ namespace Languages {
 		STRING_Run,
 		STRING_Enter,
 		STRING_Ignore,
-		STRING_Trust
+		STRING_Trust,
+		STRING_Play_Again
 	};
 
 	/**
@@ -62,7 +63,8 @@ namespace Languages {
 		STATUS_Select_A_Language,
 		STATUS_Select_An_Option,
 		STATUS_Enter_A_Command,
-		STATUS_Press_Enter_To_Continue
+		STATUS_Press_Enter_To_Continue,
+		STATUS_The_End
 	};
 
 	/**
@@ -142,7 +144,8 @@ namespace Languages {
 		TITLE_Village,
 		TITLE_Good_End,
 		TITLE_Bad_End,
-		TITLE_Neutral_End
+		TITLE_Neutral_End,
+		TITLE_The_End
 	};
 
 
