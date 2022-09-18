@@ -309,7 +309,7 @@ std::string Functions::textBox(const std::string title, std::string text, const 
 		box += borderRow;
 	};
 
-	for(int i = 0; i < height - 2; i++) {
+	for(int i = 0; i < height - 4; i++) {
 		if(i < height * .1 || i > height * .9) {
 			box += emptyRow;
 		}
