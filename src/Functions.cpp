@@ -765,15 +765,15 @@ void Functions::Phase1::north() {
 		{
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_West],
-				NULL
+				Functions::Phase2::N::obstacle	
 			},
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_North],
-				NULL
+				Functions::Phase3::N::jaguar
 			},
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_East],
-				NULL
+				Functions::Phase2::N::obstacle	
 			},
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_South],
@@ -783,11 +783,11 @@ void Functions::Phase1::north() {
 		{
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Look_Around],
-				NULL
+				Functions::Phase2::N::lookAround
 			},
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Climb],
-				NULL
+				Functions::Phase3::N::hornet
 			},
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Quit],
@@ -813,25 +813,25 @@ void Functions::Phase1::east() {
 			},
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_North],
-				NULL
+				Functions::Phase2::E::obstacle
 			},
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_East],
-				NULL
+				Functions::Phase2::E::drink
 			},
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_South],
-				NULL
+				Functions::Phase2::E::obstacle
 			}
 		},
 		{
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Look_Around],
-				NULL
+				Functions::Phase2::E::lookAround
 			},
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Drink],
-				NULL
+				Functions::Phase2::E::drink
 			},
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Quit],
@@ -871,7 +871,7 @@ void Functions::Phase1::south() {
 		{
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Look_Around],
-				NULL
+				Functions::Phase1::lookAround
 			},
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Quit],
@@ -888,7 +888,7 @@ void Functions::Phase1::south() {
 
 void Functions::Phase1::lookAround() {
 	const unsigned int rows = 2;
-	const unsigned int columns = 4;
+	const unsigned int columns = 3;
 	const struct Entry entries[rows][columns] = {
 		{
 			{
@@ -902,16 +902,12 @@ void Functions::Phase1::lookAround() {
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_East],
 				Functions::Phase1::east
-			},
-			{
-				Languages::strings[GameState::settings.language][Languages::STRING_South],
-				Functions::Phase1::south
 			}
 		},
 		{
 			{
-				Languages::strings[GameState::settings.language][Languages::STRING_Look_Around],
-				NULL
+				Languages::strings[GameState::settings.language][Languages::STRING_South],
+				Functions::Phase1::south
 			},
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Quit],
@@ -932,23 +928,11 @@ void Functions::Phase2::W::obstacle() {
 	const struct Entry entries[rows][columns] = {
 		{
 			{
-				Languages::strings[GameState::settings.language][Languages::STRING_West],
-				NULL
-			},
-			{
-				Languages::strings[GameState::settings.language][Languages::STRING_North],
-				NULL
-			},
-			{
 				Languages::strings[GameState::settings.language][Languages::STRING_East],
 				Functions::Phase1::start
 			}
 		},
 		{
-			{
-				Languages::strings[GameState::settings.language][Languages::STRING_South],
-				NULL
-			},
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Look_Around],
 				Functions::Phase2::W::lookAround
@@ -961,11 +945,11 @@ void Functions::Phase2::W::obstacle() {
 		{
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Fig],
-				NULL
+				Functions::Phase2::W::ficus
 			},
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Palm],
-				NULL
+				Functions::Phase2::W::palm
 			},
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Quit],
@@ -1015,11 +999,11 @@ void Functions::Phase2::W::lookAround() {
 		{
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Fig],
-				NULL
+				Functions::Phase2::W::ficus
 			},
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Palm],
-				NULL
+				Functions::Phase2::W::palm
 			},
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Quit],
@@ -1041,21 +1025,21 @@ void Functions::Phase2::W::climb() {
 		{
 			{
 				"1",
-				NULL
+				Functions::Phase2::W::ficus
 			},
 			{
 				"2",
-				NULL
+				Functions::Phase2::W::palm
 			}
 		},
 		{
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Fig],
-				NULL
+				Functions::Phase2::W::ficus
 			},
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Palm],
-				NULL
+				Functions::Phase2::W::palm
 			},
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Quit],
@@ -1077,11 +1061,11 @@ void Functions::Phase2::W::ficus() {
 		{
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Eat],
-				NULL
+				Functions::Phase3::W::ficusEat
 			},
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Proceed],
-				NULL
+				Functions::Phase3::W::ficusProceed
 			},
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Quit],
@@ -1090,7 +1074,7 @@ void Functions::Phase2::W::ficus() {
 		}
 	};
 
-	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>(Languages::titles[GameState::settings.language][Languages::TITLE_Fig], Languages::story[GameState::settings.language][Languages::STORY_Intro], entries, Languages::status[GameState::settings.language][Languages::STATUS_Enter_A_Command], Functions::Phase2::W::ficus);
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>(Languages::titles[GameState::settings.language][Languages::TITLE_Fig], Languages::story[GameState::settings.language][Languages::STORY_Phase2W_Fig], entries, Languages::status[GameState::settings.language][Languages::STATUS_Enter_A_Command], Functions::Phase2::W::ficus);
 
 	GameState::prevGameFunction = Functions::Phase1::start;
 	return;
@@ -1103,11 +1087,11 @@ void Functions::Phase2::W::palm() {
 		{
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Eat],
-				NULL
+				Functions::Phase3::W::palmEat
 			},
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Proceed],
-				NULL
+				Functions::Phase3::W::palmProceed
 			},
 			{
 				Languages::strings[GameState::settings.language][Languages::STRING_Quit],
@@ -1116,7 +1100,7 @@ void Functions::Phase2::W::palm() {
 		}
 	};
 
-	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>(Languages::titles[GameState::settings.language][Languages::TITLE_Palm], Languages::story[GameState::settings.language][Languages::STORY_Intro], entries, Languages::status[GameState::settings.language][Languages::STATUS_Enter_A_Command], Functions::Phase2::W::palm);
+	drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>(Languages::titles[GameState::settings.language][Languages::TITLE_Palm], Languages::story[GameState::settings.language][Languages::STORY_Phase2W_Palm], entries, Languages::status[GameState::settings.language][Languages::STATUS_Enter_A_Command], Functions::Phase2::W::palm);
 
 	GameState::prevGameFunction = Functions::Phase1::start;
 	return;
@@ -1460,6 +1444,12 @@ void Functions::Phase3::W::palmEat() {
 		drawTextBoxAndSetNextFunctionOnUserInput<rows, columns>(Languages::titles[GameState::settings.language][Languages::TITLE_Hunter], Languages::story[GameState::settings.language][Languages::STORY_Phase3W_PalmEat], entries, Languages::status[GameState::settings.language][Languages::STATUS_Enter_A_Command], Functions::Phase3::W::palmEat);
 	}
 	else {
+		std::cout << fullScreenTextBox(Languages::titles[GameState::settings.language][Languages::TITLE_Palm], Languages::story[GameState::settings.language][Languages::STORY_Phase3W_PalmEat_alt]) << Languages::status[GameState::settings.language][Languages::STATUS_Press_Enter_To_Continue] << std::endl;
+		
+		std::cin.get();
+		GameState::gameFunction = Functions::endMenu;
+
+		return;
 	};
 
 	GameState::prevGameFunction = Functions::Phase1::start;
